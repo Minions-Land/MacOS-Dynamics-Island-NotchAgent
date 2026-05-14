@@ -1,4 +1,5 @@
 import Foundation
+import UserNotifications
 
 @MainActor
 class NewsManager: Sendable {
@@ -17,14 +18,23 @@ class NewsManager: Sendable {
     func refresh() async {
         guard !store.isLoading else { return }
         store.isLoading = true
-        defer { store.isLoading = false }
 
-        let items = await invokeClaudeCode()
+        let keywords = store.keywords
+        let items = await Task.detached {
+            await Self.invokeClaudeCode(keywords: keywords)
+        }.value
+
         if !items.isEmpty {
+            let isNew = store.items.first?.id != items.first?.id
             store.items = items
             store.saveToDisk()
             store.lastUpdated = Date()
+
+            if isNew, let first = items.first {
+                sendNotification(title: "NotchAgent", body: first.title)
+            }
         }
+        store.isLoading = false
     }
 
     private func isStale() -> Bool {
@@ -40,33 +50,51 @@ class NewsManager: Sendable {
         }
     }
 
-    private func invokeClaudeCode() async -> [NewsItem] {
-        let keywords = store.keywords.joined(separator: ", ")
+    private func sendNotification(title: String, body: String) {
+        guard Bundle.main.bundleIdentifier != nil else { return }
+        let content = UNMutableNotificationContent()
+        content.title = title
+        content.body = body
+        content.sound = .default
+
+        let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: nil)
+        UNUserNotificationCenter.current().add(request)
+    }
+
+    private static func invokeClaudeCode(keywords: [String]) async -> [NewsItem] {
+        let keywordStr = keywords.joined(separator: ", ")
         let prompt = """
-        You are a news aggregator agent. Find the latest content (last 24h) about: \(keywords).
+        You are a news aggregator. Use the mcp__codex-bridge__codex tool to delegate this task to Codex GPT-5.5:
 
-        Use these sources:
-        1. arXiv RSS: https://export.arxiv.org/rss/cs.AI, cs.MA, cs.CL
-        2. GitHub: search repos with topics agent-system, multi-agent, agent-framework, autonomous-agents
-        3. Hacker News: https://hn.algolia.com/api/v1/search?query=agent+AI&tags=story
-        4. Papers with Code, tech blogs
+        Task for Codex: "Search the web for the latest AI news (last 24 hours) about these topics: \(keywordStr). \
+        Check arXiv (cs.AI, cs.MA, cs.CL), GitHub trending repos, Hacker News (hn.algolia.com/api/v1/search?query=AI+agent&tags=story), \
+        and tech blogs. Return ONLY a JSON array with up to 10 items: \
+        [{\"id\":\"unique\",\"title\":\"...\",\"summary\":\"2-3句中文摘要\",\"url\":\"https://...\",\"source\":\"arxiv|github|hackernews|blog\",\"keywords\":[\"matching\"],\"timestamp\":\"ISO8601\"}]. \
+        Summary must be in Chinese. URLs must be real."
 
-        Return ONLY a JSON array (no markdown, no explanation) with up to 10 objects:
-        [{"id":"unique-id","title":"...","summary":"2-3句中文摘要","url":"https://...","source":"arxiv|github|hackernews|blog","keywords":["matching","keywords"],"timestamp":"2024-01-01T00:00:00Z"}]
+        Use cwd: "/tmp" and sandbox: "read-only" for the codex call.
 
-        Rules:
-        - summary MUST be in Chinese (中文)
-        - url must be a real, valid link
-        - Prioritize newest and most relevant content
-        - Include arXiv paper links, GitHub repo links, or blog URLs
+        If the codex tool is unavailable, fall back to using WebSearch and WebFetch tools yourself to find the content.
+
+        After getting results, output ONLY the JSON array. No markdown fences, no explanation.
         """
 
-        let claudePath = findClaudeCodePath()
-        guard let path = claudePath else { return [] }
+        guard let claudePath = findClaudeCodePath() else { return [] }
 
         let process = Process()
-        process.executableURL = URL(fileURLWithPath: path)
-        process.arguments = ["--print", "--model", "sonnet", prompt]
+        process.executableURL = URL(fileURLWithPath: claudePath)
+        process.arguments = [
+            "--print",
+            "--permission-mode", "bypassPermissions",
+            "--model", "sonnet",
+            prompt
+        ]
+
+        let home = FileManager.default.homeDirectoryForCurrentUser.path
+        process.environment = ProcessInfo.processInfo.environment.merging([
+            "PATH": "/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin:\(home)/.claude/bin",
+            "HOME": home
+        ]) { _, new in new }
 
         let pipe = Pipe()
         process.standardOutput = pipe
@@ -78,7 +106,6 @@ class NewsManager: Sendable {
 
             let data = pipe.fileHandleForReading.readDataToEndOfFile()
             guard let output = String(data: data, encoding: .utf8) else { return [] }
-
             return parseNewsItems(from: output)
         } catch {
             print("Claude Code invocation failed: \(error)")
@@ -86,11 +113,12 @@ class NewsManager: Sendable {
         }
     }
 
-    private func findClaudeCodePath() -> String? {
+    private static func findClaudeCodePath() -> String? {
+        let home = FileManager.default.homeDirectoryForCurrentUser.path
         let candidates = [
+            "/opt/homebrew/bin/claude",
             "/usr/local/bin/claude",
-            "\(FileManager.default.homeDirectoryForCurrentUser.path)/.claude/bin/claude",
-            "/opt/homebrew/bin/claude"
+            "\(home)/.claude/bin/claude"
         ]
 
         for path in candidates {
@@ -98,34 +126,14 @@ class NewsManager: Sendable {
                 return path
             }
         }
-
-        let whichProcess = Process()
-        whichProcess.executableURL = URL(fileURLWithPath: "/usr/bin/which")
-        whichProcess.arguments = ["claude"]
-        let whichPipe = Pipe()
-        whichProcess.standardOutput = whichPipe
-        try? whichProcess.run()
-        whichProcess.waitUntilExit()
-
-        let whichData = whichPipe.fileHandleForReading.readDataToEndOfFile()
-        if let path = String(data: whichData, encoding: .utf8)?.trimmingCharacters(in: .whitespacesAndNewlines),
-           !path.isEmpty {
-            return path
-        }
-
         return nil
     }
 
-    private func parseNewsItems(from output: String) -> [NewsItem] {
-        let jsonPattern = output
-            .components(separatedBy: "\n")
-            .drop(while: { !$0.trimmingCharacters(in: .whitespaces).hasPrefix("[") })
-            .joined(separator: "\n")
+    private static func parseNewsItems(from output: String) -> [NewsItem] {
+        guard let startIdx = output.firstIndex(of: "["),
+              let endIdx = output.lastIndex(of: "]") else { return [] }
 
-        guard let startIdx = jsonPattern.firstIndex(of: "["),
-              let endIdx = jsonPattern.lastIndex(of: "]") else { return [] }
-
-        let jsonString = String(jsonPattern[startIdx...endIdx])
+        let jsonString = String(output[startIdx...endIdx])
         guard let data = jsonString.data(using: .utf8) else { return [] }
 
         let decoder = JSONDecoder()

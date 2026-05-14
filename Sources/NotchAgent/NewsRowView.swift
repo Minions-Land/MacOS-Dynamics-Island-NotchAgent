@@ -7,7 +7,7 @@ struct NewsRowView: View {
         HStack(spacing: 10) {
             Image(systemName: item.sourceIcon)
                 .font(.system(size: 12))
-                .foregroundColor(.white.opacity(0.6))
+                .foregroundColor(.yellow.opacity(0.7))
                 .frame(width: 20)
 
             VStack(alignment: .leading, spacing: 2) {
@@ -25,8 +25,8 @@ struct NewsRowView: View {
                             .font(.system(size: 9))
                             .padding(.horizontal, 4)
                             .padding(.vertical, 1)
-                            .background(Capsule().fill(.blue.opacity(0.2)))
-                            .foregroundColor(.blue.opacity(0.8))
+                            .background(Capsule().fill(.yellow.opacity(0.12)))
+                            .foregroundColor(.yellow.opacity(0.8))
                     }
                 }
             }
@@ -41,7 +41,7 @@ struct NewsRowView: View {
         .padding(.vertical, 8)
         .background(
             RoundedRectangle(cornerRadius: 8)
-                .fill(.white.opacity(0.05))
+                .fill(.white.opacity(0.04))
         )
         .contentShape(Rectangle())
     }

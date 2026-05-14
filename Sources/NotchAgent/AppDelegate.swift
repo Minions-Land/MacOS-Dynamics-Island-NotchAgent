@@ -1,5 +1,6 @@
 import AppKit
 import SwiftUI
+import UserNotifications
 
 @MainActor
 class AppDelegate: NSObject, NSApplicationDelegate {
@@ -9,6 +10,10 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
     func applicationDidFinishLaunching(_ notification: Notification) {
         NSApp.setActivationPolicy(.accessory)
+
+        if Bundle.main.bundleIdentifier != nil {
+            UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound]) { _, _ in }
+        }
 
         setupStatusBar()
         setupNotchWindow()
@@ -22,7 +27,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     private func setupStatusBar() {
         statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.variableLength)
         if let button = statusItem?.button {
-            button.image = NSImage(systemSymbolName: "brain.head.profile", accessibilityDescription: "NotchAgent")
+            button.image = NSImage.minionIcon(size: 18)
         }
 
         let menu = NSMenu()
