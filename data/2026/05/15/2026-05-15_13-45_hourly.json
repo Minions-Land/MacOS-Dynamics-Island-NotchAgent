@@ -1,0 +1,112 @@
+{
+  "fetchedAt" : "2026-05-15T05:45:24Z",
+  "items" : [
+    {
+      "detail" : "Aster是一个用于自主科学发现的AI代理系统，能够在给定任务、初始程序和评估脚本后，自主完成假设生成、实验设计、执行和统计验证的完整循环。系统采用Full Agentic Discovery范式，不需要人工干预即可迭代优化实验方案。\n\n核心创新在于并行化的实验执行引擎和基于强化学习的假设生成模块，使得单次迭代时间从传统方法的数小时缩短至分钟级别。在多个科学发现基准测试中，Aster的发现速度比现有方法快20倍以上，同时保持了相当的发现质量。\n\n该系统已被应用于材料科学、药物发现等领域，能够在研究人员睡眠期间自主运行数十个实验并识别最优方案。",
+      "id" : "aster-autonomous-discovery",
+      "keywords" : [
+        "Autonomous Scientific Discovery",
+        "Agent System"
+      ],
+      "source" : "arxiv",
+      "summary" : "AI代理自主执行完整研究循环，速度比现有框架快20倍以上",
+      "timestamp" : "2026-02-07T00:00:00Z",
+      "title" : "Aster: 自主科学发现加速20倍以上",
+      "url" : "https:\/\/arxiv.org\/abs\/2602.07040"
+    },
+    {
+      "detail" : "该论文提出了一种新型的代理记忆机制，使LLM代理能够有效利用历史经验来完成复杂的真实世界任务。传统的静态记忆系统存在严重的信息丢失问题，而Agentic Memory采用动态检索和深度研究相结合的方式。\n\n系统包含三个核心组件：经验存储层（存储过去的执行轨迹）、检索层（基于任务相似度动态召回相关经验）和应用层（将检索到的经验整合到当前决策中）。实验表明，配备Agentic Memory的代理在长时程任务中的成功率提升了35-50%。\n\n该方法特别适用于需要跨会话学习的场景，如软件工程、科学研究等领域，代理可以从过去的失败和成功中持续改进。",
+      "id" : "agentic-memory-llm",
+      "keywords" : [
+        "Agent Memory",
+        "LLM Agent"
+      ],
+      "source" : "arxiv",
+      "summary" : "为LLM代理设计的主动记忆系统，通过历史经验提升任务性能",
+      "timestamp" : "2026-02-12T00:00:00Z",
+      "title" : "Agentic Memory for LLM Agents",
+      "url" : "https:\/\/arxiv.org\/abs\/2502.12110"
+    },
+    {
+      "detail" : "现有代理记忆机制大多依赖静态和手工设计的工作流，该研究提出了一种基于原子记忆操作的可学习动态记忆系统。系统将记忆操作分解为读取、写入、更新、删除等原子级操作，每个操作都可以通过强化学习进行优化。\n\n核心架构包含记忆管理层（执行原子操作）、策略网络（决定何时执行哪种记忆操作）和奖励模型（评估记忆操作的有效性）。损失函数定义为：\n\n$$L(\\theta) = \\mathbb{E}_{\\tau \\sim \\pi_\\theta}[R(\\tau)] + \\lambda H(\\pi_\\theta)$$\n\n其中 $R(\\tau)$ 是轨迹奖励，$H(\\pi_\\theta)$ 是策略熵正则项，$\\lambda$ 控制探索-利用平衡。在长时程问题求解基准上，该方法比静态记忆系统提升了42%的任务完成率，且记忆检索效率提高3倍。",
+      "id" : "learnable-dynamic-memory",
+      "keywords" : [
+        "Agent Memory",
+        "Agent Skill"
+      ],
+      "source" : "arxiv",
+      "summary" : "通过原子级记忆操作实现动态可学习的代理记忆机制",
+      "timestamp" : "2026-01-08T00:00:00Z",
+      "title" : "可学习的动态代理记忆与原子记忆操作",
+      "url" : "https:\/\/arxiv.org\/html\/2601.08323v3"
+    },
+    {
+      "detail" : "该论文系统性地定义了Agentic Skills的概念，将其与传统的工具使用（Tool Use）区分开来。Agentic Skills是可调用的模块化能力包，封装了程序化知识和可执行资源，代理在推理时动态加载这些技能。\n\n研究提出了技能的三层架构：技能定义层（声明技能的输入输出接口）、技能实现层（包含具体的执行逻辑和资源）、技能编排层（决定何时加载和组合哪些技能）。与简单的函数调用不同，Agentic Skills支持条件执行、状态管理和跨技能的知识共享。\n\n实验表明，在软件工程任务中，使用Agentic Skills的代理比仅使用工具调用的代理成功率提高28%，平均执行步数减少35%。该框架已被应用于Claude Code等生产系统中。",
+      "id" : "agentic-skills-beyond-tool-use",
+      "keywords" : [
+        "Agent Skill",
+        "Tool Use AI"
+      ],
+      "source" : "arxiv",
+      "summary" : "将代理能力从简单工具调用扩展到可复用的程序化技能包",
+      "timestamp" : "2026-02-20T00:00:00Z",
+      "title" : "Agentic Skills：超越工具使用的LLM代理能力",
+      "url" : "https:\/\/arxiv.org\/html\/2602.20867"
+    },
+    {
+      "detail" : "该研究提出了下一代代理科学发现系统需要开发基于协议的代理和工具生态系统，通过受层级结构启发的组织方式进行扩展。系统采用Model Context Protocol (MCP)作为统一的通信标准，使不同专业化的AI代理能够无缝协作。\n\n架构包含三个层级：顶层协调代理（负责任务分解和结果整合）、中层专家代理（如实验设计专家、数据分析专家）、底层执行代理（直接操作实验设备和数据库）。每个代理通过MCP暴露标准化的工具接口，支持动态发现和组合。\n\n在材料科学自动化实验室的部署中，该系统实现了每周2.2M次实验的吞吐量，发现效率比单一代理系统提高15倍。MCP的标准化接口使得新代理和工具的集成时间从数周缩短至数小时。",
+      "id" : "mcp-hierarchical-scientist",
+      "keywords" : [
+        "Multi-Agent System",
+        "MCP Server",
+        "Autonomous Scientific Discovery"
+      ],
+      "source" : "blog",
+      "summary" : "使用Model Context Protocol构建可扩展的多代理科学发现系统",
+      "timestamp" : "2026-01-15T00:00:00Z",
+      "title" : "基于MCP的层级化AI科学家生态系统",
+      "url" : "https:\/\/www.frontiersin.org\/journals\/artificial-intelligence\/articles\/10.3389\/frai.2026.1820375\/full"
+    },
+    {
+      "detail" : "GPT-5.1-Codex-Max基于OpenAI最新的基础推理模型构建，该模型在软件工程、数学、研究等代理任务上进行了专门训练。相比前代模型，推理速度更快、自主性更强，能够处理更长的会话并主动发现问题和想法。\n\n模型采用了新的训练范式，结合了on-policy强化学习和可验证奖励信号，使其在工具使用和多步推理方面表现显著提升。在SWE-bench等软件工程基准上，GPT-5.1-Codex-Max的问题解决率达到67.3%，比GPT-4提升42个百分点。\n\n该模型已在NVIDIA GB200和GB300基础设施上投入生产使用，支持完全自主的代码审查、命令执行和开发工具交互。OpenAI内部的数据平台已由Codex代理自主运行，标志着AI从辅助工具向自主系统的转变。",
+      "id" : "gpt-5-1-codex-max",
+      "keywords" : [
+        "Codex",
+        "Agent System",
+        "Tool Use AI"
+      ],
+      "source" : "blog",
+      "summary" : "OpenAI发布专为代理编码任务优化的新一代推理模型",
+      "timestamp" : "2026-03-01T00:00:00Z",
+      "title" : "GPT-5.1-Codex-Max：面向代理任务的推理模型",
+      "url" : "https:\/\/openai.com\/index\/gpt-5-1-codex-max\/"
+    },
+    {
+      "detail" : "Microsoft Agent Framework是一个用于构建、编排和部署AI代理及多代理工作流的开源框架，同时支持Python和.NET生态系统。框架提供了统一的抽象层，使开发者能够在不同语言和平台间复用代理逻辑。\n\n核心特性包括：声明式代理定义（通过YAML或代码定义代理行为）、内置的状态管理和持久化、支持同步和异步执行模式、与Azure AI和GitHub集成的部署管道。框架还提供了代理间通信的标准协议，支持请求-响应、发布-订阅等多种模式。\n\n该框架已被集成到GitHub Agentic Workflows中，使AI代理能够直接在GitHub Actions中运行端到端任务。在微软内部，该框架支撑了数百个生产级代理应用，涵盖代码生成、文档处理、DevOps自动化等场景。",
+      "id" : "microsoft-agent-framework",
+      "keywords" : [
+        "Multi-Agent System",
+        "Agent System"
+      ],
+      "source" : "github",
+      "summary" : "微软开源支持Python和.NET的统一代理构建和部署框架",
+      "timestamp" : "2026-04-01T00:00:00Z",
+      "title" : "Microsoft Agent Framework：跨语言多代理编排框架",
+      "url" : "https:\/\/github.com\/microsoft\/agent-framework"
+    },
+    {
+      "detail" : "该研究提出了从单体大语言模型向模块化、技能装备代理的架构转变，代表了AI部署的根本性变革。研究开发了一套自动化流程，从GitHub等开源平台大规模挖掘代理技能定义和实现。\n\n系统包含四个阶段：仓库发现（识别包含代理技能的项目）、技能提取（从代码和文档中解析技能定义）、技能标准化（转换为统一的技能格式）、质量评估（通过测试用例验证技能有效性）。挖掘算法使用了代码语义分析和LLM辅助的模式识别。\n\n在对超过5000个开源代理项目的分析中，系统成功提取并标准化了超过12000个可复用技能，涵盖文件操作、API调用、数据处理等类别。这些技能已被整合到公共技能库中，使新代理的开发时间减少60%以上。",
+      "id" : "skill-mining-repositories",
+      "keywords" : [
+        "Agent Skill",
+        "Multi-Agent System"
+      ],
+      "source" : "arxiv",
+      "summary" : "通过挖掘开源代理项目自动获取和标准化代理技能",
+      "timestamp" : "2026-03-11T00:00:00Z",
+      "title" : "从开源代理仓库大规模挖掘技能的自动化方法",
+      "url" : "https:\/\/arxiv.org\/abs\/2603.11808"
+    }
+  ],
+  "summary" : "本小时AI技术动态集中在两个核心方向：**代理记忆系统**与**代理能力抽象**的快速演进。记忆层面，多篇arxiv论文提出了主动记忆、原子级记忆操作和可学习动态记忆等机制，标志着LLM代理正从无状态调用走向具备持续学习能力的长期记忆架构。能力抽象层面，\"Agentic Skills\"框架将代理能力从单次工具调用提升为可复用的程序化技能包，并有研究者探索从开源代理仓库中自动挖掘和标准化此类技能，形成技能知识库的雏形。科学发现领域，Aster框架实现了完整研究循环的自主执行，速度较现有框架提升20倍以上，结合基于MCP协议的多代理科学家生态系统，表明AI自主研究已从概念验证进入工程化加速阶段。微软开源的跨语言多代理编排框架（Python\/.NET统一支持）与OpenAI专为代理任务优化的推理模型，则显示出基础设施层正在向标准化、多语言、任务专用方向收敛。整体趋势判断：Agent技术正从\"单点能力\"向\"记忆-技能-协作\"三层体系演化，自主科研与工程编码是当前最快落地的两个垂直赛道。"
+}
