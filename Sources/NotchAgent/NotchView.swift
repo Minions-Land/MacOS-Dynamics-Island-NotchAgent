@@ -7,7 +7,7 @@ struct NotchView: View {
     private let store = NewsStore.shared
 
     private var notchHeight: CGFloat {
-        NSScreen.main?.safeAreaInsets.top ?? 33
+        NSScreen.screens.first(where: { $0.safeAreaInsets.top > 0 })?.safeAreaInsets.top ?? 33
     }
 
     var body: some View {
@@ -20,6 +20,7 @@ struct NotchView: View {
         }
         .onHover { hovering in
             collapseTask?.cancel()
+            collapseTask = nil
             if hovering {
                 withAnimation(.spring(response: 0.3, dampingFraction: 0.85)) {
                     isExpanded = true

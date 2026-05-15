@@ -47,6 +47,8 @@ class NewsStore {
     var lastUpdated: Date?
     var keywords: [String] = NewsStore.defaultKeywords
 
+    private static let maxItems = 10
+
     static let defaultKeywords = [
         "Agent System",
         "Multi-Agent System",
@@ -80,7 +82,7 @@ class NewsStore {
         let decoder = JSONDecoder()
         decoder.dateDecodingStrategy = .iso8601
         guard let fetch = try? decoder.decode(NewsFetch.self, from: data) else { return }
-        items = fetch.items
+        items = Array(fetch.items.prefix(Self.maxItems))
         summary = fetch.summary
         lastUpdated = fetch.fetchedAt
     }
@@ -91,7 +93,7 @@ class NewsStore {
         encoder.dateEncodingStrategy = .iso8601
         encoder.outputFormatting = .prettyPrinted
         guard let data = try? encoder.encode(fetch) else { return }
-        try? data.write(to: file)
+        try? data.write(to: file, options: .atomic)
     }
 
     func loadKeywords() {
@@ -104,6 +106,6 @@ class NewsStore {
     func saveKeywords() {
         let file = storePath.appendingPathComponent("keywords.json")
         guard let data = try? JSONEncoder().encode(keywords) else { return }
-        try? data.write(to: file)
+        try? data.write(to: file, options: .atomic)
     }
 }

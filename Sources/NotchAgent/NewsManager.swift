@@ -6,6 +6,7 @@ class NewsManager: Sendable {
     private var timer: Timer?
     private let store = NewsStore.shared
     private let refreshInterval: TimeInterval = 3600
+    private static let processTimeout: TimeInterval = 300
 
     func fetchInitial() async {
         store.loadFromDisk()
@@ -138,7 +139,7 @@ class NewsManager: Sendable {
         process.standardError = Pipe()
         do {
             try process.run()
-            process.waitUntilExit()
+            runWithTimeout(process)
             let data = pipe.fileHandleForReading.readDataToEndOfFile()
             return String(data: data, encoding: .utf8)?.trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
         } catch { return "" }
@@ -413,7 +414,7 @@ class NewsManager: Sendable {
         process.standardError = Pipe()
         do {
             try process.run()
-            process.waitUntilExit()
+            runWithTimeout(process)
             let data = pipe.fileHandleForReading.readDataToEndOfFile()
             return String(data: data, encoding: .utf8)?.trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
         } catch { return "" }
@@ -459,8 +460,10 @@ class NewsManager: Sendable {
         ]) { _, new in new }
         process.standardOutput = Pipe()
         process.standardError = Pipe()
-        try? process.run()
-        process.waitUntilExit()
+        do {
+            try process.run()
+            runWithTimeout(process, timeout: 60)
+        } catch {}
     }
 
     // MARK: - Claude Code Invocation
@@ -480,11 +483,22 @@ class NewsManager: Sendable {
         process.standardError = Pipe()
         do {
             try process.run()
-            process.waitUntilExit()
+            runWithTimeout(process)
             let data = pipe.fileHandleForReading.readDataToEndOfFile()
             guard let output = String(data: data, encoding: .utf8) else { return [] }
             return parseNewsItems(from: output)
         } catch { return [] }
+    }
+
+    private static func runWithTimeout(_ process: Process, timeout: TimeInterval = processTimeout) {
+        let deadline = Date().addingTimeInterval(timeout)
+        while process.isRunning && Date() < deadline {
+            Thread.sleep(forTimeInterval: 0.5)
+        }
+        if process.isRunning {
+            process.terminate()
+            process.waitUntilExit()
+        }
     }
 
     private static func findClaudeCodePath() -> String? {

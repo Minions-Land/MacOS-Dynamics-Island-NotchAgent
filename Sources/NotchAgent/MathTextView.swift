@@ -8,8 +8,7 @@ struct MathTextView: NSViewRepresentable {
 
     func makeNSView(context: Context) -> WKWebView {
         let config = WKWebViewConfiguration()
-        config.preferences.setValue(true, forKey: "developerExtrasEnabled")
-
+        config.websiteDataStore = .nonPersistent()
         let webView = WKWebView(frame: .zero, configuration: config)
         webView.setValue(false, forKey: "drawsBackground")
         webView.isHidden = true
@@ -18,13 +17,16 @@ struct MathTextView: NSViewRepresentable {
     }
 
     func updateNSView(_ webView: WKWebView, context: Context) {
-        let html = buildHTML()
-        webView.loadHTMLString(html, baseURL: nil)
+        guard context.coordinator.lastText != text else { return }
+        context.coordinator.lastText = text
+        webView.loadHTMLString(buildHTML(), baseURL: nil)
     }
 
     func makeCoordinator() -> Coordinator { Coordinator() }
 
     class Coordinator: NSObject, WKNavigationDelegate {
+        var lastText: String?
+
         func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
             webView.evaluateJavaScript("document.body.scrollHeight") { result, _ in
                 if let height = result as? CGFloat {
@@ -35,8 +37,14 @@ struct MathTextView: NSViewRepresentable {
         }
     }
 
+    static func dismantleNSView(_ webView: WKWebView, coordinator: Coordinator) {
+        webView.stopLoading()
+        webView.navigationDelegate = nil
+        webView.loadHTMLString("", baseURL: nil)
+    }
+
     private func buildHTML() -> String {
-        return """
+        """
         <!DOCTYPE html>
         <html>
         <head>
@@ -50,14 +58,12 @@ struct MathTextView: NSViewRepresentable {
                 font-size: \(fontSize)px;
                 color: \(textColor);
                 background: transparent;
-                margin: 0;
-                padding: 0;
+                margin: 0; padding: 0;
                 line-height: 1.6;
                 -webkit-font-smoothing: antialiased;
             }
             .katex { font-size: 1.05em; }
             .katex-display { margin: 8px 0; overflow-x: auto; }
-            p { margin: 4px 0; }
         </style>
         </head>
         <body>
