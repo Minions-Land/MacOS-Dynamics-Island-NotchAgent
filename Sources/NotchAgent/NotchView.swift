@@ -5,6 +5,7 @@ struct NotchView: View {
     @State private var isHovering = false
     @State private var selectedItem: NewsItem?
     @State private var minionBounce = false
+    @State private var collapseTask: Task<Void, Never>?
     private let store = NewsStore.shared
 
     var body: some View {
@@ -17,18 +18,32 @@ struct NotchView: View {
         }
         .onHover { hovering in
             isHovering = hovering
-            withAnimation(.spring(response: 0.35, dampingFraction: 0.8)) {
-                isExpanded = hovering
-            }
+            collapseTask?.cancel()
+
             if hovering {
+                withAnimation(.spring(response: 0.35, dampingFraction: 0.8)) {
+                    isExpanded = true
+                }
                 withAnimation(.spring(response: 0.3, dampingFraction: 0.5)) {
                     minionBounce = true
                 }
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
                     minionBounce = false
                 }
+                updateWindowSize(expanded: true)
+            } else {
+                collapseTask = Task {
+                    try? await Task.sleep(for: .milliseconds(400))
+                    guard !Task.isCancelled else { return }
+                    await MainActor.run {
+                        withAnimation(.spring(response: 0.35, dampingFraction: 0.8)) {
+                            isExpanded = false
+                            selectedItem = nil
+                        }
+                        updateWindowSize(expanded: false)
+                    }
+                }
             }
-            updateWindowSize(expanded: hovering)
         }
     }
 
@@ -55,10 +70,22 @@ struct NotchView: View {
         }
         .padding(.horizontal, 12)
         .padding(.vertical, 6)
-        .frame(width: 200, height: 32)
+        .frame(width: 220, height: 34)
         .background(
-            Capsule()
-                .fill(.black.opacity(0.85))
+            ZStack {
+                Capsule()
+                    .fill(.black)
+                Capsule()
+                    .stroke(
+                        LinearGradient(
+                            colors: [.yellow.opacity(0.6), .yellow.opacity(0.3), .orange.opacity(0.5)],
+                            startPoint: .top,
+                            endPoint: .bottom
+                        ),
+                        lineWidth: 1.5
+                    )
+            }
+            .shadow(color: .yellow.opacity(0.15), radius: 4, y: 2)
         )
         .foregroundColor(.white)
     }
@@ -78,7 +105,7 @@ struct NotchView: View {
                 listView
             }
         }
-        .frame(width: 380, height: 420)
+        .frame(width: 380, height: 440)
         .background(
             ZStack {
                 RoundedRectangle(cornerRadius: 16)
@@ -123,6 +150,15 @@ struct NotchView: View {
             Text("NotchAgent")
                 .font(.system(size: 13, weight: .semibold))
 
+            if !store.items.isEmpty {
+                Text("\(store.items.count)")
+                    .font(.system(size: 9, weight: .bold))
+                    .padding(.horizontal, 5)
+                    .padding(.vertical, 2)
+                    .background(Capsule().fill(.yellow.opacity(0.25)))
+                    .foregroundColor(.yellow)
+            }
+
             Spacer()
 
             if store.isLoading {
@@ -133,9 +169,7 @@ struct NotchView: View {
                         .font(.system(size: 9))
                         .foregroundColor(.yellow.opacity(0.7))
                 }
-            }
-
-            if let date = store.lastUpdated {
+            } else if let date = store.lastUpdated {
                 Text(date, style: .relative)
                     .font(.system(size: 9))
                     .foregroundColor(.white.opacity(0.4))
@@ -231,11 +265,14 @@ struct NotchView: View {
         guard let screen = NSScreen.main else { return }
 
         let screenFrame = screen.frame
-        let width: CGFloat = expanded ? 380 : 200
-        let height: CGFloat = expanded ? 420 : 32
+        let safeTop = screen.safeAreaInsets.top
+        let width: CGFloat = expanded ? 380 : 220
+        let height: CGFloat = expanded ? 440 : 34
 
         let x = screenFrame.midX - width / 2
-        let y = screenFrame.maxY - height
+        let y = expanded
+            ? screenFrame.maxY - safeTop - height + 2
+            : screenFrame.maxY - safeTop - height + 2
 
         NSAnimationContext.runAnimationGroup { context in
             context.duration = 0.3

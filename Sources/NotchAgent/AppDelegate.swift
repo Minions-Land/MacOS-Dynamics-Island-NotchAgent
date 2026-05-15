@@ -42,12 +42,14 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     private func setupNotchWindow() {
         guard let screen = NSScreen.main else { return }
 
-        let notchWidth: CGFloat = 200
-        let notchHeight: CGFloat = 32
+        let notchWidth: CGFloat = 220
+        let notchHeight: CGFloat = 34
         let screenFrame = screen.frame
+        let safeTop = screen.safeAreaInsets.top
 
         let windowX = screenFrame.midX - notchWidth / 2
-        let windowY = screenFrame.maxY - notchHeight
+        // Position just below the safe area (below the notch/menu bar)
+        let windowY = screenFrame.maxY - safeTop - notchHeight + 2
 
         let contentView = NotchView()
         let hostingView = NSHostingView(rootView: contentView)
@@ -62,7 +64,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         window.level = .statusBar + 1
         window.backgroundColor = .clear
         window.isOpaque = false
-        window.hasShadow = false
+        window.hasShadow = true
         window.collectionBehavior = [.canJoinAllSpaces, .stationary, .fullScreenAuxiliary]
         window.contentView = hostingView
         window.ignoresMouseEvents = false
