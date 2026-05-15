@@ -229,10 +229,10 @@ struct NotchView: View {
 
     private func updateWindowSize(expanded: Bool) {
         guard let window = NSApp.windows.first(where: { $0 is NSPanel }) else { return }
-        guard let screen = NSScreen.main else { return }
+        let screen = NSScreen.screens.first(where: { $0.safeAreaInsets.top > 0 }) ?? NSScreen.main!
 
         let screenFrame = screen.frame
-        let notchH = screen.safeAreaInsets.top
+        let notchH = max(screen.safeAreaInsets.top, 33)
 
         let width: CGFloat = expanded ? 420 : 300
         let height: CGFloat = expanded ? 520 : notchH

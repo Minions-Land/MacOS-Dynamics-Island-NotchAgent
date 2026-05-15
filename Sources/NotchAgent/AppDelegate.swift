@@ -40,11 +40,11 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
 
     private func setupNotchWindow() {
-        guard let screen = NSScreen.main else { return }
+        // Find the screen with a notch (safeAreaInsets.top > 0)
+        let screen = NSScreen.screens.first(where: { $0.safeAreaInsets.top > 0 }) ?? NSScreen.main!
 
         let screenFrame = screen.frame
-        let notchHeight = screen.safeAreaInsets.top
-        // Collapsed: hidden behind the notch, same height as notch
+        let notchHeight = max(screen.safeAreaInsets.top, 33)
         let notchWidth: CGFloat = 300
         let windowX = screenFrame.midX - notchWidth / 2
         let windowY = screenFrame.maxY - notchHeight
