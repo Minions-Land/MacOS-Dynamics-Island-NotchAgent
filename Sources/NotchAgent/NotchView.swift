@@ -208,9 +208,16 @@ struct NotchView: View {
                     .lineLimit(3)
 
                 Text(item.summary)
-                    .font(.system(size: 11))
-                    .foregroundColor(.white.opacity(0.85))
-                    .lineSpacing(3)
+                    .font(.system(size: 11, weight: .medium))
+                    .foregroundColor(.white.opacity(0.9))
+
+                if !item.detail.isEmpty {
+                    Text(item.detail)
+                        .font(.system(size: 10.5))
+                        .foregroundColor(.white.opacity(0.75))
+                        .lineSpacing(3.5)
+                        .fixedSize(horizontal: false, vertical: true)
+                }
 
                 HStack(spacing: 8) {
                     Image(systemName: item.sourceIcon)

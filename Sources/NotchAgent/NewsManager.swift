@@ -78,23 +78,28 @@ class NewsManager: Sendable {
         UNUserNotificationCenter.current().add(request)
     }
 
-    // MARK: - Fetch (Haiku)
+    // MARK: - Fetch (Sonnet — quality + detail)
 
     private static func fetchNews(keywords: [String]) async -> [NewsItem] {
         let keywordStr = keywords.joined(separator: ", ")
         let prompt = """
-        You are a technical news aggregator focused on AI/ML research and engineering. \
-        Use WebSearch to find the latest technical developments (last 24h) about: \(keywordStr).
+        You are a technical research aggregator. Use WebSearch to find the latest technical developments (last 24h) about: \(keywordStr).
 
-        Focus on: new techniques, frameworks, papers, tools — NOT social news or opinions.
+        Focus on: new techniques, frameworks, papers, tools. NOT social news.
         Search arXiv (cs.AI, cs.MA, cs.CL), GitHub trending, HN (hn.algolia.com/api/v1/search?query=AI+agent&tags=story).
 
-        Return ONLY a JSON array (no markdown) with up to 10 items:
-        [{"id":"unique","title":"...","summary":"2-3句中文技术摘要，聚焦技术创新点","url":"https://...","source":"arxiv|github|hackernews|blog","keywords":["matching"],"timestamp":"ISO8601"}]
+        Return ONLY a JSON array (no markdown) with up to 8 items:
+        [{"id":"unique","title":"...","summary":"1-2句中文概述","detail":"中文技术细节(5-8句)：包含具体方法、关键结果数据、核心公式或算法思路、与现有方案的对比。要有实质内容，不要空话。","url":"https://...","source":"arxiv|github|hackernews|blog","keywords":["matching"],"timestamp":"ISO8601"}]
 
-        Rules: summary in Chinese focusing on TECHNICAL innovation, urls must be real.
+        For the "detail" field:
+        - Papers: include method name, key formula/algorithm idea, benchmark results (numbers)
+        - GitHub repos: include architecture approach, key features, performance claims
+        - Blog posts: include the core technical insight and concrete examples
+        Keep detail concise but substantive — a reader should learn something without opening the link.
+
+        Rules: summary and detail in Chinese, urls must be real, focus on TECHNICAL content.
         """
-        return await invokeClaudeCode(prompt: prompt, model: "haiku")
+        return await invokeClaudeCode(prompt: prompt, model: "sonnet")
     }
 
     // MARK: - Summarize (Sonnet) — tech-focused

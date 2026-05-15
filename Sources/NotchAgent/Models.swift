@@ -4,6 +4,7 @@ struct NewsItem: Identifiable, Codable, Sendable {
     let id: String
     let title: String
     let summary: String
+    let detail: String
     let url: String
     let source: String
     let keywords: [String]
@@ -16,6 +17,18 @@ struct NewsItem: Identifiable, Codable, Sendable {
         case "hackernews": return "flame"
         default: return "globe"
         }
+    }
+
+    init(from decoder: Decoder) throws {
+        let c = try decoder.container(keyedBy: CodingKeys.self)
+        id = try c.decode(String.self, forKey: .id)
+        title = try c.decode(String.self, forKey: .title)
+        summary = try c.decode(String.self, forKey: .summary)
+        detail = try c.decodeIfPresent(String.self, forKey: .detail) ?? ""
+        url = try c.decode(String.self, forKey: .url)
+        source = try c.decode(String.self, forKey: .source)
+        keywords = try c.decode([String].self, forKey: .keywords)
+        timestamp = try c.decode(Date.self, forKey: .timestamp)
     }
 }
 
