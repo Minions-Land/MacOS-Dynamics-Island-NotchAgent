@@ -1,0 +1,135 @@
+{
+  "fetchedAt" : "2026-05-15T13:23:26Z",
+  "items" : [
+    {
+      "detail" : "随着LLM Agent扩展到长时域、多会话场景，如何高效管理累积经验成为核心瓶颈。现有研究将记忆系统与技能发现分开处理，但对1136篇引用文献的分析显示两者存在大量重叠，缺乏统一视角。\n\n本文提出**Experience Compression Spectrum（经验压缩谱）**，将情节记忆（episodic memory）、技能（skills）和规则（rules）定位为单一压缩轴上的三个点，压缩比分别为 $5\\text{–}20\\times$、$20\\text{–}100\\times$ 和 $>100\\times$。框架统一了提取、存储与检索机制，使不同粒度的经验可以互操作。\n\n该框架对22篇核心论文进行了系统性综述，揭示了记忆与技能研究社区之间的引用孤岛现象，并提出了跨层次经验复用的设计原则，为构建自进化Agent提供了理论基础。",
+      "id" : "arxiv-2604-15877",
+      "keywords" : [
+        "agent memory",
+        "agent skill",
+        "experience compression",
+        "LLM agent",
+        "long-horizon"
+      ],
+      "source" : "arxiv",
+      "summary" : "提出「经验压缩谱」统一框架，将记忆、技能与规则视为单一压缩轴上的不同点，系统性解决长期多会话Agent的经验管理瓶颈。",
+      "timestamp" : "2026-04-28T00:00:00Z",
+      "title" : "Unifying Memory, Skills, and Rules in LLM Agents",
+      "url" : "https:\/\/arxiv.org\/abs\/2604.15877"
+    },
+    {
+      "detail" : "当Agent面对大规模技能库时，如何高效检索并正确组合技能是关键挑战。现有方法多采用平面向量检索，忽略技能间的依赖关系，导致组合错误率高。\n\nGraSP将技能库建模为有向依赖图（Directed Dependency Graph），节点为原子技能，边表示调用依赖。查询时通过混合语义-词法种子（hybrid semantic-lexical seeding）定位入口节点，再沿图结构进行**反向感知结构扩散（reverse-aware structural diffusion）**，预算化地水合（hydrate）一个依赖完整的技能子图。\n\n实验结果显示，GraSP在所有测试配置下均取得最优性能，图结构同时提升了检索有效性与推理效率，验证了结构化技能组织相对于平面检索的优越性。",
+      "id" : "arxiv-2604-17870",
+      "keywords" : [
+        "agent skill",
+        "skill graph",
+        "tool use",
+        "LLM agent",
+        "retrieval"
+      ],
+      "source" : "arxiv",
+      "summary" : "提出GraSP框架，用有向图结构组织Agent技能，通过图结构检索与组合显著提升复杂任务的执行效率和准确率。",
+      "timestamp" : "2026-04-28T00:00:00Z",
+      "title" : "GraSP: Graph-Structured Skill Compositions for LLM Agents",
+      "url" : "https:\/\/arxiv.org\/abs\/2604.17870"
+    },
+    {
+      "detail" : "现有Agent记忆系统将推理时的记忆操作与训练过程分离，导致记忆策略无法通过任务反馈自适应优化。MemFactory将记忆的提取（extraction）、更新（updating）和检索（retrieval）建模为可学习的策略动作，并引入RL训练信号端到端优化整个记忆管道。\n\n核心思路是将记忆操作形式化为马尔可夫决策过程，奖励信号来自下游任务表现：\n\n$$\\mathcal{L}(\\theta) = \\mathbb{E}_{\\tau \\sim \\pi_\\theta}\\left[\\sum_t r_t^{\\text{task}} \\cdot \\nabla \\log \\pi_\\theta(a_t^{\\text{mem}})\\right]$$\n\n其中 $a_t^{\\text{mem}}$ 为记忆操作动作，$r_t^{\\text{task}}$ 为任务奖励。\n\n该框架支持长期Agent场景下的记忆自适应演化，在多轮对话和长文档问答基准上相比静态记忆方案取得显著提升，是首个将记忆管理纳入RL训练闭环的统一系统。",
+      "id" : "arxiv-2603-29493",
+      "keywords" : [
+        "agent memory",
+        "reinforcement learning",
+        "LLM agent",
+        "memory management",
+        "training"
+      ],
+      "source" : "arxiv",
+      "summary" : "提出MemFactory，首个将记忆操作（提取、更新、检索）与强化学习训练统一在同一框架内的Agent记忆系统。",
+      "timestamp" : "2026-03-31T00:00:00Z",
+      "title" : "MemFactory: Unified Inference & Training Framework for Agent Memory",
+      "url" : "https:\/\/arxiv.org\/abs\/2603.29493"
+    },
+    {
+      "detail" : "传统多Agent科学发现系统依赖中央协调器分配任务，存在单点瓶颈和扩展性问题。ScienceClaw+Infinite允许任意贡献者部署新Agent加入网络，Agent之间通过交换计算制品（artifacts）而非直接通信来隐式协调。\n\n系统核心由三部分构成：超过300个可互操作科学技能的可扩展注册表（extensible registry）；以有向无环图（DAG）保存完整计算谱系的**制品层（artifact layer）**；以及基于制品相似度的涌现协调机制，使Agent自发形成分工而无需显式协议。\n\n该框架在化学合成路径规划和基因组数据分析任务上验证了可扩展性，新Agent加入后整体发现速度呈超线性增长，展示了去中心化多Agent系统在科学自动化中的潜力。",
+      "id" : "arxiv-2603-14312",
+      "keywords" : [
+        "multi-agent system",
+        "autonomous scientific discovery",
+        "distributed agents",
+        "artifact exchange",
+        "coordination"
+      ],
+      "source" : "arxiv",
+      "summary" : "提出去中心化科学发现框架，多个独立Agent通过「涌现制品交换」协调分布式研究，无需中央调度器即可完成跨Agent知识积累。",
+      "timestamp" : "2026-03-18T00:00:00Z",
+      "title" : "ScienceClaw+Infinite: Autonomous Agents Coordinating Distributed Discovery Through Emergent Artifact Exchange",
+      "url" : "https:\/\/arxiv.org\/abs\/2603.14312"
+    },
+    {
+      "detail" : "MARTI（Multi-Agent Reinforced Training and Inference）针对LLM多Agent系统的训练效率问题，将集中式交互与分布式策略训练解耦。框架支持多轮异步rollout（multi-turn asynchronous rollouts），允许不同Agent在不同时间步完成动作采样，大幅提升长轨迹训练的吞吐量。\n\n核心设计包括：集中式多Agent交互环境（支持工具调用和Agent间通信）、分布式PPO\/GRPO策略优化器、以及针对多Agent奖励归因的信用分配模块。框架兼容主流LLM后端（vLLM、HuggingFace Transformers），并提供代码生成、数学推理等多Agent基准任务。\n\n在代码生成多Agent协作任务上，MARTI训练的Agent组合相比单Agent基线提升显著，验证了多Agent RL训练范式相对于单纯提示工程的优越性。",
+      "id" : "github-marti",
+      "keywords" : [
+        "multi-agent system",
+        "reinforcement learning",
+        "LLM training",
+        "distributed training",
+        "agent framework"
+      ],
+      "source" : "github",
+      "summary" : "清华C3I实验室开源的多Agent强化训练与推理框架，支持集中式多Agent交互、分布式策略训练和多轮异步rollout。",
+      "timestamp" : "2026-05-01T00:00:00Z",
+      "title" : "MARTI: LLM-based Multi-Agent Reinforced Training and Inference Framework",
+      "url" : "https:\/\/github.com\/TsinghuaC3I\/MARTI"
+    },
+    {
+      "detail" : "Codex自2025年发布以来持续演进，最新动态是将其集成至ChatGPT移动应用，使开发者可随时随地监控Agent执行状态、审查代码变更并干预工作流。底层模型升级至GPT-5.5，在NVIDIA GB200\/GB300基础设施上运行，支持更长的自主会话（超越单次代码执行，能主动发现问题并提出改进建议）。\n\nGPT-5.3-Codex系统卡显示，该模型将GPT-5.2-Codex的前沿编码性能与GPT-5.2的推理和专业知识能力相结合，是迄今最强的自主编程模型。Codex现已支持操作计算机、与日常工具和应用集成、生成图像、记住用户偏好并从历史操作中学习。\n\n此次移动端扩展标志着Codex从桌面开发工具向全平台自主Agent演进，Xcode 26.3已支持Claude Agent与Codex在整个开发生命周期中协作，形成跨厂商Agent协同生态。",
+      "id" : "openai-codex-mobile",
+      "keywords" : [
+        "Codex",
+        "agentic coding",
+        "GPT-5.5",
+        "autonomous agent",
+        "tool use"
+      ],
+      "source" : "blog",
+      "summary" : "OpenAI将Codex集成进ChatGPT移动App，用户可在手机端监控和管理开发工作流，底层由GPT-5.5驱动，支持更长时域的自主编程会话。",
+      "timestamp" : "2026-05-14T00:00:00Z",
+      "title" : "OpenAI Codex移动端发布：GPT-5.5驱动的自主编程Agent扩展至手机端",
+      "url" : "https:\/\/openai.com\/index\/codex-for-almost-everything\/"
+    },
+    {
+      "detail" : "本文核心论点是：现代LLM Agent的能力提升越来越少依赖模型权重更新，而更多依赖对运行时环境的重组（reorganizing the runtime）。论文将Agent运行时工程分解为四个正交维度：记忆（跨会话状态持久化）、技能（可复用行为单元）、协议（MCP等标准化工具接口）和Harness工程（提示模板、工具注册、执行沙箱）。\n\n在协议层，论文重点分析了Model Context Protocol（MCP）作为Agent工具接口标准的架构意义：MCP通过统一的工具发现、调用和结果返回接口，使Agent能够以「USB-C式」方式接入任意外部系统，支持OAuth认证和AI_AGENT环境变量传递。\n\n综述覆盖2022年至2026年初的研究，识别出记忆-技能-协议三者之间的设计张力，并提出未来Agent系统应在这三个维度上协同优化，而非孤立设计各模块。",
+      "id" : "arxiv-2604-08224",
+      "keywords" : [
+        "agent memory",
+        "agent skill",
+        "MCP",
+        "tool use",
+        "harness engineering",
+        "LLM agent"
+      ],
+      "source" : "arxiv",
+      "summary" : "系统综述LLM Agent运行时工程的四大支柱：记忆、技能、协议（MCP等）和Harness工程，提出「运行时重组」是现代Agent能力提升的主要路径。",
+      "timestamp" : "2026-04-11T00:00:00Z",
+      "title" : "A Unified Review of Memory, Skills, Protocols and Harness Engineering for LLM Agents",
+      "url" : "https:\/\/arxiv.org\/abs\/2604.08224"
+    },
+    {
+      "detail" : "科学发现任务的多Agent系统面临跨迭代上下文丢失的问题：每轮假设-实验-分析循环后，Agent难以保持对整体研究进展的连贯理解。本文提出以**持久世界状态（persistent world state）**作为所有Agent的共享上下文锚点，维护跨迭代的研究状态、已验证假设和待探索方向。\n\n架构包含四类专业Agent：规划Agent（分解研究目标为可执行子任务）、数据分析Agent（执行统计分析和可视化）、文献检索Agent（实时检索相关论文）和新颖性检测Agent（评估假设与已有文献的差异度）。四类Agent通过世界状态异步协作，无需直接通信。\n\n在生物信息学和材料科学基准任务上，该架构相比单Agent基线在假设质量（由专家评分）和实验成功率上均有显著提升，持久世界状态机制被证明是跨迭代知识积累的关键。",
+      "id" : "arxiv-2601-12542",
+      "keywords" : [
+        "multi-agent system",
+        "autonomous scientific discovery",
+        "agent workflow",
+        "persistent state",
+        "tool use"
+      ],
+      "source" : "arxiv",
+      "summary" : "提出基于持久世界状态（persistent world state）的交互式多Agent科学发现架构，集成规划、数据分析、文献检索和新颖性检测四类专业Agent。",
+      "timestamp" : "2026-01-21T00:00:00Z",
+      "title" : "Interactive Multi-Agent Workflows for Scientific Discovery",
+      "url" : "https:\/\/arxiv.org\/abs\/2601.12542"
+    }
+  ],
+  "summary" : "本小时AI Agent领域呈现出高度集中的技术演进：记忆与技能管理成为核心攻关方向，涌现出「经验压缩谱」统一框架（将记忆、技能、规则视为同一压缩轴上的连续体）、MemFactory（首次将记忆操作与强化学习训练统一到单一框架）以及GraSP（用有向图结构组织Agent技能以提升复杂任务执行效率）等多个新方法，标志着Agent长期记忆工程正从零散设计走向系统化理论。多Agent协作架构同步突破，ScienceClaw+Infinite提出无中央调度器的「涌现制品交换」机制，清华MARTI框架则实现集中式交互与分布式训练的解耦，两者共同指向去中心化、自组织的多Agent范式。综述论文提炼出「运行时重组」（Runtime Recomposition）作为当前Agent能力提升的核心路径，涵盖记忆、技能、协议（MCP等）与Harness工程四大支柱，这一概念框架对后续研究具有较强的方向性意义。整体趋势判断：Agent工程正从单次会话、单一模型向跨会话持久记忆、多Agent异步协作快速演进，基础设施层（记忆系统、技能图、训练框架）的成熟度将成为决定下一阶段Agent实用性的关键瓶颈。"
+}
