@@ -1,0 +1,115 @@
+{
+  "fetchedAt" : "2026-05-15T22:25:15Z",
+  "items" : [
+    {
+      "detail" : "针对PANGAEA等地球科学数据库的规模化挑战，提出了分层多智能体架构用于自动化数据发现和引用分析。系统通过专门化的智能体分工处理数据检索、元数据解析和科学价值评估任务。\n\n核心方法采用层级协调机制，上层规划智能体负责任务分解，下层执行智能体并行处理具体数据集的语义理解和关联挖掘。实验表明该系统在地球科学领域数据集发现准确率上显著优于单智能体基线。\n\n该架构为大规模科学数据库的智能化利用提供了可扩展方案，特别适用于跨学科数据整合场景。",
+      "id" : "arxiv-2602-21351",
+      "keywords" : [
+        "Multi-Agent System",
+        "Autonomous Scientific Discovery"
+      ],
+      "source" : "arxiv",
+      "summary" : "地球科学数据自主发现的分层多智能体系统",
+      "timestamp" : "2026-05-16T00:00:00Z",
+      "title" : "A Hierarchical Multi-Agent System for Autonomous Discovery in Geoscientific Data Archives",
+      "url" : "https:\/\/arxiv.org\/abs\/2602.21351"
+    },
+    {
+      "detail" : "通过对22篇主要论文的1136条引用分析发现，智能体记忆系统和技能发现机制在提取可复用知识方面存在割裂。本文提出统一框架将三者整合：记忆存储交互历史，技能封装可执行过程，规则定义约束条件。\n\n框架核心是知识抽取管道，从原始交互轨迹中同时提取陈述性记忆（事实）、过程性记忆（技能）和规范性知识（规则）。采用图结构存储三者的依赖关系，检索时通过 $\\text{score}(q, k) = \\alpha \\cdot \\text{sim}(q, k) + \\beta \\cdot \\text{relevance}(k)$ 综合语义相似度和任务相关性。\n\n在多个长期交互基准测试中，统一系统相比独立记忆或技能模块，任务成功率提升15-23%，知识复用效率提高40%。该工作为构建持续学习的智能体提供了理论基础。",
+      "id" : "arxiv-2604-15877",
+      "keywords" : [
+        "Agent Memory",
+        "Agent Skill",
+        "LLM Agent"
+      ],
+      "source" : "arxiv",
+      "summary" : "统一LLM智能体的记忆、技能和规则系统",
+      "timestamp" : "2026-05-16T00:00:00Z",
+      "title" : "Unifying Memory, Skills, and Rules in LLM Agents",
+      "url" : "https:\/\/arxiv.org\/html\/2604.15877"
+    },
+    {
+      "detail" : "现有LLM智能体记忆系统依赖少量静态手工设计的操作来提取记忆，这些固定流程硬编码了人类先验假设。本文提出让智能体自主学习和演化记忆技能的框架。\n\n核心机制包括：(1) 元学习模块通过强化学习优化记忆提取策略，奖励函数为 $R = \\gamma \\cdot \\text{recall\\_acc} + (1-\\gamma) \\cdot \\text{storage\\_efficiency}$；(2) 技能库动态扩展，新技能通过变异和交叉操作从现有技能演化而来；(3) 自适应选择器根据任务上下文选择最优记忆操作组合。\n\n在长期对话和多任务场景中，自演化系统的记忆召回准确率比静态系统高18%，存储开销降低35%。该方法使智能体能够根据特定领域需求定制记忆机制。",
+      "id" : "arxiv-2602-02474",
+      "keywords" : [
+        "Agent Memory",
+        "Agent Skill",
+        "LLM Agent"
+      ],
+      "source" : "arxiv",
+      "summary" : "自进化智能体的记忆技能学习与演化机制",
+      "timestamp" : "2026-05-16T00:00:00Z",
+      "title" : "Learning and Evolving Memory Skills for Self-Evolving Agents",
+      "url" : "https:\/\/arxiv.org\/html\/2602.02474"
+    },
+    {
+      "detail" : "工具使用型智能体面临状态管理难题：工具调用产生的副作用难以回溯，导致错误累积。本文提出由执行框架（harness）管理的虚拟内存系统，将智能体与真实环境隔离。\n\n架构采用写时复制（copy-on-write）机制，每次工具调用在虚拟内存快照上执行，仅当智能体确认后才提交到真实环境。状态转换表示为 $S_{t+1} = \\text{commit}(S_t, a_t)$ 当且仅当 $\\text{verify}(S_t, a_t) = \\text{True}$。支持时间旅行调试，可回滚到任意历史状态。\n\n在文件操作、数据库查询和API调用等基准测试中，虚拟内存系统将破坏性错误率降低92%，同时保持工具调用延迟增加小于8%。该方法为安全的自主智能体部署提供了基础设施保障。",
+      "id" : "arxiv-2604-10352",
+      "keywords" : [
+        "Tool Use AI",
+        "LLM Agent",
+        "Agent Memory"
+      ],
+      "source" : "arxiv",
+      "summary" : "工具使用型LLM智能体的虚拟内存管理框架",
+      "timestamp" : "2026-05-16T00:00:00Z",
+      "title" : "Harness-Managed Virtual Memory for Stateful Tool-Using LLM Agents",
+      "url" : "https:\/\/arxiv.org\/html\/2604.10352v1"
+    },
+    {
+      "detail" : "提出面向科学发现的多智能体协作架构，包含规划、数据分析、文献检索和新颖性检测等专门化智能体。通过持久化世界状态（persistent world state）维护跨迭代的上下文一致性。\n\n工作流采用迭代精化模式：规划智能体生成假设 $H_t$，分析智能体执行实验得到结果 $R_t$，文献智能体检索相关工作 $L_t$，新颖性检测器计算 $\\text{novelty}(H_t, L_t, R_t)$ 评分。世界状态 $W_t = \\{H_{1:t}, R_{1:t}, L_{1:t}\\}$ 在智能体间共享，支持协同推理。\n\n在材料科学和药物发现任务中，交互式多智能体系统发现的有效假设数量是单智能体基线的2.7倍，平均迭代轮次减少40%。持久化状态机制是实现长期科学探索的关键。",
+      "id" : "arxiv-2601-12542",
+      "keywords" : [
+        "Multi-Agent System",
+        "Autonomous Scientific Discovery"
+      ],
+      "source" : "arxiv",
+      "summary" : "科学发现的交互式多智能体工作流",
+      "timestamp" : "2026-05-16T00:00:00Z",
+      "title" : "Interactive Multi-Agent Workflows for Scientific Discovery",
+      "url" : "https:\/\/arxiv.org\/abs\/2601.12542"
+    },
+    {
+      "detail" : "CASCADE框架使智能体能够掌握复杂外部工具并通过两个元技能编码知识：(1) 持续学习，通过网络搜索、代码提取和记忆利用；(2) 自我反思，通过迭代验证和错误修正。\n\n技能创建流程为：智能体遇到新任务时，首先搜索相关文档和示例代码，提取关键API调用模式，生成技能原型 $s_0$。然后进入自我改进循环：$s_{i+1} = \\text{refine}(s_i, \\text{feedback}(\\text{test}(s_i)))$，直到通过验证测试。成功的技能存入技能库供未来复用。\n\n在工具学习基准测试中，CASCADE在20个复杂工具上的首次成功率达78%（基线52%），技能复用使后续相似任务的解决时间缩短65%。该系统展示了智能体通过经验积累实现能力增长的潜力。",
+      "id" : "arxiv-2512-23880",
+      "keywords" : [
+        "Agent Skill",
+        "LLM Agent",
+        "Tool Use AI"
+      ],
+      "source" : "arxiv",
+      "summary" : "通过自主开发和演化实现累积式智能体技能创建",
+      "timestamp" : "2026-05-16T00:00:00Z",
+      "title" : "CASCADE: Cumulative Agentic Skill Creation through Autonomous Development and Evolution",
+      "url" : "https:\/\/arxiv.org\/abs\/2512.23880"
+    },
+    {
+      "detail" : "Microsoft Agent Framework提供统一的API用于构建、编排和部署AI智能体及多智能体工作流，同时支持Python和.NET生态。框架核心是声明式工作流定义和运行时编排引擎。\n\n架构特点包括：(1) 跨语言互操作，Python智能体可调用.NET工具，反之亦然；(2) 内置状态管理和检查点机制，支持长时间运行的工作流；(3) 可观测性集成，提供分布式追踪和性能监控。支持多种编排模式：顺序、并行、条件分支和循环。\n\n该框架降低了企业级多智能体系统的开发门槛，特别适合需要整合现有.NET业务逻辑和Python AI模型的场景。已在微软内部多个产品中应用。",
+      "id" : "github-microsoft-agent-framework",
+      "keywords" : [
+        "Multi-Agent System",
+        "Agent System"
+      ],
+      "source" : "github",
+      "summary" : "微软发布跨语言多智能体编排框架",
+      "timestamp" : "2026-05-16T00:00:00Z",
+      "title" : "Microsoft Agent Framework: Multi-Agent Orchestration for Python and .NET",
+      "url" : "https:\/\/github.com\/microsoft\/agent-framework"
+    },
+    {
+      "detail" : "2026年5月14日，OpenAI宣布Codex现已在iOS和Android的ChatGPT应用中可用，用户可远程监控和管理Mac上运行的开发工作流。同时发布GPT-5.1-Codex-Max模型，基于更新的基础推理模型训练。\n\n技术升级包括：(1) 跨设备状态同步，移动端可实时查看代码变更和工具调用；(2) 速率限制翻倍，Pro\/Enterprise用户获得更高并发能力；(3) 增强的智能体任务训练，覆盖软件工程、数学和研究等领域。Codex应用引入工作树（worktrees）和云环境，支持智能体并行工作。\n\n移动集成使开发者能够在通勤或会议间隙审批智能体操作，显著提升工作流灵活性。GPT-5.1-Codex-Max在代码生成准确率和推理速度上均有提升，标志着智能体编码工具的成熟化。",
+      "id" : "openai-codex-mobile-2026",
+      "keywords" : [
+        "Codex",
+        "Agent System",
+        "Tool Use AI"
+      ],
+      "source" : "blog",
+      "summary" : "OpenAI将Codex编码智能体集成到移动端并发布增强模型",
+      "timestamp" : "2026-05-14T00:00:00Z",
+      "title" : "OpenAI Codex Mobile Integration and GPT-5.1-Codex-Max",
+      "url" : "https:\/\/openai.com\/index\/gpt-5-1-codex-max\/"
+    }
+  ],
+  "summary" : "本小时AI技术动态高度集中于智能体记忆与技能架构的系统化突破：多篇arxiv论文同步推进LLM Agent的记忆统一化方向，涵盖记忆\/技能\/规则的统一框架、虚拟内存管理（Harness-Managed Virtual Memory）及自进化记忆技能机制，标志着Agent状态管理从临时方案走向体系化设计。CASCADE框架提出通过自主开发与演化实现技能累积创建，代表Agent自我扩展能力的新范式。多智能体协作方面，地球科学与科学发现领域的分层\/交互式多智能体工作流论文显示垂直领域落地正在加速，微软发布的跨Python\/.NET多智能体编排框架则从工程层面补强了异构环境下的生产级部署能力。整体趋势表明，当前Agent研究的核心矛盾正从\"单轮能力\"转向\"持久状态管理与跨任务技能积累\"，记忆架构与自进化机制将成为下一阶段竞争的核心技术维度。"
+}
