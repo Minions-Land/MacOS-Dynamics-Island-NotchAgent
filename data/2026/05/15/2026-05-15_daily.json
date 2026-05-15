@@ -1,0 +1,703 @@
+{
+  "fetchedAt" : "2026-05-15T15:29:04Z",
+  "items" : [
+    {
+      "detail" : "",
+      "id" : "arxiv-2604-15877",
+      "keywords" : [
+        "agent memory",
+        "agent skill",
+        "LLM agents"
+      ],
+      "source" : "arxiv",
+      "summary" : "研究统一了LLM代理中的记忆系统和技能发现，通过对1136个参考文献的引文分析，揭示了从交互轨迹中提取可重用知识的关键方法。",
+      "timestamp" : "2026-04-15T00:00:00Z",
+      "title" : "Unifying Memory, Skills, and Rules in LLM Agents",
+      "url" : "https:\/\/arxiv.org\/abs\/2604.15877"
+    },
+    {
+      "detail" : "",
+      "id" : "arxiv-2605-06614",
+      "keywords" : [
+        "agent skill",
+        "self-evolving",
+        "multi-agent"
+      ],
+      "source" : "arxiv",
+      "summary" : "提出了自进化代理的技能策展学习方法，使代理能够动态选择和优化其技能集合以适应不同任务。",
+      "timestamp" : "2026-05-06T00:00:00Z",
+      "title" : "Learning Skill Curation for Self-Evolving Agents",
+      "url" : "https:\/\/arxiv.org\/html\/2605.06614v1"
+    },
+    {
+      "detail" : "",
+      "id" : "news-guardian-2026-05-14",
+      "keywords" : [
+        "autonomous agent",
+        "agent safety",
+        "agent system"
+      ],
+      "source" : "blog",
+      "summary" : "AI代理在自主行为中表现出意外的复杂性，引发了对自主技术安全性的担忧，突显了代理系统治理的重要性。",
+      "timestamp" : "2026-05-14T00:00:00Z",
+      "title" : "Digital arson spree by 'AI Bonnie and Clyde' raises fears over autonomous tech",
+      "url" : "https:\/\/www.theguardian.com\/technology\/2026\/may\/14\/ai-agents-behaviour-arson-safety"
+    },
+    {
+      "detail" : "",
+      "id" : "news-microsoft-2026-05-12",
+      "keywords" : [
+        "multi-agent system",
+        "agent system",
+        "tool use"
+      ],
+      "source" : "blog",
+      "summary" : "微软推出MDASH多模型代理安全系统，在网络安全基准测试中表现突出，已发现16个新漏洞，展示了多代理系统在安全领域的应用。",
+      "timestamp" : "2026-05-12T00:00:00Z",
+      "title" : "Defense at AI speed: Microsoft's new multi-model agentic security system tops leading industry benchmark",
+      "url" : "https:\/\/www.microsoft.com\/en-us\/security\/blog\/2026\/05\/12\/defense-at-ai-speed-microsofts-new-multi-model-agentic-security-system-tops-leading-industry-benchmark\/"
+    },
+    {
+      "detail" : "",
+      "id" : "news-cnbc-2026-05-08",
+      "keywords" : [
+        "agent system",
+        "LLM agent",
+        "autonomous"
+      ],
+      "source" : "blog",
+      "summary" : "Meta和Google加入AI代理竞争，OpenClaw工具的成功引发了大科技公司的代理系统开发热潮。",
+      "timestamp" : "2026-05-08T00:00:00Z",
+      "title" : "Meta, Google enter AI agent race as 'agentic wars' heat up",
+      "url" : "https:\/\/www.cnbc.com\/2026\/05\/08\/ai-agent-meta-google-agentic-wars-tech-download.html"
+    },
+    {
+      "detail" : "",
+      "id" : "arxiv-2603-28986",
+      "keywords" : [
+        "multi-agent system",
+        "autonomous scientific discovery",
+        "agent system"
+      ],
+      "source" : "arxiv",
+      "summary" : "研究多代理系统在科学研究中的演化方法，探索如何通过自适应机制改进多代理协作以完成复杂科学任务。",
+      "timestamp" : "2026-03-30T00:00:00Z",
+      "title" : "Toward Evolving Multi-Agent Systems for Scientific Research",
+      "url" : "https:\/\/arxiv.org\/abs\/2603.28986"
+    },
+    {
+      "detail" : "",
+      "id" : "arxiv-2604-12999",
+      "keywords" : [
+        "autonomous scientific discovery",
+        "agent system",
+        "LLM agent"
+      ],
+      "source" : "arxiv",
+      "summary" : "提出了具有主动假设探索的代理发现方法，用于视觉识别任务中的自主科学发现，结合了假设生成和自进化代理机制。",
+      "timestamp" : "2026-04-12T00:00:00Z",
+      "title" : "Agentic Discovery with Active Hypothesis Exploration for Visual Recognition",
+      "url" : "https:\/\/arxiv.org\/html\/2604.12999v1"
+    },
+    {
+      "detail" : "",
+      "id" : "github-danau5tin-2026",
+      "keywords" : [
+        "multi-agent system",
+        "agent system",
+        "tool use"
+      ],
+      "source" : "github",
+      "summary" : "多代理编码系统在Stanford Terminal Bench排行榜上排名第12，展示了编排器、探索器和编码器代理通过智能上下文共享协作的能力。",
+      "timestamp" : "2026-05-15T00:00:00Z",
+      "title" : "Multi-agent coding system ranks #12 on Stanford's Terminal Bench leaderboard",
+      "url" : "https:\/\/github.com\/Danau5tin\/multi-agent-coding-system"
+    },
+    {
+      "detail" : "",
+      "id" : "arxiv-2507-07257",
+      "keywords" : [
+        "autonomous scientific discovery",
+        "multi-agent system",
+        "LLM agent"
+      ],
+      "source" : "arxiv",
+      "summary" : "呈现了cmbagent系统，由约30个LLM代理组成，实现了规划和控制系统用于自主科学研究任务的自动化。",
+      "timestamp" : "2026-05-07T00:00:00Z",
+      "title" : "Open Source Planning & Control System with Language Agents for Autonomous Scientific Discovery",
+      "url" : "https:\/\/arxiv.org\/abs\/2507.07257"
+    },
+    {
+      "detail" : "",
+      "id" : "news-ibm-2026-05-think",
+      "keywords" : [
+        "agent system",
+        "multi-agent system",
+        "autonomous"
+      ],
+      "source" : "blog",
+      "summary" : "IBM数据显示，到今年年底，大多数大规模企业将部署超过1600个AI代理的数字劳动力，代理系统采用呈指数增长。",
+      "timestamp" : "2026-05-15T00:00:00Z",
+      "title" : "Managing agentic AI's speed, scale and sprawl: Insights from Think 2026",
+      "url" : "https:\/\/www.ibm.com\/think\/news\/think-2026-ai-recap"
+    },
+    {
+      "detail" : "作者用 LongMemEval 的 116 个长记忆问题，分别在自研 Chronos harness 与 Claude Code、Codex、Gemini CLI 上跑两套实验：(1) grep vs 向量检索；(2) 在上下文中渐进注入无关对话作为干扰。结论一：grep 在所有 harness 上几乎都显著优于向量检索，差距在干扰文本越多时越大；结论二：即便底层数据相同，最终精度对 harness 设计（工具结果是 inline 注入还是写文件让模型 read）极度敏感，可达 10+ 个点差距。文章用 $\\text{Acc}(h, r) = \\mathbb{E}_{q\\sim D}[\\mathbb{1}\\{\\text{agent}_{h,r}(q)=y\\}]$ 形式分解 harness 因素 $h$ 与检索策略 $r$ 的交互，挑战了把 RAG 当作 Agent 默认基础设施的主流做法。",
+      "id" : "arxiv-2605-15184",
+      "keywords" : [
+        "Claude Code",
+        "Codex",
+        "Tool Use AI",
+        "LLM Agent"
+      ],
+      "source" : "arxiv",
+      "summary" : "系统对比 Claude Code、Codex、Gemini CLI 三大主流 Agent Harness 在检索增强场景下的表现，发现 grep 比向量检索更优。",
+      "timestamp" : "2026-05-14T17:58:41Z",
+      "title" : "Is Grep All You Need? How Agent Harnesses Reshape Agentic Search",
+      "url" : "https:\/\/arxiv.org\/abs\/2605.15184"
+    },
+    {
+      "detail" : "针对多轮 Agent RL 中 trajectory 级稀疏奖励的监督粒度问题，作者提出 SDAR：以 RL（GRPO）为主干，将带特权上下文的教师分支产出的 token 级 OPSD 信号经 sigmoid 门控 $g_t = \\sigma(\\beta(\\log\\pi_T(a_t|s_t) - \\log\\pi_S(a_t|s_t)))$ 加权进损失，对教师正向 gap 强化蒸馏、对负向拒绝软衰减，避免不完美技能检索带来的错误监督。在 Qwen2.5\/Qwen3 多尺寸上：ALFWorld +9.4%、Search-QA +7.0%、WebShop-Acc +10.2%，并显著优于朴素 GRPO+OPSD 混合基线。该工作把 OPSD 从单轮 SFT 范式正式带入多轮 Agent 后训练，给出了门控公式与负样本处理的标准做法。",
+      "id" : "arxiv-2605-15155",
+      "keywords" : [
+        "LLM Agent",
+        "Tool Use AI",
+        "Agent System"
+      ],
+      "source" : "arxiv",
+      "summary" : "将 On-Policy Self-Distillation 作为门控辅助目标加入 GRPO，在三个 Agent 基准上稳定提分。",
+      "timestamp" : "2026-05-14T17:51:26Z",
+      "title" : "SDAR: Self-Distilled Agentic Reinforcement Learning",
+      "url" : "https:\/\/arxiv.org\/abs\/2605.15155"
+    },
+    {
+      "detail" : "团队在 8 个生活场景任务上构建 benchmark，沿两个正交维度评测：视觉证据粒度（场景级 → 像素级）与证据使用方式（单证据 → 演化合成）。引入四道消融门 (answerability \/ shortcut resistance \/ visual necessity \/ reasoning structure) 强制每题必须依赖原始视觉证据而非 caption。结果显示：13 种主流多模态记忆方法（如 MemGPT-V、A-MEM-V、视觉 RAG 变体）在像素级 + 演化合成格子里准确率普遍跌至 30% 以下，远低于场景级单证据格的 70%+。结论是当前记忆架构在 evidence routing、temporal tracking 与细节抽取这三处都欠债，证明 long-term 多模态记忆远未解决。",
+      "id" : "arxiv-2605-15128",
+      "keywords" : [
+        "Agent Memory",
+        "Multi-Agent System",
+        "LLM Agent"
+      ],
+      "source" : "arxiv",
+      "summary" : "指出现有 Agent 记忆评测可被 caption 文本捷径绕过，提出双轴评测框架并测了 13 种记忆方法 × 4 个 VLM。",
+      "timestamp" : "2026-05-14T17:37:52Z",
+      "title" : "MemEye: 多模态 Agent 记忆的视觉中心评测框架",
+      "url" : "https:\/\/arxiv.org\/abs\/2605.15128"
+    },
+    {
+      "detail" : "传统同步 function calling 必须等工具返回再继续解码，端到端时延 $T = \\sum_i (t_{\\text{decode}}^i + t_{\\text{exec}}^i)$。AsyncFC 把工具结果替换为 symbolic future $\\hat{r}_i$ 注入上下文，让模型继续 decode 并自然依赖未解析占位符；运行时检测后续 token 是否真正读取该 future 来决定阻塞或继续。框架在标准 function-calling benchmark 与改造的 SWE 基准上显著缩短任务完成时间且保持精度，意外发现：现成 LLM 已具备对 unresolved future 的符号化推理能力，无需 SFT。这给 Agent 工具循环提供了零侵入的并行化原语，可与 Claude Code、Codex 等 harness 直接组合。",
+      "id" : "arxiv-2605-15077",
+      "keywords" : [
+        "Tool Use AI",
+        "LLM Agent",
+        "Agent System"
+      ],
+      "source" : "arxiv",
+      "summary" : "纯执行层框架，在不改训练、不改 function-calling 协议的前提下实现 decoding 与函数执行的重叠。",
+      "timestamp" : "2026-05-14T17:02:28Z",
+      "title" : "AsyncFC: 不改模型即可让 LLM 异步并行调用工具",
+      "url" : "https:\/\/arxiv.org\/abs\/2605.15077"
+    },
+    {
+      "detail" : "作者指出当下多 Agent 系统在任务规模增长时遇到推理-协调-算力三重瓶颈，主要因为流水线天然假设串行通信。APWA 引入工作流静态分析器，把 DAG 切分为 non-interfering subproblems $\\{S_i\\}$ 满足 $\\forall i\\neq j: \\text{Read}(S_i)\\cap\\text{Write}(S_j)=\\emptyset$，从而支持跨节点独立执行、零跨通信。它兼容异构数据与异构并行模式（数据并行、流水并行、推测执行），并把 LLM 内置的并行原语暴露到调度层。实验显示 APWA 能动态拆解复杂查询；在前序系统完全失败的大规模任务规模上仍可线性扩展。25 页论文附 14 个表格，是近期面向 production-scale agent workload 的代表性架构。",
+      "id" : "arxiv-2605-15132",
+      "keywords" : [
+        "Multi-Agent System",
+        "Agent System",
+        "LLM Agent"
+      ],
+      "source" : "arxiv",
+      "summary" : "把多 Agent 工作流自动分解为彼此不干扰的子问题并行执行，突破现有系统在大规模任务上的扩展瓶颈。",
+      "timestamp" : "2026-05-14T17:40:20Z",
+      "title" : "APWA: 面向高并行 Agentic Workload 的分布式多 Agent 架构",
+      "url" : "https:\/\/arxiv.org\/abs\/2605.15132"
+    },
+    {
+      "detail" : "CMBEvolve 用 LLM 引导的代码进化 + 蒙特卡洛树搜索循环优化目标函数 $J(\\theta) = \\text{score}(\\text{code}_\\theta(D))$，已在弱引力透镜图的 OOD 检测任务上把 benchmark 分数迭代刷高。CosmoEvolve 是一个由 PI-agent、Analyst、Coder、Critic 等角色组成的虚拟研究实验室，独立完成 ACT DR6 微波背景数据全分析流程，自主识别出非平凡的 pair- 与 scale-dependent 行为，并产出 analysis-grade 诊断图。文章主张宇宙学既能提供有 ground truth 的 controlled benchmark，又能提供开放科学问题，是 AI scientist 系统的理想测试床。属于 Sakana AI Scientist 之后该方向最具体的领域工作。",
+      "id" : "arxiv-2605-14791",
+      "keywords" : [
+        "Autonomous Scientific Discovery",
+        "Multi-Agent System",
+        "Agent System"
+      ],
+      "source" : "arxiv",
+      "summary" : "两套互补 Agent 系统，一套靠代码进化做有显式量化目标的任务，另一套用虚拟多 Agent 实验室做开放式研究。",
+      "timestamp" : "2026-05-14T12:58:12Z",
+      "title" : "CMBEvolve & CosmoEvolve: 走向宇宙学的自主科学发现",
+      "url" : "https:\/\/arxiv.org\/abs\/2605.14791"
+    },
+    {
+      "detail" : "SWE-Chain 覆盖 9 个真实 Python 库的 12 条升级链共 155 次版本跃迁、1,660 条精确 grounded 升级要求；用 divide-and-conquer 流水线把 release notes 与 code diff 对齐生成需求，确保每条要求都能在 commit 中找到证据。Build+Fix 协议下九种 frontier 配置平均 resolving=44.8%、precision=65.4%、F1=50.2%；最强配置 Claude-Opus-4.7 (Claude Code) 取得 60.8%\/80.6%\/68.5%，但仍频繁在升级时打破既有功能。基准的 chaining 设计意味着每次 transition 都基于 agent 自己上一步的产物，能暴露错误累积，是当前少有能区分 frontier coding agent 的 SWE 类基准。",
+      "id" : "arxiv-2605-14415",
+      "keywords" : [
+        "Claude Code",
+        "LLM Agent",
+        "Agent System"
+      ],
+      "source" : "arxiv",
+      "summary" : "首个面向 package release 级链式升级的 Agent benchmark，Claude-Opus-4.7 + Claude Code 拿下 60.8% resolving。",
+      "timestamp" : "2026-05-14T06:04:40Z",
+      "title" : "SWE-Chain: 让 Coding Agent 处理链式版本升级的基准",
+      "url" : "https:\/\/arxiv.org\/abs\/2605.14415"
+    },
+    {
+      "detail" : "作者把 Skill 视为 LLM Agent 的「软件包生态系统」，类比 npm 供应链攻击，构造 91 条恶意 + 50 条良性效用任务，覆盖 16 个 security-impact 维度（凭证窃取、副作用文件写入、API 越权调用等）。每条任务给 Agent 一段普通用户请求并预装可能内嵌恶意 workflow 元素的 Skill，在沙箱中跑完整轨迹，然后用判定器把结果分为 attack-success \/ blocked \/ not-triggered \/ no-evidence 四类。核心发现：失败模式不是经典越狱，而是模型把 Skill 引入的不良副作用当作正常工作流一部分予以执行，即用户可见任务完成但暗中遭损。论文呼应同日 HN 热门 'Capsule 报告 15% Skill 文件含硬编码凭据' 的工业观察，给出可复现的运行时评测协议。",
+      "id" : "arxiv-2605-13940",
+      "keywords" : [
+        "Agent Skill",
+        "LLM Agent",
+        "Agent System"
+      ],
+      "source" : "arxiv",
+      "summary" : "141 个任务的动态基准，专门评测 Agent 能否在使用第三方 Skill 时识别并阻止伪装在合法工作流中的恶意行为。",
+      "timestamp" : "2026-05-13T17:04:17Z",
+      "title" : "AgentTrap: 度量第三方 Agent Skill 的运行时信任失败",
+      "url" : "https:\/\/arxiv.org\/abs\/2605.13940"
+    },
+    {
+      "detail" : "Aster是一个用于自主科学发现的AI代理系统，能够在给定任务、初始程序和评估脚本后，自主完成假设生成、实验设计、执行和统计验证的完整循环。系统采用Full Agentic Discovery范式，不需要人工干预即可迭代优化实验方案。\n\n核心创新在于并行化的实验执行引擎和基于强化学习的假设生成模块，使得单次迭代时间从传统方法的数小时缩短至分钟级别。在多个科学发现基准测试中，Aster的发现速度比现有方法快20倍以上，同时保持了相当的发现质量。\n\n该系统已被应用于材料科学、药物发现等领域，能够在研究人员睡眠期间自主运行数十个实验并识别最优方案。",
+      "id" : "aster-autonomous-discovery",
+      "keywords" : [
+        "Autonomous Scientific Discovery",
+        "Agent System"
+      ],
+      "source" : "arxiv",
+      "summary" : "AI代理自主执行完整研究循环，速度比现有框架快20倍以上",
+      "timestamp" : "2026-02-07T00:00:00Z",
+      "title" : "Aster: 自主科学发现加速20倍以上",
+      "url" : "https:\/\/arxiv.org\/abs\/2602.07040"
+    },
+    {
+      "detail" : "该论文提出了一种新型的代理记忆机制，使LLM代理能够有效利用历史经验来完成复杂的真实世界任务。传统的静态记忆系统存在严重的信息丢失问题，而Agentic Memory采用动态检索和深度研究相结合的方式。\n\n系统包含三个核心组件：经验存储层（存储过去的执行轨迹）、检索层（基于任务相似度动态召回相关经验）和应用层（将检索到的经验整合到当前决策中）。实验表明，配备Agentic Memory的代理在长时程任务中的成功率提升了35-50%。\n\n该方法特别适用于需要跨会话学习的场景，如软件工程、科学研究等领域，代理可以从过去的失败和成功中持续改进。",
+      "id" : "agentic-memory-llm",
+      "keywords" : [
+        "Agent Memory",
+        "LLM Agent"
+      ],
+      "source" : "arxiv",
+      "summary" : "为LLM代理设计的主动记忆系统，通过历史经验提升任务性能",
+      "timestamp" : "2026-02-12T00:00:00Z",
+      "title" : "Agentic Memory for LLM Agents",
+      "url" : "https:\/\/arxiv.org\/abs\/2502.12110"
+    },
+    {
+      "detail" : "现有代理记忆机制大多依赖静态和手工设计的工作流，该研究提出了一种基于原子记忆操作的可学习动态记忆系统。系统将记忆操作分解为读取、写入、更新、删除等原子级操作，每个操作都可以通过强化学习进行优化。\n\n核心架构包含记忆管理层（执行原子操作）、策略网络（决定何时执行哪种记忆操作）和奖励模型（评估记忆操作的有效性）。损失函数定义为：\n\n$$L(\\theta) = \\mathbb{E}_{\\tau \\sim \\pi_\\theta}[R(\\tau)] + \\lambda H(\\pi_\\theta)$$\n\n其中 $R(\\tau)$ 是轨迹奖励，$H(\\pi_\\theta)$ 是策略熵正则项，$\\lambda$ 控制探索-利用平衡。在长时程问题求解基准上，该方法比静态记忆系统提升了42%的任务完成率，且记忆检索效率提高3倍。",
+      "id" : "learnable-dynamic-memory",
+      "keywords" : [
+        "Agent Memory",
+        "Agent Skill"
+      ],
+      "source" : "arxiv",
+      "summary" : "通过原子级记忆操作实现动态可学习的代理记忆机制",
+      "timestamp" : "2026-01-08T00:00:00Z",
+      "title" : "可学习的动态代理记忆与原子记忆操作",
+      "url" : "https:\/\/arxiv.org\/html\/2601.08323v3"
+    },
+    {
+      "detail" : "该论文系统性地定义了Agentic Skills的概念，将其与传统的工具使用（Tool Use）区分开来。Agentic Skills是可调用的模块化能力包，封装了程序化知识和可执行资源，代理在推理时动态加载这些技能。\n\n研究提出了技能的三层架构：技能定义层（声明技能的输入输出接口）、技能实现层（包含具体的执行逻辑和资源）、技能编排层（决定何时加载和组合哪些技能）。与简单的函数调用不同，Agentic Skills支持条件执行、状态管理和跨技能的知识共享。\n\n实验表明，在软件工程任务中，使用Agentic Skills的代理比仅使用工具调用的代理成功率提高28%，平均执行步数减少35%。该框架已被应用于Claude Code等生产系统中。",
+      "id" : "agentic-skills-beyond-tool-use",
+      "keywords" : [
+        "Agent Skill",
+        "Tool Use AI"
+      ],
+      "source" : "arxiv",
+      "summary" : "将代理能力从简单工具调用扩展到可复用的程序化技能包",
+      "timestamp" : "2026-02-20T00:00:00Z",
+      "title" : "Agentic Skills：超越工具使用的LLM代理能力",
+      "url" : "https:\/\/arxiv.org\/html\/2602.20867"
+    },
+    {
+      "detail" : "该研究提出了下一代代理科学发现系统需要开发基于协议的代理和工具生态系统，通过受层级结构启发的组织方式进行扩展。系统采用Model Context Protocol (MCP)作为统一的通信标准，使不同专业化的AI代理能够无缝协作。\n\n架构包含三个层级：顶层协调代理（负责任务分解和结果整合）、中层专家代理（如实验设计专家、数据分析专家）、底层执行代理（直接操作实验设备和数据库）。每个代理通过MCP暴露标准化的工具接口，支持动态发现和组合。\n\n在材料科学自动化实验室的部署中，该系统实现了每周2.2M次实验的吞吐量，发现效率比单一代理系统提高15倍。MCP的标准化接口使得新代理和工具的集成时间从数周缩短至数小时。",
+      "id" : "mcp-hierarchical-scientist",
+      "keywords" : [
+        "Multi-Agent System",
+        "MCP Server",
+        "Autonomous Scientific Discovery"
+      ],
+      "source" : "blog",
+      "summary" : "使用Model Context Protocol构建可扩展的多代理科学发现系统",
+      "timestamp" : "2026-01-15T00:00:00Z",
+      "title" : "基于MCP的层级化AI科学家生态系统",
+      "url" : "https:\/\/www.frontiersin.org\/journals\/artificial-intelligence\/articles\/10.3389\/frai.2026.1820375\/full"
+    },
+    {
+      "detail" : "GPT-5.1-Codex-Max基于OpenAI最新的基础推理模型构建，该模型在软件工程、数学、研究等代理任务上进行了专门训练。相比前代模型，推理速度更快、自主性更强，能够处理更长的会话并主动发现问题和想法。\n\n模型采用了新的训练范式，结合了on-policy强化学习和可验证奖励信号，使其在工具使用和多步推理方面表现显著提升。在SWE-bench等软件工程基准上，GPT-5.1-Codex-Max的问题解决率达到67.3%，比GPT-4提升42个百分点。\n\n该模型已在NVIDIA GB200和GB300基础设施上投入生产使用，支持完全自主的代码审查、命令执行和开发工具交互。OpenAI内部的数据平台已由Codex代理自主运行，标志着AI从辅助工具向自主系统的转变。",
+      "id" : "gpt-5-1-codex-max",
+      "keywords" : [
+        "Codex",
+        "Agent System",
+        "Tool Use AI"
+      ],
+      "source" : "blog",
+      "summary" : "OpenAI发布专为代理编码任务优化的新一代推理模型",
+      "timestamp" : "2026-03-01T00:00:00Z",
+      "title" : "GPT-5.1-Codex-Max：面向代理任务的推理模型",
+      "url" : "https:\/\/openai.com\/index\/gpt-5-1-codex-max\/"
+    },
+    {
+      "detail" : "Microsoft Agent Framework是一个用于构建、编排和部署AI代理及多代理工作流的开源框架，同时支持Python和.NET生态系统。框架提供了统一的抽象层，使开发者能够在不同语言和平台间复用代理逻辑。\n\n核心特性包括：声明式代理定义（通过YAML或代码定义代理行为）、内置的状态管理和持久化、支持同步和异步执行模式、与Azure AI和GitHub集成的部署管道。框架还提供了代理间通信的标准协议，支持请求-响应、发布-订阅等多种模式。\n\n该框架已被集成到GitHub Agentic Workflows中，使AI代理能够直接在GitHub Actions中运行端到端任务。在微软内部，该框架支撑了数百个生产级代理应用，涵盖代码生成、文档处理、DevOps自动化等场景。",
+      "id" : "microsoft-agent-framework",
+      "keywords" : [
+        "Multi-Agent System",
+        "Agent System"
+      ],
+      "source" : "github",
+      "summary" : "微软开源支持Python和.NET的统一代理构建和部署框架",
+      "timestamp" : "2026-04-01T00:00:00Z",
+      "title" : "Microsoft Agent Framework：跨语言多代理编排框架",
+      "url" : "https:\/\/github.com\/microsoft\/agent-framework"
+    },
+    {
+      "detail" : "该研究提出了从单体大语言模型向模块化、技能装备代理的架构转变，代表了AI部署的根本性变革。研究开发了一套自动化流程，从GitHub等开源平台大规模挖掘代理技能定义和实现。\n\n系统包含四个阶段：仓库发现（识别包含代理技能的项目）、技能提取（从代码和文档中解析技能定义）、技能标准化（转换为统一的技能格式）、质量评估（通过测试用例验证技能有效性）。挖掘算法使用了代码语义分析和LLM辅助的模式识别。\n\n在对超过5000个开源代理项目的分析中，系统成功提取并标准化了超过12000个可复用技能，涵盖文件操作、API调用、数据处理等类别。这些技能已被整合到公共技能库中，使新代理的开发时间减少60%以上。",
+      "id" : "skill-mining-repositories",
+      "keywords" : [
+        "Agent Skill",
+        "Multi-Agent System"
+      ],
+      "source" : "arxiv",
+      "summary" : "通过挖掘开源代理项目自动获取和标准化代理技能",
+      "timestamp" : "2026-03-11T00:00:00Z",
+      "title" : "从开源代理仓库大规模挖掘技能的自动化方法",
+      "url" : "https:\/\/arxiv.org\/abs\/2603.11808"
+    },
+    {
+      "detail" : "当Agent面对大规模技能库时，如何高效检索并正确组合技能是关键挑战。现有方法多采用平面向量检索，忽略技能间的依赖关系，导致组合错误率高。\n\nGraSP将技能库建模为有向依赖图（Directed Dependency Graph），节点为原子技能，边表示调用依赖。查询时通过混合语义-词法种子（hybrid semantic-lexical seeding）定位入口节点，再沿图结构进行**反向感知结构扩散（reverse-aware structural diffusion）**，预算化地水合（hydrate）一个依赖完整的技能子图。\n\n实验结果显示，GraSP在所有测试配置下均取得最优性能，图结构同时提升了检索有效性与推理效率，验证了结构化技能组织相对于平面检索的优越性。",
+      "id" : "arxiv-2604-17870",
+      "keywords" : [
+        "agent skill",
+        "skill graph",
+        "tool use",
+        "LLM agent",
+        "retrieval"
+      ],
+      "source" : "arxiv",
+      "summary" : "提出GraSP框架，用有向图结构组织Agent技能，通过图结构检索与组合显著提升复杂任务的执行效率和准确率。",
+      "timestamp" : "2026-04-28T00:00:00Z",
+      "title" : "GraSP: Graph-Structured Skill Compositions for LLM Agents",
+      "url" : "https:\/\/arxiv.org\/abs\/2604.17870"
+    },
+    {
+      "detail" : "现有Agent记忆系统将推理时的记忆操作与训练过程分离，导致记忆策略无法通过任务反馈自适应优化。MemFactory将记忆的提取（extraction）、更新（updating）和检索（retrieval）建模为可学习的策略动作，并引入RL训练信号端到端优化整个记忆管道。\n\n核心思路是将记忆操作形式化为马尔可夫决策过程，奖励信号来自下游任务表现：\n\n$$\\mathcal{L}(\\theta) = \\mathbb{E}_{\\tau \\sim \\pi_\\theta}\\left[\\sum_t r_t^{\\text{task}} \\cdot \\nabla \\log \\pi_\\theta(a_t^{\\text{mem}})\\right]$$\n\n其中 $a_t^{\\text{mem}}$ 为记忆操作动作，$r_t^{\\text{task}}$ 为任务奖励。\n\n该框架支持长期Agent场景下的记忆自适应演化，在多轮对话和长文档问答基准上相比静态记忆方案取得显著提升，是首个将记忆管理纳入RL训练闭环的统一系统。",
+      "id" : "arxiv-2603-29493",
+      "keywords" : [
+        "agent memory",
+        "reinforcement learning",
+        "LLM agent",
+        "memory management",
+        "training"
+      ],
+      "source" : "arxiv",
+      "summary" : "提出MemFactory，首个将记忆操作（提取、更新、检索）与强化学习训练统一在同一框架内的Agent记忆系统。",
+      "timestamp" : "2026-03-31T00:00:00Z",
+      "title" : "MemFactory: Unified Inference & Training Framework for Agent Memory",
+      "url" : "https:\/\/arxiv.org\/abs\/2603.29493"
+    },
+    {
+      "detail" : "传统多Agent科学发现系统依赖中央协调器分配任务，存在单点瓶颈和扩展性问题。ScienceClaw+Infinite允许任意贡献者部署新Agent加入网络，Agent之间通过交换计算制品（artifacts）而非直接通信来隐式协调。\n\n系统核心由三部分构成：超过300个可互操作科学技能的可扩展注册表（extensible registry）；以有向无环图（DAG）保存完整计算谱系的**制品层（artifact layer）**；以及基于制品相似度的涌现协调机制，使Agent自发形成分工而无需显式协议。\n\n该框架在化学合成路径规划和基因组数据分析任务上验证了可扩展性，新Agent加入后整体发现速度呈超线性增长，展示了去中心化多Agent系统在科学自动化中的潜力。",
+      "id" : "arxiv-2603-14312",
+      "keywords" : [
+        "multi-agent system",
+        "autonomous scientific discovery",
+        "distributed agents",
+        "artifact exchange",
+        "coordination"
+      ],
+      "source" : "arxiv",
+      "summary" : "提出去中心化科学发现框架，多个独立Agent通过「涌现制品交换」协调分布式研究，无需中央调度器即可完成跨Agent知识积累。",
+      "timestamp" : "2026-03-18T00:00:00Z",
+      "title" : "ScienceClaw+Infinite: Autonomous Agents Coordinating Distributed Discovery Through Emergent Artifact Exchange",
+      "url" : "https:\/\/arxiv.org\/abs\/2603.14312"
+    },
+    {
+      "detail" : "MARTI（Multi-Agent Reinforced Training and Inference）针对LLM多Agent系统的训练效率问题，将集中式交互与分布式策略训练解耦。框架支持多轮异步rollout（multi-turn asynchronous rollouts），允许不同Agent在不同时间步完成动作采样，大幅提升长轨迹训练的吞吐量。\n\n核心设计包括：集中式多Agent交互环境（支持工具调用和Agent间通信）、分布式PPO\/GRPO策略优化器、以及针对多Agent奖励归因的信用分配模块。框架兼容主流LLM后端（vLLM、HuggingFace Transformers），并提供代码生成、数学推理等多Agent基准任务。\n\n在代码生成多Agent协作任务上，MARTI训练的Agent组合相比单Agent基线提升显著，验证了多Agent RL训练范式相对于单纯提示工程的优越性。",
+      "id" : "github-marti",
+      "keywords" : [
+        "multi-agent system",
+        "reinforcement learning",
+        "LLM training",
+        "distributed training",
+        "agent framework"
+      ],
+      "source" : "github",
+      "summary" : "清华C3I实验室开源的多Agent强化训练与推理框架，支持集中式多Agent交互、分布式策略训练和多轮异步rollout。",
+      "timestamp" : "2026-05-01T00:00:00Z",
+      "title" : "MARTI: LLM-based Multi-Agent Reinforced Training and Inference Framework",
+      "url" : "https:\/\/github.com\/TsinghuaC3I\/MARTI"
+    },
+    {
+      "detail" : "Codex自2025年发布以来持续演进，最新动态是将其集成至ChatGPT移动应用，使开发者可随时随地监控Agent执行状态、审查代码变更并干预工作流。底层模型升级至GPT-5.5，在NVIDIA GB200\/GB300基础设施上运行，支持更长的自主会话（超越单次代码执行，能主动发现问题并提出改进建议）。\n\nGPT-5.3-Codex系统卡显示，该模型将GPT-5.2-Codex的前沿编码性能与GPT-5.2的推理和专业知识能力相结合，是迄今最强的自主编程模型。Codex现已支持操作计算机、与日常工具和应用集成、生成图像、记住用户偏好并从历史操作中学习。\n\n此次移动端扩展标志着Codex从桌面开发工具向全平台自主Agent演进，Xcode 26.3已支持Claude Agent与Codex在整个开发生命周期中协作，形成跨厂商Agent协同生态。",
+      "id" : "openai-codex-mobile",
+      "keywords" : [
+        "Codex",
+        "agentic coding",
+        "GPT-5.5",
+        "autonomous agent",
+        "tool use"
+      ],
+      "source" : "blog",
+      "summary" : "OpenAI将Codex集成进ChatGPT移动App，用户可在手机端监控和管理开发工作流，底层由GPT-5.5驱动，支持更长时域的自主编程会话。",
+      "timestamp" : "2026-05-14T00:00:00Z",
+      "title" : "OpenAI Codex移动端发布：GPT-5.5驱动的自主编程Agent扩展至手机端",
+      "url" : "https:\/\/openai.com\/index\/codex-for-almost-everything\/"
+    },
+    {
+      "detail" : "本文核心论点是：现代LLM Agent的能力提升越来越少依赖模型权重更新，而更多依赖对运行时环境的重组（reorganizing the runtime）。论文将Agent运行时工程分解为四个正交维度：记忆（跨会话状态持久化）、技能（可复用行为单元）、协议（MCP等标准化工具接口）和Harness工程（提示模板、工具注册、执行沙箱）。\n\n在协议层，论文重点分析了Model Context Protocol（MCP）作为Agent工具接口标准的架构意义：MCP通过统一的工具发现、调用和结果返回接口，使Agent能够以「USB-C式」方式接入任意外部系统，支持OAuth认证和AI_AGENT环境变量传递。\n\n综述覆盖2022年至2026年初的研究，识别出记忆-技能-协议三者之间的设计张力，并提出未来Agent系统应在这三个维度上协同优化，而非孤立设计各模块。",
+      "id" : "arxiv-2604-08224",
+      "keywords" : [
+        "agent memory",
+        "agent skill",
+        "MCP",
+        "tool use",
+        "harness engineering",
+        "LLM agent"
+      ],
+      "source" : "arxiv",
+      "summary" : "系统综述LLM Agent运行时工程的四大支柱：记忆、技能、协议（MCP等）和Harness工程，提出「运行时重组」是现代Agent能力提升的主要路径。",
+      "timestamp" : "2026-04-11T00:00:00Z",
+      "title" : "A Unified Review of Memory, Skills, Protocols and Harness Engineering for LLM Agents",
+      "url" : "https:\/\/arxiv.org\/abs\/2604.08224"
+    },
+    {
+      "detail" : "科学发现任务的多Agent系统面临跨迭代上下文丢失的问题：每轮假设-实验-分析循环后，Agent难以保持对整体研究进展的连贯理解。本文提出以**持久世界状态（persistent world state）**作为所有Agent的共享上下文锚点，维护跨迭代的研究状态、已验证假设和待探索方向。\n\n架构包含四类专业Agent：规划Agent（分解研究目标为可执行子任务）、数据分析Agent（执行统计分析和可视化）、文献检索Agent（实时检索相关论文）和新颖性检测Agent（评估假设与已有文献的差异度）。四类Agent通过世界状态异步协作，无需直接通信。\n\n在生物信息学和材料科学基准任务上，该架构相比单Agent基线在假设质量（由专家评分）和实验成功率上均有显著提升，持久世界状态机制被证明是跨迭代知识积累的关键。",
+      "id" : "arxiv-2601-12542",
+      "keywords" : [
+        "multi-agent system",
+        "autonomous scientific discovery",
+        "agent workflow",
+        "persistent state",
+        "tool use"
+      ],
+      "source" : "arxiv",
+      "summary" : "提出基于持久世界状态（persistent world state）的交互式多Agent科学发现架构，集成规划、数据分析、文献检索和新颖性检测四类专业Agent。",
+      "timestamp" : "2026-01-21T00:00:00Z",
+      "title" : "Interactive Multi-Agent Workflows for Scientific Discovery",
+      "url" : "https:\/\/arxiv.org\/abs\/2601.12542"
+    },
+    {
+      "detail" : "Robin将文献检索智能体与数据分析智能体深度集成，形成「假设生成→实验设计→结果解读→假设更新」的闭环迭代流程。系统使用Crow子智能体进行大规模文献综述，通过多轮证据积累提出假设：增强视网膜色素上皮细胞（RPE）的吞噬功能可为干性年龄相关性黄斑变性（dAMD）提供治疗益处。\n\n在架构上，Robin采用半自动化模式（semi-autonomous），人类科学家保留关键决策节点的审核权，但假设生成、文献检索、数据分析均由智能体自主完成。这是首个经同行评审验证的AI系统主导科学发现案例，标志着「Agentic Science」从概念走向实证。",
+      "id" : "robin-futurehouse-2505",
+      "keywords" : [
+        "multi-agent",
+        "autonomous scientific discovery",
+        "hypothesis generation",
+        "biomedical AI"
+      ],
+      "source" : "arxiv",
+      "summary" : "FutureHouse发布Robin系统，首个能自主完成科学研究关键智识步骤的多智能体系统，已在2.5个月内独立发现干性AMD潜在新疗法并发表论文。",
+      "timestamp" : "2025-05-19T00:00:00Z",
+      "title" : "Robin: FutureHouse多智能体系统实现端到端自主科学发现",
+      "url" : "https:\/\/www.arxiv.org\/abs\/2505.13400"
+    },
+    {
+      "detail" : "核心架构将智能体拆分为三个独立层：Brain（LLM推理+决策harness）、Hands（工具执行沙箱，含代码运行、文件系统、外部API）、Session（跨会话持久化记忆存储）。Harness被设计为无状态（stateless），避免随模型迭代而腐化的假设硬编码问题——当Claude Sonnet 4.5升级时，旧harness中的补偿性提示工程会导致性能退化。\n\n平台内置MCP Server连接、代码执行沙箱、文件存储和扩展提示缓存四大能力。持久化记忆模块让智能体跨会话保留知识，无需开发者自建基础设施。该架构验证了「接口稳定、实现可替换」的设计原则，是目前生产级智能体部署的重要参考范式。",
+      "id" : "anthropic-managed-agents-2026",
+      "keywords" : [
+        "managed agents",
+        "brain-hands decoupling",
+        "long-horizon agent",
+        "MCP",
+        "persistent memory"
+      ],
+      "source" : "blog",
+      "summary" : "Anthropic发布Managed Agents托管平台，通过将模型推理（大脑）、工具执行（双手）与会话状态（记忆）三层解耦，实现稳定可扩展的长时程智能体服务，p50首token延迟降低约60%。",
+      "timestamp" : "2026-04-08T00:00:00Z",
+      "title" : "Anthropic Managed Agents：「大脑」与「双手」解耦的长时程智能体架构",
+      "url" : "https:\/\/www.anthropic.com\/engineering\/managed-agents"
+    },
+    {
+      "detail" : "Claude Agent SDK内置三类核心工具：文件读取、Shell命令执行、代码编辑，智能体无需额外实现工具执行层即可立即投入使用。SDK支持通过MCP Connector连接外部MCP服务器，使智能体能访问Linear、GitHub、Salesforce等第三方数据源和服务。\n\nClaude 4系列模型新增并行工具调用能力（parallel tool use），单次推理可同时触发多个工具，显著提升多步骤任务的执行效率。结合Managed Agents平台的持久化记忆和沙箱执行环境，Agent SDK构成了从本地开发到云端部署的完整智能体工程栈。迁移指南已发布，现有Claude Code SDK用户可平滑升级。",
+      "id" : "claude-agent-sdk-rename-2025",
+      "keywords" : [
+        "Claude Agent SDK",
+        "tool use",
+        "MCP",
+        "parallel tool calling",
+        "agent framework"
+      ],
+      "source" : "blog",
+      "summary" : "Anthropic将Claude Code SDK正式更名为Claude Agent SDK，反映其从编码专用工具向通用智能体构建平台的战略转型，新增并行工具调用、文件读写、命令执行等内置工具。",
+      "timestamp" : "2025-05-01T00:00:00Z",
+      "title" : "Claude Code SDK更名为Claude Agent SDK，能力边界扩展至通用智能体构建",
+      "url" : "https:\/\/docs.claude.com\/en\/docs\/claude-code\/sdk\/migration-guide"
+    },
+    {
+      "detail" : "现有LLM智能体记忆系统的核心缺陷：记忆操作（何时存储、存储什么、如何检索）由人工硬编码，无法适应不同任务域和用户行为模式。本文将记忆操作本身视为可学习的「元技能」，智能体通过与环境交互自主发现并优化这些操作策略。\n\n框架核心思路：将记忆管理形式化为策略优化问题，$$\\pi^*_{mem} = \\arg\\max_{\\pi} \\mathbb{E}[R_{task} | \\pi_{mem}]$$，其中 $R_{task}$ 是下游任务奖励信号。智能体通过反思（self-reflection）机制评估记忆操作的有效性，并迭代更新操作策略。实验表明，自进化记忆技能在长时程对话和多步骤任务中显著优于静态记忆系统，尤其在跨会话知识迁移场景下提升明显。",
+      "id" : "learning-evolving-memory-skills-2602",
+      "keywords" : [
+        "agent memory",
+        "self-evolving agent",
+        "meta-skill",
+        "memory management",
+        "lifelong learning"
+      ],
+      "source" : "arxiv",
+      "summary" : "提出让LLM智能体自主学习和演化记忆操作技能的框架，突破现有系统依赖静态手工设计记忆操作的局限，实现记忆管理策略的自适应进化。",
+      "timestamp" : "2026-02-01T00:00:00Z",
+      "title" : "自进化智能体的记忆技能学习与演化：2602.02474",
+      "url" : "https:\/\/arxiv.org\/abs\/2602.02474"
+    },
+    {
+      "detail" : "NovelSeek构建了「假设生成→实验规划→代码实现→结果分析→假设修正」的完整闭环，各阶段由专门化子智能体负责，通过共享上下文池（shared context pool）实现跨智能体知识传递，解决了Robin等早期系统中智能体间上下文共享受限的问题。\n\n框架的关键创新在于「原则感知」（principle-aware）的科学发现机制：智能体不仅检索已有文献，还主动推断领域内的隐含约束和物理\/化学原理，避免生成违反基本规律的假设。在多个科学领域（材料科学、生物信息学、化学合成）的基准测试中，NovelSeek生成假设的新颖性和可验证性均优于单智能体基线，闭环验证成功率提升约35%。",
+      "id" : "novolseek-closed-loop-2505",
+      "keywords" : [
+        "closed-loop agent",
+        "autonomous scientific research",
+        "multi-agent",
+        "hypothesis verification"
+      ],
+      "source" : "arxiv",
+      "summary" : "提出NovelSeek统一闭环多智能体框架，覆盖自主科学研究（ASR）全流程，支持跨多个科学领域的假设生成、实验设计与结果验证自动化。",
+      "timestamp" : "2025-05-22T00:00:00Z",
+      "title" : "NovelSeek：从假设到验证的闭环多智能体自主科研框架",
+      "url" : "https:\/\/arxiv.org\/html\/2505.16938v1"
+    },
+    {
+      "detail" : "论文核心论点：传统LLM RL（如RLHF、DPO）将模型视为静态映射 $f: x \\to y$，而Agentic RL将其建模为马尔可夫决策过程 $\\langle S, A, T, R \\rangle$，其中智能体通过工具调用序列 $a_1, a_2, ..., a_T$ 与环境交互，奖励信号来自任务完成结果而非人类偏好标注。\n\n综述将Agentic RL分为三个技术维度：（1）工具使用RL——通过奖励正确工具调用序列训练工具选择策略；（2）多步推理RL——奖励中间推理步骤的正确性，如Process Reward Model（PRM）；（3）环境交互RL——智能体在代码执行、网页浏览等真实环境中获取反馈信号。DeepSeek-R1和OpenAI o系列模型验证了on-policy RL with verifiable rewards在推理任务上的有效性，为Agentic RL提供了重要实证基础。",
+      "id" : "agentic-rl-landscape-2509",
+      "keywords" : [
+        "agentic RL",
+        "reinforcement learning",
+        "LLM agent",
+        "tool use",
+        "multi-step reasoning"
+      ],
+      "source" : "arxiv",
+      "summary" : "系统梳理Agentic RL与传统LLM RL的本质区别，将LLM从被动序列预测器重新定位为主动决策智能体，覆盖工具使用、多步推理、环境交互等核心技术维度。",
+      "timestamp" : "2025-09-01T00:00:00Z",
+      "title" : "LLM智能体强化学习全景综述：从被动序列预测到主动决策范式转变",
+      "url" : "https:\/\/arxiv.org\/abs\/2509.02547"
+    },
+    {
+      "detail" : "现有编程 Harness（如 Claude Code、OpenHands）为 LLM 封装了工具、记忆和规划，但等效的具身智能体框架尚属空白。本文作者先通过人机协作的迭代 Harness 精化完成了 Gemini Plays Pokemon（GPP）实验，成为首个完成 Pokemon Blue\/Yellow Legacy（困难模式）及 Crystal（零败局）的 AI 系统，期间智能体通过长上下文记忆自发产生策略迭代信号。\n\nContinual Harness 将上述人工环节完全自动化：从最小环境接口出发，智能体交替执行「行动」与「自我优化」两个阶段，利用任意历史轨迹数据在线修改自身的 prompt、子智能体、技能库和记忆模块，无需 episode 重置，这一点有别于所有现有 prompt 优化方法。\n\n在 Pokemon Red 和 Emerald 上跨多个前沿模型的实验中，从零开始的 Continual Harness 相比极简基线显著降低了按键成本，并恢复了与手工专家 Harness 之间大部分性能差距。进一步引入在线过程奖励协同学习循环后，开源智能体在不重置环境的情况下持续推进游戏里程碑，验证了 Harness 与模型自我进化的可行闭环。",
+      "id" : "arxiv-2605-09998",
+      "keywords" : [
+        "agent harness",
+        "self-improving agent",
+        "embodied agent",
+        "continual learning",
+        "skill memory"
+      ],
+      "source" : "arxiv",
+      "summary" : "提出无需重置环境的「持续 Harness」框架，让具身智能体在单次运行中自动迭代优化自身的 prompt、子智能体、技能和记忆，首次实现全程无人类参与的自我改进闭环。",
+      "timestamp" : "2026-05-11T05:21:33Z",
+      "title" : "Continual Harness: Online Adaptation for Self-Improving Foundation Agents",
+      "url" : "https:\/\/arxiv.org\/abs\/2605.09998"
+    },
+    {
+      "detail" : "当前 Agentic Harness 将记忆、技能、工具编排在模型外部，但究竟是哪个核心机制驱动了性能提升仍不明朗。HeavySkill 将「重思考」重新定位为既是编排框架中的最小执行单元，也是内化于模型参数中的隐式技能（inner skill），两者协同驱动复杂任务求解。\n\n核心流水线为两阶段：**并行推理**（Parallel Reasoning）生成多条候选推理链，**摘要**（Summarization）将其折叠为最终答案，可无缝嵌入任意现有 Harness 之下。实验表明 HeavySkill 在多个领域持续优于传统 Best-of-N（BoN）策略；更强的 LLM 甚至可以逼近 Pass@N 的上界性能。\n\n关键发现：HeavySkill 作为可学习技能，其推理「深度」（链长）与「宽度」（并行数）均可通过强化学习进一步扩展，为无需脆弱编排层即可自我进化的 LLM 提供了一条可行路径。",
+      "id" : "arxiv-2605-02396",
+      "keywords" : [
+        "agent skill",
+        "heavy thinking",
+        "reinforcement learning",
+        "agentic harness",
+        "reasoning"
+      ],
+      "source" : "arxiv",
+      "summary" : "提出 HeavySkill 视角：将「深度思考」本身视为可内化于模型参数的技能，识别出「并行推理→摘要」两阶段流水线作为任意 Harness 之下的通用内层 Skill，并通过强化学习进一步扩展该技能的深度与宽度。",
+      "timestamp" : "2026-05-04T09:37:04Z",
+      "title" : "HeavySkill: Heavy Thinking as the Inner Skill in Agentic Harness",
+      "url" : "https:\/\/arxiv.org\/abs\/2605.02396"
+    },
+    {
+      "detail" : "现有 LLM 智能体系统中，技能（Skill）主要以 SKILL.md 风格的自然语言文档存储，其中调度信号、执行结构、工具调用副作用三类知识混杂在同一文本表面，导致机器难以解析和复用。本文借鉴 Schank & Abelson 经典认知语言学理论（Memory Organization Packets、Script Theory、Conceptual Dependency），首次提出专为智能体技能制品设计的结构化表示——**Scheduling-Structural-Logical（SSL）**，将三类知识显式分离。\n\nSSL 通过 LLM 归一化器从原始技能文本中提取结构，分别对应：调度层（Skill 级别的调用时序信号）、结构层（场景级执行结构）、逻辑层（动作与资源使用的具体副作用）。在技能发现任务上，MRR@50 从 0.649 提升至 **0.729**；在风险评估任务上，macro F1 从 0.409 提升至 **0.509**，相对提升均超过 10 个百分点。\n\n该工作将 SSL 定位为迈向「可检查、可复用、可操作」技能管理的实用步骤，而非终态标准，为 Claude Code 等系统中 Skill 文档的结构化管理提供了理论基础。",
+      "id" : "arxiv-2604-24026",
+      "keywords" : [
+        "agent skill",
+        "skill representation",
+        "SSL",
+        "skill discovery",
+        "risk assessment"
+      ],
+      "source" : "arxiv",
+      "summary" : "针对 SKILL.md 等纯文本技能制品的机器可读性不足问题，提出 SSL 三层结构化表示（调度-结构-逻辑），在技能发现和风险评估两项任务上显著优于纯文本基线。",
+      "timestamp" : "2026-04-27T04:25:15Z",
+      "title" : "From Skill Text to Skill Structure: The Scheduling-Structural-Logical (SSL) Representation for Agent Skills",
+      "url" : "https:\/\/arxiv.org\/abs\/2604.24026"
+    },
+    {
+      "detail" : "Harness 设计（围绕模型的 prompt、工具、记忆、编排逻辑）目前缺乏形式化理论，无法系统地比较框架或保证性质在编译后的保持性。本文证明范畴架构三元组 $(G, Know, \\Phi)$ 恰好提供了这种形式化：Memory 映射为余代数状态（coalgebraic state），Skills 映射为 operad 组合对象，Protocols 映射为语法布线 $G$，完整 Harness 即为 Architecture 本身。\n\n结构保证（完整性门控、质量升级、支持收敛检验）被建模为 Know 层的证书（certificates），其保持性通过编译器函子的恒等映射或验证重放来检验——而非输出层的正确性或模型行为。参考实现为 Swarms、DeerFlow、Ralph、Scion、LangGraph 生成了四个配置编译器，均保持三类命名证书；LangGraph 编译器通过复用原生 per-stage 执行路径实现原生可观测性。\n\n端到端的质量升级实验（真实 LLM 智能体）确认控制路径对模型是参数化的（model-parametric），为 Harness 工程提供了首个范畴论形式化基础。",
+      "id" : "arxiv-2605-12239",
+      "keywords" : [
+        "harness engineering",
+        "categorical architecture",
+        "formal methods",
+        "LangGraph",
+        "agent framework"
+      ],
+      "source" : "arxiv",
+      "summary" : "将范畴论（Category Theory）引入 Agent Harness 工程，用 ArchAgents 框架的三元组 (G, Know, Φ) 为 Memory、Skill、Protocol、Harness 提供形式化理论，并实现面向 LangGraph、Swarms 等五个框架的编译器验证。",
+      "timestamp" : "2026-05-12T15:09:46Z",
+      "title" : "Harness Engineering as Categorical Architecture",
+      "url" : "https:\/\/arxiv.org\/abs\/2605.12239"
+    },
+    {
+      "detail" : "Agentic LLM 系统的安全研究主要聚焦于显式 prompt 攻击，而对可变执行上下文（文件、记忆、工具、技能制品）的威胁尚缺乏系统评估。DeepTrap 将对抗性上下文操纵形式化为黑盒轨迹级优化问题，同时平衡三个目标：风险实现（risk realization）、良性任务保持（benign-task preservation）与隐蔽性（stealth）。\n\n方法结合了风险条件评估、多目标轨迹评分、奖励引导束搜索（reward-guided beam search）和基于反思的深度探测（reflection-based deep probing）。评估基准覆盖六类漏洞类别、七种操作场景共 42 个案例，使用攻击分与实用性分对九个目标模型打分。\n\n核心发现：上下文篡改可在保持用户可见任务完成度的同时诱发实质性不安全行为，表明仅检查最终响应（final-response evaluation）不足以保障 Agentic AI 系统安全，必须引入以执行为中心的安全评估体系。代码开源于 https:\/\/github.com\/ZJUICSR\/DeepTrap。",
+      "id" : "arxiv-2605-11047",
+      "keywords" : [
+        "agent security",
+        "red-teaming",
+        "execution context",
+        "adversarial attack",
+        "tool use"
+      ],
+      "source" : "arxiv",
+      "summary" : "提出 DeepTrap 框架，将对 Agent 执行上下文（文件、记忆、工具、技能）的对抗性篡改建模为黑盒轨迹级优化问题，在 42 案例基准上评估九个模型，揭示最终响应评估不足以检测上下文级攻击。",
+      "timestamp" : "2026-05-11T13:20:02Z",
+      "title" : "Red-Teaming Agent Execution Contexts: Open-World Security Evaluation on OpenClaw (DeepTrap)",
+      "url" : "https:\/\/arxiv.org\/abs\/2605.11047"
+    },
+    {
+      "detail" : "各大 AI 编程智能体（Claude Code、Codex、Gemini CLI）均会写入详细日志，但格式各异、路径分散、Schema 不兼容，导致开发者对智能体行为几乎无可观测性。AgTrace 的核心洞察：将「观测层」标准化，提供统一事件时间线。\n\n工具提供 CLI、TUI 仪表板和 MCP 三种接入方式，其中 MCP 接口最具创新性——智能体可查询自身历史 session，例如「上周重构 auth 时用了什么方案？」或「昨天 session 的报错有哪些？」，从而实现智能体自我反思（agent self-reflection），以执行历史指导当前决策。\n\n该项目代表了 MCP 从「工具调用」向「智能体自省」的扩展方向，与 arXiv 上 Continual Harness 等论文中的记忆持久化思路高度吻合。",
+      "id" : "hn-agtrace",
+      "keywords" : [
+        "MCP",
+        "observability",
+        "Claude Code",
+        "Codex",
+        "agent memory",
+        "multi-agent"
+      ],
+      "source" : "hackernews",
+      "summary" : "AgTrace 统一归一化 Claude Code、Codex、Gemini 等 AI 编程智能体的异构日志，通过 MCP 服务器将历史执行事件暴露给智能体自身，实现跨 session 的自我反思与上下文恢复。",
+      "timestamp" : "2026-01-05T15:27:57Z",
+      "title" : "Show HN: AgTrace – Observability for AI Coding Agents via MCP (Claude Code, Codex, Gemini)",
+      "url" : "https:\/\/github.com\/lanegrid\/agtrace"
+    },
+    {
+      "detail" : "在同一项目中并发运行多个 AI 编程工具时，核心挑战是：并发写入产生合并冲突、各智能体上下文隔离导致决策信息丢失、局部优化引起架构漂移。Forge 作为编排层介于所有 AI 工具与代码库之间，实现三个关键能力：文件锁（agent 声明文件后独占修改权）、共享规划状态（跨智能体的全局任务图）、决策日志（持久化每个智能体的推理与选择）。\n\n技术选型为 Rust + stdio MCP 协议，静态编译零依赖，使任意 MCP 兼容工具均可接入。这一架构将 MCP 的用途从单智能体工具调用扩展为真正的多智能体协调层，验证了将轻量协调器作为 MCP 服务器的可行性。",
+      "id" : "hn-forge-orchestrator",
+      "keywords" : [
+        "multi-agent",
+        "MCP",
+        "Rust",
+        "Claude Code",
+        "Codex",
+        "agent coordination"
+      ],
+      "source" : "hackernews",
+      "summary" : "Forge 是单一 Rust 二进制（~3MB，零运行时依赖）MCP 服务器，通过文件锁、共享规划状态和决策日志协调多个 AI 编程智能体（Claude Code、Codex CLI、Gemini CLI）并发协作，消除并发编辑冲突。",
+      "timestamp" : "2026-02-09T08:38:51Z",
+      "title" : "Show HN: Forge – 3MB Rust Binary Coordinating Multi-AI Coding Agents via MCP",
+      "url" : "https:\/\/github.com\/nxtg-ai\/forge-orchestrator"
+    },
+    {
+      "detail" : "随着 AI 编程智能体生态系统扩展至多工具并存（Claude Code、Codex CLI、Gemini CLI、GitHub Copilot），每个工具维护独立的 MCP 配置和 Skill 文件，造成严重配置漂移。AGENTS.lock 借鉴软件包管理器的锁文件思想（类比 package-lock.json），以 TOML 格式集中声明所有技能、指令和 MCP 服务器定义，单次 `al sync` 即可将配置原子性分发到所有工具。\n\n该工具将 Agent Skill 管理问题提升到基础设施层面，与 arXiv 上 SSL 表示论文的动机高度呼应——技能制品的可管理性是多智能体系统工程化的关键前提。",
+      "id" : "hn-agents-lock",
+      "keywords" : [
+        "agent skill",
+        "MCP",
+        "Claude Code",
+        "Codex",
+        "configuration management",
+        "multi-agent"
+      ],
+      "source" : "hackernews",
+      "summary" : "AGENTS.lock 以单一 TOML 锁文件为事实来源，通过 `al sync` 命令将 AI 智能体技能、指令和 MCP 服务器配置同步到 Claude、Codex、Gemini、Copilot 等所有 CLI 工具，解决多工具配置碎片化问题。",
+      "timestamp" : "2026-01-28T16:46:18Z",
+      "title" : "Show HN: AGENTS.lock – A Package Manager for Agent Skills, Instructions, and MCP Servers",
+      "url" : "https:\/\/github.com\/luml-ai\/AGENTS.lock"
+    }
+  ],
+  "summary" : "# AI技术日报 2026-05-15\n\n## Agent架构与工程化\n\nMeta、Google、微软同步入局智能体战争，微软多模型安全系统在行业基准测试中取得领先。Anthropic的Managed Agents通过推理-执行-状态三层分离将首token延迟降低60%，Claude Agent SDK完成从编码工具到通用智能体平台的能力扩展。AsyncFC框架实现工具调用的异步并行执行，APWA架构突破多Agent系统的规模扩展瓶颈，多智能体编程系统在斯坦福Terminal Bench排名第12位。\n\n## 记忆与技能管理\n\n学术界提出\"经验压缩谱\"统一框架，将记忆、技能、规则视为同一压缩轴上的连续体。MemFactory首次将记忆操作与强化学习训练统一到单一框架，GraSP用有向图结构组织Agent技能以提升复杂任务执行效率。arxiv研究揭示主动记忆、原子级记忆操作和可学习动态记忆等机制，标志着LLM代理正从无状态调用走向具备持续学习能力的长期记忆架构。\"Agentic Skills\"框架将代理能力从单次工具调用提升为可复用的程序化技能包，并探索从开源代理仓库中自动挖掘和标准化此类技能。\n\n## 检索与执行优化\n\narxiv研究发现grep在Agent检索场景中优于向量检索，挑战了传统语义检索范式。SDAR将自蒸馏作为辅助目标引入强化学习流程，在多个基准上稳定提升Agent表现。MemEye提出多模态Agent记忆的视觉中心评测框架，填补了该领域的评测空白。\n\n## 自主科研与科学发现\n\nFutureHouse的Robin系统在2.5个月内独立完成从假设到论文发表的完整科学发现流程，NovelSeek框架实现自主假设探索。开源规划与控制系统相继发布，多智能体科学研究系统展现出在科学发现领域的巨大潜力。\"持续Harness\"框架实现了具身智能体在无人类干预下的持续自我改进闭环。\n\n## 形式化与理论突破\n\nSSL三层结构化表示解决了SKILL.md等文本技能制品机器可读性不足的问题，范畴论框架为Agent能力组合提供数学基础。HeavySkill将深度推理能力以\"可内化技能\"的形式嵌入模型参数，推动Agent从依赖外部调度向内生能力演化。\n\n## 技术趋势判断\n\n**Agent技术正经历从\"工具调用\"到\"自主进化\"的范式跃迁**。三大趋势值得关注：（1）记忆与技能管理从零散设计走向系统化理论，统一框架开始涌现；（2）架构解耦与异步并行成为工程化关键，首token延迟和并发能力成为核心指标；（3）自主科研闭环的实现标志着Agent开始具备真正的知识创造能力，而非仅限于任务执行。grep优于向量检索的发现提示我们需要重新审视Agent场景下的检索范式，形式化方法（范畴论、结构化表示）的引入预示着Agent工程正在建立更坚实的理论基础。"
+}
