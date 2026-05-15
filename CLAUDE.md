@@ -4,10 +4,11 @@ macOS Dynamic Island-style AI news aggregator for Apple Silicon MacBooks.
 
 ## Architecture
 
-- **UI Layer**: SwiftUI + AppKit (NSPanel positioned at notch)
-- **Backend**: Claude Code CLI invoked via Process (--print mode, sonnet model)
-- **Data**: JSON files in ~/.notchagent/
+- **UI Layer**: SwiftUI + AppKit (NSPanel hidden behind physical notch)
+- **Backend**: Claude Code CLI — haiku for fetching, sonnet for summarizing
+- **Data**: `~/.notchagent/latest.json` (current), `data/` dir (historical, git-tracked)
 - **Refresh**: Timer-based, every 60 minutes
+- **GitHub Sync**: Auto-commits each fetch to `data/YYYY-MM-DD/HH-mm.json` and pushes
 
 ## Build & Run
 
@@ -21,17 +22,27 @@ open ~/Applications/NotchAgent.app
 
 - `App.swift` — Entry point, SwiftUI App with NSApplicationDelegateAdaptor
 - `AppDelegate.swift` — Window setup, menu bar, notch panel creation
-- `NotchView.swift` — Collapsed/expanded notch UI with hover detection
-- `NewsManager.swift` — Claude Code invocation + JSON parsing
-- `Models.swift` — NewsItem model + NewsStore (Observable singleton)
+- `NotchView.swift` — Collapsed (invisible) / expanded (summary + list) UI
+- `NewsManager.swift` — Two-model pipeline: haiku fetch → sonnet summarize → git push
+- `Models.swift` — NewsItem, NewsFetch, NewsStore
 - `SettingsView.swift` — Keyword management UI
+- `MinionIcon.swift` / `MinionIconView.swift` — Custom Minion-style icon
 
 ## How It Works
 
-1. App launches as accessory (no Dock icon), shows in menu bar
-2. NSPanel positioned at screen top-center (notch area)
-3. Collapsed: shows latest headline in a pill shape
-4. Hover: expands to 380x420 panel with scrollable news list
-5. Every hour: invokes `claude --print --model sonnet <prompt>` to fetch news
-6. Claude searches arXiv, GitHub, HN for keyword-matched content
-7. Results stored as JSON, displayed with Chinese summaries
+1. App launches as accessory (no Dock icon), shows Minion icon in menu bar
+2. NSPanel positioned exactly behind the physical notch (invisible when collapsed)
+3. Hover over notch area → panel expands from top with summary-first layout
+4. Expanded header: "NotchAgent" left of notch, time right of notch
+5. Every hour: haiku fetches 10 news items, sonnet writes Chinese summary
+6. Data auto-pushed to GitHub (Minions-Land/MacOS-Dynamics-Island-NotchAgent)
+7. Local only keeps latest fetch; all history lives in git
+
+## Data Flow
+
+```
+Timer (1h) → claude --print --model haiku (fetch news)
+           → claude --print --model sonnet (summarize)
+           → save ~/.notchagent/latest.json
+           → git commit + push data/YYYY-MM-DD/HH-mm.json
+```
