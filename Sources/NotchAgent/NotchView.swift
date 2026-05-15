@@ -4,6 +4,7 @@ struct NotchView: View {
     @State private var isExpanded = false
     @State private var selectedItem: NewsItem?
     @State private var collapseTask: Task<Void, Never>?
+    @State private var detailHeight: CGFloat = 100
     private let store = NewsStore.shared
 
     private var notchHeight: CGFloat {
@@ -34,6 +35,7 @@ struct NotchView: View {
                         withAnimation(.spring(response: 0.3, dampingFraction: 0.85)) {
                             isExpanded = false
                             selectedItem = nil
+                            detailHeight = 100
                         }
                         updateWindowSize(expanded: false)
                     }
@@ -217,9 +219,10 @@ struct NotchView: View {
                         MathTextView(
                             text: item.detail,
                             fontSize: 11,
-                            textColor: "rgba(255,255,255,0.75)"
+                            textColor: "rgba(255,255,255,0.75)",
+                            measuredHeight: $detailHeight
                         )
-                        .frame(minHeight: 80, maxHeight: 300)
+                        .frame(height: detailHeight)
                     } else {
                         Text(item.detail)
                             .font(.system(size: 10.5))
