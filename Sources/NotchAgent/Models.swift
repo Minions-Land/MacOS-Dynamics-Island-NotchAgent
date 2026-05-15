@@ -19,10 +19,17 @@ struct NewsItem: Identifiable, Codable, Sendable {
     }
 }
 
+struct NewsFetch: Codable, Sendable {
+    let summary: String
+    let items: [NewsItem]
+    let fetchedAt: Date
+}
+
 @MainActor
 @Observable
 class NewsStore {
     var items: [NewsItem] = []
+    var summary: String?
     var isLoading = false
     var lastUpdated: Date?
     var keywords: [String] = NewsStore.defaultKeywords
@@ -55,16 +62,22 @@ class NewsStore {
     }
 
     func loadFromDisk() {
-        let file = storePath.appendingPathComponent("news.json")
-        guard let data = try? Data(contentsOf: file),
-              let decoded = try? JSONDecoder().decode([NewsItem].self, from: data) else { return }
-        items = decoded
-        lastUpdated = try? FileManager.default.attributesOfItem(atPath: file.path)[.modificationDate] as? Date
+        let file = storePath.appendingPathComponent("latest.json")
+        guard let data = try? Data(contentsOf: file) else { return }
+        let decoder = JSONDecoder()
+        decoder.dateDecodingStrategy = .iso8601
+        guard let fetch = try? decoder.decode(NewsFetch.self, from: data) else { return }
+        items = fetch.items
+        summary = fetch.summary
+        lastUpdated = fetch.fetchedAt
     }
 
-    func saveToDisk() {
-        let file = storePath.appendingPathComponent("news.json")
-        guard let data = try? JSONEncoder().encode(items) else { return }
+    func saveToDisk(fetch: NewsFetch) {
+        let file = storePath.appendingPathComponent("latest.json")
+        let encoder = JSONEncoder()
+        encoder.dateEncodingStrategy = .iso8601
+        encoder.outputFormatting = .prettyPrinted
+        guard let data = try? encoder.encode(fetch) else { return }
         try? data.write(to: file)
     }
 

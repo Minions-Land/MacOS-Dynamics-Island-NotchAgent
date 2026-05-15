@@ -2,11 +2,13 @@ import SwiftUI
 
 struct NotchView: View {
     @State private var isExpanded = false
-    @State private var isHovering = false
     @State private var selectedItem: NewsItem?
-    @State private var minionBounce = false
     @State private var collapseTask: Task<Void, Never>?
     private let store = NewsStore.shared
+
+    private var notchHeight: CGFloat {
+        NSScreen.main?.safeAreaInsets.top ?? 33
+    }
 
     var body: some View {
         ZStack(alignment: .top) {
@@ -17,26 +19,18 @@ struct NotchView: View {
             }
         }
         .onHover { hovering in
-            isHovering = hovering
             collapseTask?.cancel()
-
             if hovering {
-                withAnimation(.spring(response: 0.35, dampingFraction: 0.8)) {
+                withAnimation(.spring(response: 0.3, dampingFraction: 0.85)) {
                     isExpanded = true
-                }
-                withAnimation(.spring(response: 0.3, dampingFraction: 0.5)) {
-                    minionBounce = true
-                }
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
-                    minionBounce = false
                 }
                 updateWindowSize(expanded: true)
             } else {
                 collapseTask = Task {
-                    try? await Task.sleep(for: .milliseconds(400))
+                    try? await Task.sleep(for: .milliseconds(500))
                     guard !Task.isCancelled else { return }
                     await MainActor.run {
-                        withAnimation(.spring(response: 0.35, dampingFraction: 0.8)) {
+                        withAnimation(.spring(response: 0.3, dampingFraction: 0.85)) {
                             isExpanded = false
                             selectedItem = nil
                         }
@@ -47,217 +41,190 @@ struct NotchView: View {
         }
     }
 
+    // COLLAPSED: completely hidden behind the notch
     private var collapsedView: some View {
-        HStack(spacing: 6) {
-            if store.isLoading {
-                MinionIconView(size: 14)
-                    .rotationEffect(.degrees(minionBounce ? 10 : 0))
-                    .opacity(0.6)
-            } else {
-                MinionIconView(size: 14)
-                    .scaleEffect(minionBounce ? 1.2 : 1.0)
-            }
-
-            if let latest = store.items.first {
-                Text(latest.title)
-                    .font(.system(size: 10, weight: .medium))
-                    .lineLimit(1)
-                    .truncationMode(.tail)
-            } else {
-                Text("NotchAgent")
-                    .font(.system(size: 10, weight: .medium))
-            }
-        }
-        .padding(.horizontal, 12)
-        .padding(.vertical, 6)
-        .frame(width: 220, height: 34)
-        .background(
-            ZStack {
-                Capsule()
-                    .fill(.black)
-                Capsule()
-                    .stroke(
-                        LinearGradient(
-                            colors: [.yellow.opacity(0.6), .yellow.opacity(0.3), .orange.opacity(0.5)],
-                            startPoint: .top,
-                            endPoint: .bottom
-                        ),
-                        lineWidth: 1.5
-                    )
-            }
-            .shadow(color: .yellow.opacity(0.15), radius: 4, y: 2)
-        )
-        .foregroundColor(.white)
+        Color.clear
+            .frame(width: 300, height: notchHeight)
     }
 
+    // EXPANDED: starts from top of screen, notch area has title + time
     private var expandedView: some View {
-        VStack(alignment: .leading, spacing: 0) {
-            headerBar
-            Divider().background(
-                LinearGradient(colors: [.yellow.opacity(0.4), .orange.opacity(0.3)], startPoint: .leading, endPoint: .trailing)
-            )
+        VStack(spacing: 0) {
+            // Notch-flanking header (left: title, right: time)
+            notchHeader
+                .frame(height: notchHeight)
 
-            if let item = selectedItem {
-                detailView(item: item)
-            } else if store.items.isEmpty {
-                emptyStateView
-            } else {
-                listView
+            // Main content area below the notch
+            VStack(alignment: .leading, spacing: 0) {
+                if let item = selectedItem {
+                    detailView(item: item)
+                } else {
+                    summaryAndListView
+                }
             }
+            .frame(maxWidth: .infinity)
         }
-        .frame(width: 380, height: 440)
+        .frame(width: 420, height: 520)
         .background(
-            ZStack {
-                RoundedRectangle(cornerRadius: 16)
-                    .fill(.black.opacity(0.92))
-                RoundedRectangle(cornerRadius: 16)
-                    .stroke(
-                        LinearGradient(
-                            colors: [.yellow.opacity(0.2), .orange.opacity(0.1), .clear],
-                            startPoint: .topLeading,
-                            endPoint: .bottomTrailing
-                        ),
-                        lineWidth: 1
-                    )
-            }
-            .shadow(color: .black.opacity(0.4), radius: 20, y: 10)
+            RoundedRectangle(cornerRadius: 0)
+                .fill(.black.opacity(0.95))
+                .clipShape(ExpandedShape())
         )
         .foregroundColor(.white)
     }
 
-    private var emptyStateView: some View {
-        VStack(spacing: 12) {
-            Spacer()
-            MinionIconView(size: 48)
-                .opacity(0.5)
-            Text(store.isLoading ? "Minion is searching..." : "No news yet")
-                .font(.system(size: 12))
-                .foregroundColor(.white.opacity(0.5))
-            if store.isLoading {
-                ProgressView()
-                    .scaleEffect(0.7)
+    // Header that flanks the notch: [NotchAgent ...notch... time]
+    private var notchHeader: some View {
+        HStack(spacing: 0) {
+            // Left side of notch
+            HStack(spacing: 5) {
+                MinionIconView(size: 12)
+                Text("NotchAgent")
+                    .font(.system(size: 10, weight: .semibold))
             }
-            Spacer()
-        }
-        .frame(maxWidth: .infinity)
-    }
+            .frame(maxWidth: .infinity, alignment: .trailing)
+            .padding(.trailing, 8)
 
-    private var headerBar: some View {
-        HStack(spacing: 8) {
-            MinionIconView(size: 16)
-                .scaleEffect(minionBounce ? 1.15 : 1.0)
+            // Notch gap (approximately 180pt wide on MacBook Air)
+            Color.clear
+                .frame(width: 180)
 
-            Text("NotchAgent")
-                .font(.system(size: 13, weight: .semibold))
-
-            if !store.items.isEmpty {
-                Text("\(store.items.count)")
-                    .font(.system(size: 9, weight: .bold))
-                    .padding(.horizontal, 5)
-                    .padding(.vertical, 2)
-                    .background(Capsule().fill(.yellow.opacity(0.25)))
-                    .foregroundColor(.yellow)
-            }
-
-            Spacer()
-
-            if store.isLoading {
-                HStack(spacing: 4) {
+            // Right side of notch
+            HStack(spacing: 5) {
+                Text(Date(), format: .dateTime.hour().minute())
+                    .font(.system(size: 10, weight: .medium))
+                    .monospacedDigit()
+                if store.isLoading {
                     ProgressView()
-                        .scaleEffect(0.5)
-                    Text("fetching...")
-                        .font(.system(size: 9))
-                        .foregroundColor(.yellow.opacity(0.7))
+                        .scaleEffect(0.4)
                 }
-            } else if let date = store.lastUpdated {
-                Text(date, style: .relative)
-                    .font(.system(size: 9))
-                    .foregroundColor(.white.opacity(0.4))
             }
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .padding(.leading, 8)
         }
-        .padding(.horizontal, 16)
-        .padding(.vertical, 10)
+        .foregroundColor(.white.opacity(0.8))
     }
 
-    private var listView: some View {
+    private var summaryAndListView: some View {
         ScrollView {
-            LazyVStack(alignment: .leading, spacing: 2) {
-                ForEach(store.items) { item in
-                    NewsRowView(item: item)
-                        .onTapGesture {
-                            withAnimation(.easeInOut(duration: 0.2)) {
-                                selectedItem = item
-                            }
+            VStack(alignment: .leading, spacing: 12) {
+                // Summary section
+                if let summary = store.summary, !summary.isEmpty {
+                    VStack(alignment: .leading, spacing: 6) {
+                        HStack {
+                            Image(systemName: "sparkles")
+                                .font(.system(size: 10))
+                                .foregroundColor(.yellow)
+                            Text("Overview")
+                                .font(.system(size: 11, weight: .semibold))
+                                .foregroundColor(.yellow)
                         }
+
+                        Text(summary)
+                            .font(.system(size: 11))
+                            .foregroundColor(.white.opacity(0.85))
+                            .lineSpacing(4)
+                            .fixedSize(horizontal: false, vertical: true)
+                    }
+                    .padding(12)
+                    .background(
+                        RoundedRectangle(cornerRadius: 10)
+                            .fill(.yellow.opacity(0.06))
+                            .overlay(
+                                RoundedRectangle(cornerRadius: 10)
+                                    .stroke(.yellow.opacity(0.15), lineWidth: 0.5)
+                            )
+                    )
+                }
+
+                // News list
+                if !store.items.isEmpty {
+                    Text("Details")
+                        .font(.system(size: 10, weight: .medium))
+                        .foregroundColor(.white.opacity(0.4))
+                        .padding(.top, 4)
+
+                    ForEach(store.items) { item in
+                        NewsRowView(item: item)
+                            .onTapGesture {
+                                withAnimation(.easeInOut(duration: 0.2)) {
+                                    selectedItem = item
+                                }
+                            }
+                    }
+                } else if store.isLoading {
+                    VStack(spacing: 8) {
+                        MinionIconView(size: 32)
+                            .opacity(0.4)
+                        Text("Searching...")
+                            .font(.system(size: 11))
+                            .foregroundColor(.white.opacity(0.4))
+                    }
+                    .frame(maxWidth: .infinity)
+                    .padding(.top, 40)
                 }
             }
-            .padding(.horizontal, 12)
-            .padding(.vertical, 8)
+            .padding(.horizontal, 14)
+            .padding(.vertical, 10)
         }
     }
 
     private func detailView(item: NewsItem) -> some View {
-        VStack(alignment: .leading, spacing: 10) {
-            Button(action: { withAnimation { selectedItem = nil } }) {
-                HStack(spacing: 4) {
-                    Image(systemName: "chevron.left")
-                        .font(.system(size: 10))
-                    Text("Back")
-                        .font(.system(size: 11))
-                }
-                .foregroundColor(.yellow.opacity(0.8))
-            }
-            .buttonStyle(.plain)
-
-            Text(item.title)
-                .font(.system(size: 13, weight: .semibold))
-                .lineLimit(3)
-
-            Text(item.summary)
-                .font(.system(size: 11))
-                .foregroundColor(.white.opacity(0.8))
-                .lineSpacing(3)
-
-            Spacer()
-
-            HStack(spacing: 8) {
-                Image(systemName: item.sourceIcon)
-                    .font(.system(size: 10))
-                    .foregroundColor(.yellow.opacity(0.7))
-                Text(item.source.uppercased())
-                    .font(.system(size: 9, weight: .medium))
-                    .foregroundColor(.white.opacity(0.5))
-
-                Spacer()
-
-                Button("Open Link") {
-                    if let url = URL(string: item.url) {
-                        NSWorkspace.shared.open(url)
+        ScrollView {
+            VStack(alignment: .leading, spacing: 10) {
+                Button(action: { withAnimation { selectedItem = nil } }) {
+                    HStack(spacing: 4) {
+                        Image(systemName: "chevron.left")
+                            .font(.system(size: 10))
+                        Text("Back")
+                            .font(.system(size: 11))
                     }
+                    .foregroundColor(.yellow.opacity(0.8))
                 }
                 .buttonStyle(.plain)
-                .font(.system(size: 11, weight: .medium))
-                .padding(.horizontal, 10)
-                .padding(.vertical, 4)
-                .background(
-                    Capsule().fill(
-                        LinearGradient(colors: [.yellow.opacity(0.2), .orange.opacity(0.15)], startPoint: .leading, endPoint: .trailing)
-                    )
-                )
-            }
 
-            FlowLayout(spacing: 4) {
-                ForEach(item.keywords, id: \.self) { kw in
-                    Text(kw)
-                        .font(.system(size: 9))
-                        .padding(.horizontal, 6)
-                        .padding(.vertical, 2)
-                        .background(Capsule().fill(.yellow.opacity(0.15)))
-                        .foregroundColor(.yellow.opacity(0.9))
+                Text(item.title)
+                    .font(.system(size: 13, weight: .semibold))
+                    .lineLimit(3)
+
+                Text(item.summary)
+                    .font(.system(size: 11))
+                    .foregroundColor(.white.opacity(0.85))
+                    .lineSpacing(3)
+
+                HStack(spacing: 8) {
+                    Image(systemName: item.sourceIcon)
+                        .font(.system(size: 10))
+                        .foregroundColor(.yellow.opacity(0.7))
+                    Text(item.source.uppercased())
+                        .font(.system(size: 9, weight: .medium))
+                        .foregroundColor(.white.opacity(0.5))
+                    Spacer()
+                    Button("Open") {
+                        if let url = URL(string: item.url) {
+                            NSWorkspace.shared.open(url)
+                        }
+                    }
+                    .buttonStyle(.plain)
+                    .font(.system(size: 11, weight: .medium))
+                    .padding(.horizontal, 10)
+                    .padding(.vertical, 4)
+                    .background(Capsule().fill(.yellow.opacity(0.15)))
+                }
+
+                FlowLayout(spacing: 4) {
+                    ForEach(item.keywords, id: \.self) { kw in
+                        Text(kw)
+                            .font(.system(size: 9))
+                            .padding(.horizontal, 6)
+                            .padding(.vertical, 2)
+                            .background(Capsule().fill(.yellow.opacity(0.12)))
+                            .foregroundColor(.yellow.opacity(0.9))
+                    }
                 }
             }
+            .padding(14)
         }
-        .padding(16)
     }
 
     private func updateWindowSize(expanded: Bool) {
@@ -265,19 +232,36 @@ struct NotchView: View {
         guard let screen = NSScreen.main else { return }
 
         let screenFrame = screen.frame
-        let safeTop = screen.safeAreaInsets.top
-        let width: CGFloat = expanded ? 380 : 220
-        let height: CGFloat = expanded ? 440 : 34
+        let notchH = screen.safeAreaInsets.top
 
+        let width: CGFloat = expanded ? 420 : 300
+        let height: CGFloat = expanded ? 520 : notchH
         let x = screenFrame.midX - width / 2
-        let y = expanded
-            ? screenFrame.maxY - safeTop - height + 2
-            : screenFrame.maxY - safeTop - height + 2
+        let y = screenFrame.maxY - height
 
         NSAnimationContext.runAnimationGroup { context in
             context.duration = 0.3
             context.timingFunction = CAMediaTimingFunction(name: .easeInEaseOut)
             window.animator().setFrame(NSRect(x: x, y: y, width: width, height: height), display: true)
         }
+    }
+}
+
+// Custom shape: rectangle with top corners squared (flush with screen top)
+// and bottom corners rounded
+struct ExpandedShape: Shape {
+    func path(in rect: CGRect) -> Path {
+        var path = Path()
+        let radius: CGFloat = 16
+        path.move(to: CGPoint(x: rect.minX, y: rect.minY))
+        path.addLine(to: CGPoint(x: rect.maxX, y: rect.minY))
+        path.addLine(to: CGPoint(x: rect.maxX, y: rect.maxY - radius))
+        path.addQuadCurve(to: CGPoint(x: rect.maxX - radius, y: rect.maxY),
+                          control: CGPoint(x: rect.maxX, y: rect.maxY))
+        path.addLine(to: CGPoint(x: rect.minX + radius, y: rect.maxY))
+        path.addQuadCurve(to: CGPoint(x: rect.minX, y: rect.maxY - radius),
+                          control: CGPoint(x: rect.minX, y: rect.maxY))
+        path.closeSubpath()
+        return path
     }
 }
