@@ -129,7 +129,7 @@ class NewsManager: Sendable {
         guard let claudePath = findClaudeCodePath() else { return "" }
         let process = Process()
         process.executableURL = URL(fileURLWithPath: claudePath)
-        process.arguments = ["--print", "--model", "sonnet", prompt]
+        process.arguments = ["--print", "--permission-mode", "bypassPermissions", "--model", "sonnet", prompt]
         let home = FileManager.default.homeDirectoryForCurrentUser.path
         process.environment = ProcessInfo.processInfo.environment.merging([
             "PATH": "/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin:\(home)/.claude/bin",
@@ -404,7 +404,7 @@ class NewsManager: Sendable {
         guard let claudePath = findClaudeCodePath() else { return "" }
         let process = Process()
         process.executableURL = URL(fileURLWithPath: claudePath)
-        process.arguments = ["--print", "--model", "sonnet", prompt]
+        process.arguments = ["--print", "--permission-mode", "bypassPermissions", "--model", "sonnet", prompt]
         let home = FileManager.default.homeDirectoryForCurrentUser.path
         process.environment = ProcessInfo.processInfo.environment.merging([
             "PATH": "/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin:\(home)/.claude/bin",
