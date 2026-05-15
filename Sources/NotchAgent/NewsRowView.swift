@@ -47,6 +47,24 @@ struct NewsRowView: View {
     }
 }
 
+struct ReportButton: View {
+    let icon: String
+    let label: String
+
+    var body: some View {
+        HStack(spacing: 4) {
+            Image(systemName: icon)
+                .font(.system(size: 9))
+            Text(label)
+                .font(.system(size: 9, weight: .medium))
+        }
+        .foregroundColor(.white.opacity(0.5))
+        .padding(.horizontal, 8)
+        .padding(.vertical, 5)
+        .background(RoundedRectangle(cornerRadius: 6).fill(.white.opacity(0.06)))
+    }
+}
+
 struct FlowLayout: Layout {
     var spacing: CGFloat = 4
 

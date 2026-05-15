@@ -137,14 +137,14 @@ struct NotchView: View {
                     )
                 }
 
-                // News list
+                // News list (hourly — main content)
                 if !store.items.isEmpty {
-                    Text("Details")
+                    Text("本小时技术动态")
                         .font(.system(size: 10, weight: .medium))
                         .foregroundColor(.white.opacity(0.4))
                         .padding(.top, 4)
 
-                    ForEach(store.items) { item in
+                    ForEach(store.items.prefix(6)) { item in
                         NewsRowView(item: item)
                             .onTapGesture {
                                 withAnimation(.easeInOut(duration: 0.2)) {
@@ -152,6 +152,12 @@ struct NotchView: View {
                                 }
                             }
                     }
+
+                    // Report entry points
+                    Divider().background(Color.white.opacity(0.1))
+                        .padding(.vertical, 6)
+
+                    reportEntries
                 } else if store.isLoading {
                     VStack(spacing: 8) {
                         MinionIconView(size: 32)
@@ -166,6 +172,20 @@ struct NotchView: View {
             }
             .padding(.horizontal, 14)
             .padding(.vertical, 10)
+        }
+    }
+
+    private var reportEntries: some View {
+        VStack(alignment: .leading, spacing: 6) {
+            Text("Reports")
+                .font(.system(size: 9, weight: .medium))
+                .foregroundColor(.white.opacity(0.3))
+
+            HStack(spacing: 8) {
+                ReportButton(icon: "calendar", label: "日报")
+                ReportButton(icon: "calendar.badge.clock", label: "周报")
+                ReportButton(icon: "chart.bar", label: "月报")
+            }
         }
     }
 

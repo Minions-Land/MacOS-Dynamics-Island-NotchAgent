@@ -16,7 +16,11 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         }
 
         setupStatusBar()
-        setupNotchWindow()
+
+        // Delay window setup slightly to ensure screen geometry is ready
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { [self] in
+            setupNotchWindow()
+        }
 
         newsManager = NewsManager()
         Task {
