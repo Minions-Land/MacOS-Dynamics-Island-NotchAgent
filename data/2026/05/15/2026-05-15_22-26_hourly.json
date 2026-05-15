@@ -1,0 +1,131 @@
+{
+  "fetchedAt" : "2026-05-15T14:26:42Z",
+  "items" : [
+    {
+      "detail" : "Robin将文献检索智能体与数据分析智能体深度集成，形成「假设生成→实验设计→结果解读→假设更新」的闭环迭代流程。系统使用Crow子智能体进行大规模文献综述，通过多轮证据积累提出假设：增强视网膜色素上皮细胞（RPE）的吞噬功能可为干性年龄相关性黄斑变性（dAMD）提供治疗益处。\n\n在架构上，Robin采用半自动化模式（semi-autonomous），人类科学家保留关键决策节点的审核权，但假设生成、文献检索、数据分析均由智能体自主完成。这是首个经同行评审验证的AI系统主导科学发现案例，标志着「Agentic Science」从概念走向实证。",
+      "id" : "robin-futurehouse-2505",
+      "keywords" : [
+        "multi-agent",
+        "autonomous scientific discovery",
+        "hypothesis generation",
+        "biomedical AI"
+      ],
+      "source" : "arxiv",
+      "summary" : "FutureHouse发布Robin系统，首个能自主完成科学研究关键智识步骤的多智能体系统，已在2.5个月内独立发现干性AMD潜在新疗法并发表论文。",
+      "timestamp" : "2025-05-19T00:00:00Z",
+      "title" : "Robin: FutureHouse多智能体系统实现端到端自主科学发现",
+      "url" : "https:\/\/www.arxiv.org\/abs\/2505.13400"
+    },
+    {
+      "detail" : "核心架构将智能体拆分为三个独立层：Brain（LLM推理+决策harness）、Hands（工具执行沙箱，含代码运行、文件系统、外部API）、Session（跨会话持久化记忆存储）。Harness被设计为无状态（stateless），避免随模型迭代而腐化的假设硬编码问题——当Claude Sonnet 4.5升级时，旧harness中的补偿性提示工程会导致性能退化。\n\n平台内置MCP Server连接、代码执行沙箱、文件存储和扩展提示缓存四大能力。持久化记忆模块让智能体跨会话保留知识，无需开发者自建基础设施。该架构验证了「接口稳定、实现可替换」的设计原则，是目前生产级智能体部署的重要参考范式。",
+      "id" : "anthropic-managed-agents-2026",
+      "keywords" : [
+        "managed agents",
+        "brain-hands decoupling",
+        "long-horizon agent",
+        "MCP",
+        "persistent memory"
+      ],
+      "source" : "blog",
+      "summary" : "Anthropic发布Managed Agents托管平台，通过将模型推理（大脑）、工具执行（双手）与会话状态（记忆）三层解耦，实现稳定可扩展的长时程智能体服务，p50首token延迟降低约60%。",
+      "timestamp" : "2026-04-08T00:00:00Z",
+      "title" : "Anthropic Managed Agents：「大脑」与「双手」解耦的长时程智能体架构",
+      "url" : "https:\/\/www.anthropic.com\/engineering\/managed-agents"
+    },
+    {
+      "detail" : "论文核心发现：记忆系统研究（存储\/检索历史经验）与技能发现研究（从交互轨迹中提取可复用知识）在学术上高度割裂，但本质上解决同一问题——如何让智能体从过去经验中学习。作者通过对22篇核心论文、1136条引用的系统分析，量化了两个子领域的引用隔离现象。\n\n提出的统一框架将记忆操作（Retrieve\/Add\/Update\/Delete\/Summary\/Filter）与技能抽象（可复用的参数化行为模式）纳入同一形式化体系。规则（Rules）作为第三类知识，编码约束与不变量，与记忆和技能共享存储与检索机制。该框架为构建能在多会话长时程任务中持续自我改进的智能体提供了理论基础。",
+      "id" : "unifying-memory-skills-rules-2604",
+      "keywords" : [
+        "agent memory",
+        "skill discovery",
+        "long-horizon agent",
+        "knowledge unification"
+      ],
+      "source" : "arxiv",
+      "summary" : "该论文提出将智能体记忆系统与技能发现统一建模，通过对1136篇文献的引用分析揭示两个领域的割裂现状，并提出融合框架以解决长时程多会话部署中的经验积累瓶颈。",
+      "timestamp" : "2026-04-01T00:00:00Z",
+      "title" : "统一LLM智能体的记忆、技能与规则：2604.15877",
+      "url" : "https:\/\/arxiv.org\/abs\/2604.15877"
+    },
+    {
+      "detail" : "Claude Agent SDK内置三类核心工具：文件读取、Shell命令执行、代码编辑，智能体无需额外实现工具执行层即可立即投入使用。SDK支持通过MCP Connector连接外部MCP服务器，使智能体能访问Linear、GitHub、Salesforce等第三方数据源和服务。\n\nClaude 4系列模型新增并行工具调用能力（parallel tool use），单次推理可同时触发多个工具，显著提升多步骤任务的执行效率。结合Managed Agents平台的持久化记忆和沙箱执行环境，Agent SDK构成了从本地开发到云端部署的完整智能体工程栈。迁移指南已发布，现有Claude Code SDK用户可平滑升级。",
+      "id" : "claude-agent-sdk-rename-2025",
+      "keywords" : [
+        "Claude Agent SDK",
+        "tool use",
+        "MCP",
+        "parallel tool calling",
+        "agent framework"
+      ],
+      "source" : "blog",
+      "summary" : "Anthropic将Claude Code SDK正式更名为Claude Agent SDK，反映其从编码专用工具向通用智能体构建平台的战略转型，新增并行工具调用、文件读写、命令执行等内置工具。",
+      "timestamp" : "2025-05-01T00:00:00Z",
+      "title" : "Claude Code SDK更名为Claude Agent SDK，能力边界扩展至通用智能体构建",
+      "url" : "https:\/\/docs.claude.com\/en\/docs\/claude-code\/sdk\/migration-guide"
+    },
+    {
+      "detail" : "GPT-5.1-Codex-Max基于GPT-5.5构建，专为长时程自主编码会话优化，能够超越单纯代码执行，主动发现潜在问题并提出改进建议。Codex平台现支持开发者跨项目编排多个智能体并行工作，实现任务委派和并行执行。\n\n企业集成案例显示：Cisco将Codex直接嵌入生产工程工作流，处理大型多仓库系统和C\/C++重型代码库；NVIDIA在自有GPU基础设施上运行Codex，支持更长的自主会话。新增管理员工具包含环境控制、监控和分析仪表板，支持企业级规模化部署。Codex现已正式GA（Generally Available），并推出独立Codex App。",
+      "id" : "openai-codex-gpt51-max-2025",
+      "keywords" : [
+        "Codex",
+        "GPT-5.1",
+        "coding agent",
+        "multi-agent orchestration",
+        "enterprise AI"
+      ],
+      "source" : "blog",
+      "summary" : "OpenAI推出GPT-5.1-Codex-Max，在速度、智能和token效率上全面升级，支持多智能体并行任务编排，已在NVIDIA GB200\/GB300基础设施上生产部署。",
+      "timestamp" : "2025-05-01T00:00:00Z",
+      "title" : "OpenAI发布GPT-5.1-Codex-Max：更快、更高token效率的编码智能体",
+      "url" : "https:\/\/openai.com\/index\/gpt-5-1-codex-max\/"
+    },
+    {
+      "detail" : "现有LLM智能体记忆系统的核心缺陷：记忆操作（何时存储、存储什么、如何检索）由人工硬编码，无法适应不同任务域和用户行为模式。本文将记忆操作本身视为可学习的「元技能」，智能体通过与环境交互自主发现并优化这些操作策略。\n\n框架核心思路：将记忆管理形式化为策略优化问题，$$\\pi^*_{mem} = \\arg\\max_{\\pi} \\mathbb{E}[R_{task} | \\pi_{mem}]$$，其中 $R_{task}$ 是下游任务奖励信号。智能体通过反思（self-reflection）机制评估记忆操作的有效性，并迭代更新操作策略。实验表明，自进化记忆技能在长时程对话和多步骤任务中显著优于静态记忆系统，尤其在跨会话知识迁移场景下提升明显。",
+      "id" : "learning-evolving-memory-skills-2602",
+      "keywords" : [
+        "agent memory",
+        "self-evolving agent",
+        "meta-skill",
+        "memory management",
+        "lifelong learning"
+      ],
+      "source" : "arxiv",
+      "summary" : "提出让LLM智能体自主学习和演化记忆操作技能的框架，突破现有系统依赖静态手工设计记忆操作的局限，实现记忆管理策略的自适应进化。",
+      "timestamp" : "2026-02-01T00:00:00Z",
+      "title" : "自进化智能体的记忆技能学习与演化：2602.02474",
+      "url" : "https:\/\/arxiv.org\/abs\/2602.02474"
+    },
+    {
+      "detail" : "NovelSeek构建了「假设生成→实验规划→代码实现→结果分析→假设修正」的完整闭环，各阶段由专门化子智能体负责，通过共享上下文池（shared context pool）实现跨智能体知识传递，解决了Robin等早期系统中智能体间上下文共享受限的问题。\n\n框架的关键创新在于「原则感知」（principle-aware）的科学发现机制：智能体不仅检索已有文献，还主动推断领域内的隐含约束和物理\/化学原理，避免生成违反基本规律的假设。在多个科学领域（材料科学、生物信息学、化学合成）的基准测试中，NovelSeek生成假设的新颖性和可验证性均优于单智能体基线，闭环验证成功率提升约35%。",
+      "id" : "novolseek-closed-loop-2505",
+      "keywords" : [
+        "closed-loop agent",
+        "autonomous scientific research",
+        "multi-agent",
+        "hypothesis verification"
+      ],
+      "source" : "arxiv",
+      "summary" : "提出NovelSeek统一闭环多智能体框架，覆盖自主科学研究（ASR）全流程，支持跨多个科学领域的假设生成、实验设计与结果验证自动化。",
+      "timestamp" : "2025-05-22T00:00:00Z",
+      "title" : "NovelSeek：从假设到验证的闭环多智能体自主科研框架",
+      "url" : "https:\/\/arxiv.org\/html\/2505.16938v1"
+    },
+    {
+      "detail" : "论文核心论点：传统LLM RL（如RLHF、DPO）将模型视为静态映射 $f: x \\to y$，而Agentic RL将其建模为马尔可夫决策过程 $\\langle S, A, T, R \\rangle$，其中智能体通过工具调用序列 $a_1, a_2, ..., a_T$ 与环境交互，奖励信号来自任务完成结果而非人类偏好标注。\n\n综述将Agentic RL分为三个技术维度：（1）工具使用RL——通过奖励正确工具调用序列训练工具选择策略；（2）多步推理RL——奖励中间推理步骤的正确性，如Process Reward Model（PRM）；（3）环境交互RL——智能体在代码执行、网页浏览等真实环境中获取反馈信号。DeepSeek-R1和OpenAI o系列模型验证了on-policy RL with verifiable rewards在推理任务上的有效性，为Agentic RL提供了重要实证基础。",
+      "id" : "agentic-rl-landscape-2509",
+      "keywords" : [
+        "agentic RL",
+        "reinforcement learning",
+        "LLM agent",
+        "tool use",
+        "multi-step reasoning"
+      ],
+      "source" : "arxiv",
+      "summary" : "系统梳理Agentic RL与传统LLM RL的本质区别，将LLM从被动序列预测器重新定位为主动决策智能体，覆盖工具使用、多步推理、环境交互等核心技术维度。",
+      "timestamp" : "2025-09-01T00:00:00Z",
+      "title" : "LLM智能体强化学习全景综述：从被动序列预测到主动决策范式转变",
+      "url" : "https:\/\/arxiv.org\/abs\/2509.02547"
+    }
+  ],
+  "summary" : "本小时AI Agent技术呈现三大突破方向：**架构解耦与工程化**方面，Anthropic的Managed Agents通过推理-执行-状态三层分离将首token延迟降低60%，Claude Agent SDK完成从编码工具到通用智能体平台的能力扩展；**自主科研闭环**方面，FutureHouse的Robin系统在2.5个月内独立完成从假设到论文发表的完整科学发现流程，NovelSeek框架实现跨领域假设验证自动化；**记忆与技能演化**方面，多篇论文聚焦突破静态手工设计记忆操作的瓶颈，提出记忆系统与技能发现的统一建模及自适应进化机制。技术趋势显示Agent正从单次对话工具向具备长时程经验积累、多智能体协同、端到端任务闭环的自主决策系统演进，强化学习范式从被动序列预测转向主动环境交互成为核心方法论转变。"
+}
