@@ -1,0 +1,119 @@
+{
+  "fetchedAt" : "2026-05-15T03:47:37Z",
+  "items" : [
+    {
+      "detail" : "作者用 LongMemEval 的 116 个长记忆问题，分别在自研 Chronos harness 与 Claude Code、Codex、Gemini CLI 上跑两套实验：(1) grep vs 向量检索；(2) 在上下文中渐进注入无关对话作为干扰。结论一：grep 在所有 harness 上几乎都显著优于向量检索，差距在干扰文本越多时越大；结论二：即便底层数据相同，最终精度对 harness 设计（工具结果是 inline 注入还是写文件让模型 read）极度敏感，可达 10+ 个点差距。文章用 $\\text{Acc}(h, r) = \\mathbb{E}_{q\\sim D}[\\mathbb{1}\\{\\text{agent}_{h,r}(q)=y\\}]$ 形式分解 harness 因素 $h$ 与检索策略 $r$ 的交互，挑战了把 RAG 当作 Agent 默认基础设施的主流做法。",
+      "id" : "arxiv-2605-15184",
+      "keywords" : [
+        "Claude Code",
+        "Codex",
+        "Tool Use AI",
+        "LLM Agent"
+      ],
+      "source" : "arxiv",
+      "summary" : "系统对比 Claude Code、Codex、Gemini CLI 三大主流 Agent Harness 在检索增强场景下的表现，发现 grep 比向量检索更优。",
+      "timestamp" : "2026-05-14T17:58:41Z",
+      "title" : "Is Grep All You Need? How Agent Harnesses Reshape Agentic Search",
+      "url" : "https:\/\/arxiv.org\/abs\/2605.15184"
+    },
+    {
+      "detail" : "针对多轮 Agent RL 中 trajectory 级稀疏奖励的监督粒度问题，作者提出 SDAR：以 RL（GRPO）为主干，将带特权上下文的教师分支产出的 token 级 OPSD 信号经 sigmoid 门控 $g_t = \\sigma(\\beta(\\log\\pi_T(a_t|s_t) - \\log\\pi_S(a_t|s_t)))$ 加权进损失，对教师正向 gap 强化蒸馏、对负向拒绝软衰减，避免不完美技能检索带来的错误监督。在 Qwen2.5\/Qwen3 多尺寸上：ALFWorld +9.4%、Search-QA +7.0%、WebShop-Acc +10.2%，并显著优于朴素 GRPO+OPSD 混合基线。该工作把 OPSD 从单轮 SFT 范式正式带入多轮 Agent 后训练，给出了门控公式与负样本处理的标准做法。",
+      "id" : "arxiv-2605-15155",
+      "keywords" : [
+        "LLM Agent",
+        "Tool Use AI",
+        "Agent System"
+      ],
+      "source" : "arxiv",
+      "summary" : "将 On-Policy Self-Distillation 作为门控辅助目标加入 GRPO，在三个 Agent 基准上稳定提分。",
+      "timestamp" : "2026-05-14T17:51:26Z",
+      "title" : "SDAR: Self-Distilled Agentic Reinforcement Learning",
+      "url" : "https:\/\/arxiv.org\/abs\/2605.15155"
+    },
+    {
+      "detail" : "团队在 8 个生活场景任务上构建 benchmark，沿两个正交维度评测：视觉证据粒度（场景级 → 像素级）与证据使用方式（单证据 → 演化合成）。引入四道消融门 (answerability \/ shortcut resistance \/ visual necessity \/ reasoning structure) 强制每题必须依赖原始视觉证据而非 caption。结果显示：13 种主流多模态记忆方法（如 MemGPT-V、A-MEM-V、视觉 RAG 变体）在像素级 + 演化合成格子里准确率普遍跌至 30% 以下，远低于场景级单证据格的 70%+。结论是当前记忆架构在 evidence routing、temporal tracking 与细节抽取这三处都欠债，证明 long-term 多模态记忆远未解决。",
+      "id" : "arxiv-2605-15128",
+      "keywords" : [
+        "Agent Memory",
+        "Multi-Agent System",
+        "LLM Agent"
+      ],
+      "source" : "arxiv",
+      "summary" : "指出现有 Agent 记忆评测可被 caption 文本捷径绕过，提出双轴评测框架并测了 13 种记忆方法 × 4 个 VLM。",
+      "timestamp" : "2026-05-14T17:37:52Z",
+      "title" : "MemEye: 多模态 Agent 记忆的视觉中心评测框架",
+      "url" : "https:\/\/arxiv.org\/abs\/2605.15128"
+    },
+    {
+      "detail" : "传统同步 function calling 必须等工具返回再继续解码，端到端时延 $T = \\sum_i (t_{\\text{decode}}^i + t_{\\text{exec}}^i)$。AsyncFC 把工具结果替换为 symbolic future $\\hat{r}_i$ 注入上下文，让模型继续 decode 并自然依赖未解析占位符；运行时检测后续 token 是否真正读取该 future 来决定阻塞或继续。框架在标准 function-calling benchmark 与改造的 SWE 基准上显著缩短任务完成时间且保持精度，意外发现：现成 LLM 已具备对 unresolved future 的符号化推理能力，无需 SFT。这给 Agent 工具循环提供了零侵入的并行化原语，可与 Claude Code、Codex 等 harness 直接组合。",
+      "id" : "arxiv-2605-15077",
+      "keywords" : [
+        "Tool Use AI",
+        "LLM Agent",
+        "Agent System"
+      ],
+      "source" : "arxiv",
+      "summary" : "纯执行层框架，在不改训练、不改 function-calling 协议的前提下实现 decoding 与函数执行的重叠。",
+      "timestamp" : "2026-05-14T17:02:28Z",
+      "title" : "AsyncFC: 不改模型即可让 LLM 异步并行调用工具",
+      "url" : "https:\/\/arxiv.org\/abs\/2605.15077"
+    },
+    {
+      "detail" : "作者指出当下多 Agent 系统在任务规模增长时遇到推理-协调-算力三重瓶颈，主要因为流水线天然假设串行通信。APWA 引入工作流静态分析器，把 DAG 切分为 non-interfering subproblems $\\{S_i\\}$ 满足 $\\forall i\\neq j: \\text{Read}(S_i)\\cap\\text{Write}(S_j)=\\emptyset$，从而支持跨节点独立执行、零跨通信。它兼容异构数据与异构并行模式（数据并行、流水并行、推测执行），并把 LLM 内置的并行原语暴露到调度层。实验显示 APWA 能动态拆解复杂查询；在前序系统完全失败的大规模任务规模上仍可线性扩展。25 页论文附 14 个表格，是近期面向 production-scale agent workload 的代表性架构。",
+      "id" : "arxiv-2605-15132",
+      "keywords" : [
+        "Multi-Agent System",
+        "Agent System",
+        "LLM Agent"
+      ],
+      "source" : "arxiv",
+      "summary" : "把多 Agent 工作流自动分解为彼此不干扰的子问题并行执行，突破现有系统在大规模任务上的扩展瓶颈。",
+      "timestamp" : "2026-05-14T17:40:20Z",
+      "title" : "APWA: 面向高并行 Agentic Workload 的分布式多 Agent 架构",
+      "url" : "https:\/\/arxiv.org\/abs\/2605.15132"
+    },
+    {
+      "detail" : "CMBEvolve 用 LLM 引导的代码进化 + 蒙特卡洛树搜索循环优化目标函数 $J(\\theta) = \\text{score}(\\text{code}_\\theta(D))$，已在弱引力透镜图的 OOD 检测任务上把 benchmark 分数迭代刷高。CosmoEvolve 是一个由 PI-agent、Analyst、Coder、Critic 等角色组成的虚拟研究实验室，独立完成 ACT DR6 微波背景数据全分析流程，自主识别出非平凡的 pair- 与 scale-dependent 行为，并产出 analysis-grade 诊断图。文章主张宇宙学既能提供有 ground truth 的 controlled benchmark，又能提供开放科学问题，是 AI scientist 系统的理想测试床。属于 Sakana AI Scientist 之后该方向最具体的领域工作。",
+      "id" : "arxiv-2605-14791",
+      "keywords" : [
+        "Autonomous Scientific Discovery",
+        "Multi-Agent System",
+        "Agent System"
+      ],
+      "source" : "arxiv",
+      "summary" : "两套互补 Agent 系统，一套靠代码进化做有显式量化目标的任务，另一套用虚拟多 Agent 实验室做开放式研究。",
+      "timestamp" : "2026-05-14T12:58:12Z",
+      "title" : "CMBEvolve & CosmoEvolve: 走向宇宙学的自主科学发现",
+      "url" : "https:\/\/arxiv.org\/abs\/2605.14791"
+    },
+    {
+      "detail" : "SWE-Chain 覆盖 9 个真实 Python 库的 12 条升级链共 155 次版本跃迁、1,660 条精确 grounded 升级要求；用 divide-and-conquer 流水线把 release notes 与 code diff 对齐生成需求，确保每条要求都能在 commit 中找到证据。Build+Fix 协议下九种 frontier 配置平均 resolving=44.8%、precision=65.4%、F1=50.2%；最强配置 Claude-Opus-4.7 (Claude Code) 取得 60.8%\/80.6%\/68.5%，但仍频繁在升级时打破既有功能。基准的 chaining 设计意味着每次 transition 都基于 agent 自己上一步的产物，能暴露错误累积，是当前少有能区分 frontier coding agent 的 SWE 类基准。",
+      "id" : "arxiv-2605-14415",
+      "keywords" : [
+        "Claude Code",
+        "LLM Agent",
+        "Agent System"
+      ],
+      "source" : "arxiv",
+      "summary" : "首个面向 package release 级链式升级的 Agent benchmark，Claude-Opus-4.7 + Claude Code 拿下 60.8% resolving。",
+      "timestamp" : "2026-05-14T06:04:40Z",
+      "title" : "SWE-Chain: 让 Coding Agent 处理链式版本升级的基准",
+      "url" : "https:\/\/arxiv.org\/abs\/2605.14415"
+    },
+    {
+      "detail" : "作者把 Skill 视为 LLM Agent 的「软件包生态系统」，类比 npm 供应链攻击，构造 91 条恶意 + 50 条良性效用任务，覆盖 16 个 security-impact 维度（凭证窃取、副作用文件写入、API 越权调用等）。每条任务给 Agent 一段普通用户请求并预装可能内嵌恶意 workflow 元素的 Skill，在沙箱中跑完整轨迹，然后用判定器把结果分为 attack-success \/ blocked \/ not-triggered \/ no-evidence 四类。核心发现：失败模式不是经典越狱，而是模型把 Skill 引入的不良副作用当作正常工作流一部分予以执行，即用户可见任务完成但暗中遭损。论文呼应同日 HN 热门 'Capsule 报告 15% Skill 文件含硬编码凭据' 的工业观察，给出可复现的运行时评测协议。",
+      "id" : "arxiv-2605-13940",
+      "keywords" : [
+        "Agent Skill",
+        "LLM Agent",
+        "Agent System"
+      ],
+      "source" : "arxiv",
+      "summary" : "141 个任务的动态基准，专门评测 Agent 能否在使用第三方 Skill 时识别并阻止伪装在合法工作流中的恶意行为。",
+      "timestamp" : "2026-05-13T17:04:17Z",
+      "title" : "AgentTrap: 度量第三方 Agent Skill 的运行时信任失败",
+      "url" : "https:\/\/arxiv.org\/abs\/2605.13940"
+    }
+  ],
+  "summary" : "本小时Agent技术研究呈现出多个值得关注的方向：在检索与执行效率层面，arxiv研究发现grep在Agent检索场景中优于向量检索，而AsyncFC框架无需修改模型或协议即可实现工具调用的异步并行执行，APWA则通过自动分解工作流突破多Agent系统的规模扩展瓶颈。在训练与评测方法上，SDAR将自蒸馏作为辅助目标引入强化学习流程，在多个基准上稳定提升Agent表现；MemEye揭示了现有多模态记忆评测存在文本捷径漏洞，提出双轴视觉中心评测框架；AgentTrap则专门针对第三方Skill的运行时信任失败构建动态基准，填补了Agent安全评测的空白。在应用前沿，SWE-Chain首次将链式版本升级纳入Coding Agent基准，Claude-Opus-4.7达到60.8%解决率；CMBEvolve与CosmoEvolve将Agent系统推向自主科学发现领域，分别覆盖有量化目标的代码进化任务与开放式研究场景。整体趋势表明，Agent研究正从单点能力优化转向系统级并行架构、安全可信评测与科学自主发现三个维度同步深化。"
+}
