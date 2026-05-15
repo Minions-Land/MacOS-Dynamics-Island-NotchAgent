@@ -37,10 +37,34 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         let menu = NSMenu()
         menu.addItem(NSMenuItem(title: "Refresh Now", action: #selector(refreshNow), keyEquivalent: "r"))
         menu.addItem(NSMenuItem.separator())
+
+        let fontMenu = NSMenu()
+        for (i, opt) in AppSettings.scaleOptions.enumerated() {
+            let item = NSMenuItem(title: opt.label, action: #selector(setFontScale(_:)), keyEquivalent: "")
+            item.tag = i
+            item.state = (abs(AppSettings.shared.fontScale - opt.value) < 0.01) ? .on : .off
+            fontMenu.addItem(item)
+        }
+        let fontItem = NSMenuItem(title: "Font Size", action: nil, keyEquivalent: "")
+        fontItem.submenu = fontMenu
+        menu.addItem(fontItem)
+
+        menu.addItem(NSMenuItem.separator())
         menu.addItem(NSMenuItem(title: "Settings...", action: #selector(openSettings), keyEquivalent: ","))
         menu.addItem(NSMenuItem.separator())
         menu.addItem(NSMenuItem(title: "Quit", action: #selector(quitApp), keyEquivalent: "q"))
         statusItem?.menu = menu
+    }
+
+    @objc private func setFontScale(_ sender: NSMenuItem) {
+        let opt = AppSettings.scaleOptions[sender.tag]
+        AppSettings.shared.fontScale = opt.value
+        // Update checkmarks
+        if let parent = sender.menu {
+            for item in parent.items {
+                item.state = (item == sender) ? .on : .off
+            }
+        }
     }
 
     private func setupNotchWindow() {

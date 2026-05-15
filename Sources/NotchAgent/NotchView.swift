@@ -6,6 +6,7 @@ struct NotchView: View {
     @State private var collapseTask: Task<Void, Never>?
     @State private var detailHeight: CGFloat = 100
     private let store = NewsStore.shared
+    @Bindable private var settings = AppSettings.shared
 
     private var notchHeight: CGFloat {
         NSScreen.screens.first(where: { $0.safeAreaInsets.top > 0 })?.safeAreaInsets.top ?? 33
@@ -67,7 +68,7 @@ struct NotchView: View {
             }
             .frame(maxWidth: .infinity)
         }
-        .frame(width: 420, height: 520)
+        .frame(width: 420 * settings.fontScale, height: 520 * settings.fontScale)
         .background(
             RoundedRectangle(cornerRadius: 0)
                 .fill(.black.opacity(0.95))
@@ -83,7 +84,7 @@ struct NotchView: View {
             HStack(spacing: 5) {
                 MinionIconView(size: 12)
                 Text("NotchAgent")
-                    .font(.system(size: 10, weight: .semibold))
+                    .font(.system(size: settings.scaled(12), weight: .semibold))
             }
             .frame(maxWidth: .infinity, alignment: .trailing)
             .padding(.trailing, 8)
@@ -95,7 +96,7 @@ struct NotchView: View {
             // Right side of notch
             HStack(spacing: 5) {
                 Text(Date(), format: .dateTime.hour().minute())
-                    .font(.system(size: 10, weight: .medium))
+                    .font(.system(size: settings.scaled(12), weight: .medium))
                     .monospacedDigit()
                 if store.isLoading {
                     ProgressView()
@@ -116,15 +117,15 @@ struct NotchView: View {
                     VStack(alignment: .leading, spacing: 6) {
                         HStack {
                             Image(systemName: "sparkles")
-                                .font(.system(size: 10))
+                                .font(.system(size: settings.scaled(12)))
                                 .foregroundColor(.yellow)
                             Text("Overview")
-                                .font(.system(size: 11, weight: .semibold))
+                                .font(.system(size: settings.scaled(13), weight: .semibold))
                                 .foregroundColor(.yellow)
                         }
 
                         Text(summary)
-                            .font(.system(size: 11))
+                            .font(.system(size: settings.scaled(13)))
                             .foregroundColor(.white.opacity(0.85))
                             .lineSpacing(4)
                             .fixedSize(horizontal: false, vertical: true)
@@ -143,7 +144,7 @@ struct NotchView: View {
                 // News list (hourly — main content)
                 if !store.items.isEmpty {
                     Text("本小时技术动态")
-                        .font(.system(size: 10, weight: .medium))
+                        .font(.system(size: settings.scaled(12), weight: .medium))
                         .foregroundColor(.white.opacity(0.4))
                         .padding(.top, 4)
 
@@ -166,7 +167,7 @@ struct NotchView: View {
                         MinionIconView(size: 32)
                             .opacity(0.4)
                         Text("Searching...")
-                            .font(.system(size: 11))
+                            .font(.system(size: settings.scaled(13)))
                             .foregroundColor(.white.opacity(0.4))
                     }
                     .frame(maxWidth: .infinity)
@@ -181,7 +182,7 @@ struct NotchView: View {
     private var reportEntries: some View {
         VStack(alignment: .leading, spacing: 6) {
             Text("Reports")
-                .font(.system(size: 9, weight: .medium))
+                .font(.system(size: settings.scaled(11), weight: .medium))
                 .foregroundColor(.white.opacity(0.3))
 
             HStack(spacing: 8) {
@@ -198,20 +199,20 @@ struct NotchView: View {
                 Button(action: { withAnimation { selectedItem = nil } }) {
                     HStack(spacing: 4) {
                         Image(systemName: "chevron.left")
-                            .font(.system(size: 10))
+                            .font(.system(size: settings.scaled(12)))
                         Text("Back")
-                            .font(.system(size: 11))
+                            .font(.system(size: settings.scaled(13)))
                     }
                     .foregroundColor(.yellow.opacity(0.8))
                 }
                 .buttonStyle(.plain)
 
                 Text(item.title)
-                    .font(.system(size: 13, weight: .semibold))
+                    .font(.system(size: settings.scaled(15), weight: .semibold))
                     .lineLimit(3)
 
                 Text(item.summary)
-                    .font(.system(size: 11, weight: .medium))
+                    .font(.system(size: settings.scaled(13), weight: .medium))
                     .foregroundColor(.white.opacity(0.9))
 
                 if !item.detail.isEmpty {
@@ -225,7 +226,7 @@ struct NotchView: View {
                         .frame(height: detailHeight)
                     } else {
                         Text(item.detail)
-                            .font(.system(size: 10.5))
+                            .font(.system(size: settings.scaled(12.5)))
                             .foregroundColor(.white.opacity(0.75))
                             .lineSpacing(3.5)
                             .fixedSize(horizontal: false, vertical: true)
@@ -234,10 +235,10 @@ struct NotchView: View {
 
                 HStack(spacing: 8) {
                     Image(systemName: item.sourceIcon)
-                        .font(.system(size: 10))
+                        .font(.system(size: settings.scaled(12)))
                         .foregroundColor(.yellow.opacity(0.7))
                     Text(item.source.uppercased())
-                        .font(.system(size: 9, weight: .medium))
+                        .font(.system(size: settings.scaled(11), weight: .medium))
                         .foregroundColor(.white.opacity(0.5))
                     Spacer()
                     Button("Open") {
@@ -246,7 +247,7 @@ struct NotchView: View {
                         }
                     }
                     .buttonStyle(.plain)
-                    .font(.system(size: 11, weight: .medium))
+                    .font(.system(size: settings.scaled(13), weight: .medium))
                     .padding(.horizontal, 10)
                     .padding(.vertical, 4)
                     .background(Capsule().fill(.yellow.opacity(0.15)))
@@ -255,7 +256,7 @@ struct NotchView: View {
                 FlowLayout(spacing: 4) {
                     ForEach(item.keywords, id: \.self) { kw in
                         Text(kw)
-                            .font(.system(size: 9))
+                            .font(.system(size: settings.scaled(11)))
                             .padding(.horizontal, 6)
                             .padding(.vertical, 2)
                             .background(Capsule().fill(.yellow.opacity(0.12)))
@@ -274,8 +275,9 @@ struct NotchView: View {
         let screenFrame = screen.frame
         let notchH = max(screen.safeAreaInsets.top, 33)
 
-        let width: CGFloat = expanded ? 420 : 300
-        let height: CGFloat = expanded ? 520 : notchH
+        let scale = AppSettings.shared.fontScale
+        let width: CGFloat = expanded ? 420 * scale : 300
+        let height: CGFloat = expanded ? 520 * scale : notchH
         let x = screenFrame.midX - width / 2
         let y = screenFrame.maxY - height
 
