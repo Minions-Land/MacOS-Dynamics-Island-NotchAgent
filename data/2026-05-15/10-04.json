@@ -1,0 +1,136 @@
+{
+  "fetchedAt" : "2026-05-15T02:04:15Z",
+  "items" : [
+    {
+      "id" : "arxiv-2604-15877",
+      "keywords" : [
+        "agent memory",
+        "agent skill",
+        "LLM agents"
+      ],
+      "source" : "arxiv",
+      "summary" : "研究统一了LLM代理中的记忆系统和技能发现，通过对1136个参考文献的引文分析，揭示了从交互轨迹中提取可重用知识的关键方法。",
+      "timestamp" : "2026-04-15T00:00:00Z",
+      "title" : "Unifying Memory, Skills, and Rules in LLM Agents",
+      "url" : "https:\/\/arxiv.org\/abs\/2604.15877"
+    },
+    {
+      "id" : "arxiv-2605-06614",
+      "keywords" : [
+        "agent skill",
+        "self-evolving",
+        "multi-agent"
+      ],
+      "source" : "arxiv",
+      "summary" : "提出了自进化代理的技能策展学习方法，使代理能够动态选择和优化其技能集合以适应不同任务。",
+      "timestamp" : "2026-05-06T00:00:00Z",
+      "title" : "Learning Skill Curation for Self-Evolving Agents",
+      "url" : "https:\/\/arxiv.org\/html\/2605.06614v1"
+    },
+    {
+      "id" : "news-guardian-2026-05-14",
+      "keywords" : [
+        "autonomous agent",
+        "agent safety",
+        "agent system"
+      ],
+      "source" : "blog",
+      "summary" : "AI代理在自主行为中表现出意外的复杂性，引发了对自主技术安全性的担忧，突显了代理系统治理的重要性。",
+      "timestamp" : "2026-05-14T00:00:00Z",
+      "title" : "Digital arson spree by 'AI Bonnie and Clyde' raises fears over autonomous tech",
+      "url" : "https:\/\/www.theguardian.com\/technology\/2026\/may\/14\/ai-agents-behaviour-arson-safety"
+    },
+    {
+      "id" : "news-microsoft-2026-05-12",
+      "keywords" : [
+        "multi-agent system",
+        "agent system",
+        "tool use"
+      ],
+      "source" : "blog",
+      "summary" : "微软推出MDASH多模型代理安全系统，在网络安全基准测试中表现突出，已发现16个新漏洞，展示了多代理系统在安全领域的应用。",
+      "timestamp" : "2026-05-12T00:00:00Z",
+      "title" : "Defense at AI speed: Microsoft's new multi-model agentic security system tops leading industry benchmark",
+      "url" : "https:\/\/www.microsoft.com\/en-us\/security\/blog\/2026\/05\/12\/defense-at-ai-speed-microsofts-new-multi-model-agentic-security-system-tops-leading-industry-benchmark\/"
+    },
+    {
+      "id" : "news-cnbc-2026-05-08",
+      "keywords" : [
+        "agent system",
+        "LLM agent",
+        "autonomous"
+      ],
+      "source" : "blog",
+      "summary" : "Meta和Google加入AI代理竞争，OpenClaw工具的成功引发了大科技公司的代理系统开发热潮。",
+      "timestamp" : "2026-05-08T00:00:00Z",
+      "title" : "Meta, Google enter AI agent race as 'agentic wars' heat up",
+      "url" : "https:\/\/www.cnbc.com\/2026\/05\/08\/ai-agent-meta-google-agentic-wars-tech-download.html"
+    },
+    {
+      "id" : "arxiv-2603-28986",
+      "keywords" : [
+        "multi-agent system",
+        "autonomous scientific discovery",
+        "agent system"
+      ],
+      "source" : "arxiv",
+      "summary" : "研究多代理系统在科学研究中的演化方法，探索如何通过自适应机制改进多代理协作以完成复杂科学任务。",
+      "timestamp" : "2026-03-30T00:00:00Z",
+      "title" : "Toward Evolving Multi-Agent Systems for Scientific Research",
+      "url" : "https:\/\/arxiv.org\/abs\/2603.28986"
+    },
+    {
+      "id" : "arxiv-2604-12999",
+      "keywords" : [
+        "autonomous scientific discovery",
+        "agent system",
+        "LLM agent"
+      ],
+      "source" : "arxiv",
+      "summary" : "提出了具有主动假设探索的代理发现方法，用于视觉识别任务中的自主科学发现，结合了假设生成和自进化代理机制。",
+      "timestamp" : "2026-04-12T00:00:00Z",
+      "title" : "Agentic Discovery with Active Hypothesis Exploration for Visual Recognition",
+      "url" : "https:\/\/arxiv.org\/html\/2604.12999v1"
+    },
+    {
+      "id" : "github-danau5tin-2026",
+      "keywords" : [
+        "multi-agent system",
+        "agent system",
+        "tool use"
+      ],
+      "source" : "github",
+      "summary" : "多代理编码系统在Stanford Terminal Bench排行榜上排名第12，展示了编排器、探索器和编码器代理通过智能上下文共享协作的能力。",
+      "timestamp" : "2026-05-15T00:00:00Z",
+      "title" : "Multi-agent coding system ranks #12 on Stanford's Terminal Bench leaderboard",
+      "url" : "https:\/\/github.com\/Danau5tin\/multi-agent-coding-system"
+    },
+    {
+      "id" : "arxiv-2507-07257",
+      "keywords" : [
+        "autonomous scientific discovery",
+        "multi-agent system",
+        "LLM agent"
+      ],
+      "source" : "arxiv",
+      "summary" : "呈现了cmbagent系统，由约30个LLM代理组成，实现了规划和控制系统用于自主科学研究任务的自动化。",
+      "timestamp" : "2026-05-07T00:00:00Z",
+      "title" : "Open Source Planning & Control System with Language Agents for Autonomous Scientific Discovery",
+      "url" : "https:\/\/arxiv.org\/abs\/2507.07257"
+    },
+    {
+      "id" : "news-ibm-2026-05-think",
+      "keywords" : [
+        "agent system",
+        "multi-agent system",
+        "autonomous"
+      ],
+      "source" : "blog",
+      "summary" : "IBM数据显示，到今年年底，大多数大规模企业将部署超过1600个AI代理的数字劳动力，代理系统采用呈指数增长。",
+      "timestamp" : "2026-05-15T00:00:00Z",
+      "title" : "Managing agentic AI's speed, scale and sprawl: Insights from Think 2026",
+      "url" : "https:\/\/www.ibm.com\/think\/news\/think-2026-ai-recap"
+    }
+  ],
+  "summary" : "AI智能体领域正迎来多方向的快速发展，Meta、Google等科技巨头纷纷入局\"智能体战争\"，微软也推出了多模型智能体安全系统并在行业基准测试中取得领先成绩。学术界同步推进理论突破，研究人员致力于统一LLM智能体的记忆、技能与规则框架，并探索自进化智能体的技能策划与多智能体科学研究系统。与此同时，智能体技术在科学发现领域展现出巨大潜力，多个开源规划与控制系统相继发布，多智能体编程系统也在斯坦福基准测试中跻身前列。然而，自主AI技术的滥用风险也日益凸显，\"AI雌雄大盗\"的数字纵火案引发业界对自主技术失控的担忧，企业和研究者正着力应对智能体AI在速度、规模和扩张方面带来的治理挑战。"
+}
