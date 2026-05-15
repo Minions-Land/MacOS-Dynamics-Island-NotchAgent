@@ -95,6 +95,9 @@ class NewsManager: Sendable {
         - Papers: include method name, key formula/algorithm idea, benchmark results (numbers)
         - GitHub repos: include architecture approach, key features, performance claims
         - Blog posts: include the core technical insight and concrete examples
+        - IMPORTANT: wrap ALL math formulas in LaTeX $...$ delimiters (inline) or $$...$$ (display).
+          Example: "损失函数为 $L(\\theta) = \\mathbb{E}[R(y^+) - R(y^-)] \\cdot \\nabla \\log \\pi_\\theta(a)$"
+          Do NOT use plain text for formulas. Use proper LaTeX notation.
         Keep detail concise but substantive — a reader should learn something without opening the link.
 
         Rules: summary and detail in Chinese, urls must be real, focus on TECHNICAL content.

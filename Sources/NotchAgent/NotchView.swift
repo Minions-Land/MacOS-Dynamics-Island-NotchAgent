@@ -212,11 +212,20 @@ struct NotchView: View {
                     .foregroundColor(.white.opacity(0.9))
 
                 if !item.detail.isEmpty {
-                    Text(item.detail)
-                        .font(.system(size: 10.5))
-                        .foregroundColor(.white.opacity(0.75))
-                        .lineSpacing(3.5)
-                        .fixedSize(horizontal: false, vertical: true)
+                    if item.detail.contains("$") || item.detail.contains("\\(") || item.detail.contains("\\[") {
+                        MathTextView(
+                            text: item.detail,
+                            fontSize: 11,
+                            textColor: "rgba(255,255,255,0.75)"
+                        )
+                        .frame(minHeight: 80, maxHeight: 300)
+                    } else {
+                        Text(item.detail)
+                            .font(.system(size: 10.5))
+                            .foregroundColor(.white.opacity(0.75))
+                            .lineSpacing(3.5)
+                            .fixedSize(horizontal: false, vertical: true)
+                    }
                 }
 
                 HStack(spacing: 8) {
