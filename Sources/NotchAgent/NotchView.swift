@@ -1,5 +1,9 @@
 import SwiftUI
 
+private func md(_ str: String) -> AttributedString {
+    (try? AttributedString(markdown: str, options: .init(interpretedSyntax: .inlineOnlyPreservingWhitespace))) ?? AttributedString(str)
+}
+
 struct NotchView: View {
     @State private var isExpanded = false
     @State private var selectedItem: NewsItem?
@@ -118,7 +122,7 @@ struct NotchView: View {
                                 .foregroundColor(.yellow)
                         }
 
-                        Text(summary)
+                        Text(md(summary))
                             .font(.system(size: settings.scaled(13)))
                             .foregroundColor(.white.opacity(0.85))
                             .lineSpacing(4)
@@ -325,11 +329,11 @@ struct NotchView: View {
                         .foregroundColor(.white.opacity(0.4))
                 }
 
-                Text(item.title)
+                Text(md(item.title))
                     .font(.system(size: settings.scaled(15), weight: .semibold))
                     .lineLimit(3)
 
-                Text(item.summary)
+                Text(md(item.summary))
                     .font(.system(size: settings.scaled(13), weight: .medium))
                     .foregroundColor(.white.opacity(0.9))
 
@@ -346,7 +350,7 @@ struct NotchView: View {
                     } else {
                         VStack(alignment: .leading, spacing: 8) {
                             ForEach(splitIntoParagraphs(item.detail), id: \.self) { para in
-                                Text(para)
+                                Text(md(para))
                                     .font(.system(size: settings.scaled(12.5)))
                                     .foregroundColor(.white.opacity(0.78))
                                     .lineSpacing(4.5)

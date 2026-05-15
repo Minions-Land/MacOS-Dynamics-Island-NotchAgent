@@ -1,5 +1,9 @@
 import SwiftUI
 
+private func md(_ str: String) -> AttributedString {
+    (try? AttributedString(markdown: str, options: .init(interpretedSyntax: .inlineOnlyPreservingWhitespace))) ?? AttributedString(str)
+}
+
 struct NewsRowView: View {
     let item: NewsItem
 
@@ -11,7 +15,7 @@ struct NewsRowView: View {
                 .frame(width: 20)
 
             VStack(alignment: .leading, spacing: 2) {
-                Text(item.title)
+                Text(md(item.title))
                     .font(.system(size: 11, weight: .medium))
                     .lineLimit(2)
 

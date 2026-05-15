@@ -80,6 +80,23 @@ struct MathTextView: NSViewRepresentable {
             }
         }
 
+        // Convert markdown bold/italic to HTML
+        result = result.replacingOccurrences(
+            of: #"\*\*(.+?)\*\*"#,
+            with: "<strong>$1</strong>",
+            options: .regularExpression
+        )
+        result = result.replacingOccurrences(
+            of: #"(?<!\*)\*(?!\*)(.+?)(?<!\*)\*(?!\*)"#,
+            with: "<em>$1</em>",
+            options: .regularExpression
+        )
+        result = result.replacingOccurrences(
+            of: #"`(.+?)`"#,
+            with: "<code>$1</code>",
+            options: .regularExpression
+        )
+
         // Wrap in <p> tags
         let paragraphs = result.components(separatedBy: "\n\n")
             .map { $0.trimmingCharacters(in: .whitespacesAndNewlines) }
@@ -117,6 +134,9 @@ struct MathTextView: NSViewRepresentable {
                 text-align: justify;
             }
             p:last-child { margin-bottom: 0; }
+            strong { font-weight: 600; color: rgba(255,255,255,0.95); }
+            em { font-style: italic; }
+            code { font-family: "SF Mono", Menlo, monospace; font-size: 0.9em; background: rgba(255,255,255,0.08); padding: 0.1em 0.3em; border-radius: 3px; }
             .katex { font-size: 1.05em; }
             .katex-display {
                 margin: 0.8em 0 !important;
