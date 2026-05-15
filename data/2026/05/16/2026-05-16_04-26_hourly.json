@@ -1,0 +1,138 @@
+{
+  "fetchedAt" : "2026-05-15T20:26:34Z",
+  "items" : [
+    {
+      "detail" : "SkillWeaver 的核心思路是将 Web 智能体的交互经验程序化为可调用的技能函数（Python 函数形式），存入持久化技能库。智能体在新任务中优先检索已有技能，匹配成功则直接调用，避免重复推理；匹配失败则触发探索-合成-验证闭环，将新模式提炼为新技能。\n\n与传统 ReAct\/Plan-and-Execute 方案相比，SkillWeaver 实现了跨任务、跨网站的技能迁移，在 WebArena 和 Mind2Web 基准上任务完成率显著提升（具体数值依最终版本为准）。技能合成采用 LLM 生成代码 + 自动回归测试验证的两阶段策略，保证库中技能的可靠性。\n\n该工作的关键洞见在于：将「经验」结构化为「可执行代码」而非自然语言记忆，既减少了 token 消耗，又使技能可组合、可测试。",
+      "id" : "skillweaver-2504.07079",
+      "keywords" : [
+        "web agent",
+        "skill learning",
+        "self-improvement",
+        "tool use",
+        "program synthesis"
+      ],
+      "source" : "arxiv",
+      "summary" : "提出一种Web智能体自我改进框架，通过探索自动合成并验证可复用技能函数，构建持续增长的技能库。",
+      "timestamp" : "2025-04-09T00:00:00Z",
+      "title" : "SkillWeaver: Web Agents Can Self-Improve by Discovering and Honing Skills",
+      "url" : "https:\/\/arxiv.org\/abs\/2504.07079"
+    },
+    {
+      "detail" : "MemoryOS 将智能体记忆划分为工作记忆（Working Memory）、情节记忆（Episodic Memory）和语义长期记忆（Semantic Long-term Memory）三层，类比 CPU 缓存 \/ RAM \/ 磁盘的层次结构。短期上下文在工作记忆中快速访问，超出容量后按重要性评分「换出」至情节记忆，再经定期整合压缩为语义记忆。\n\n检索机制结合向量相似度与时间衰减权重 $s = \\alpha \\cdot \\text{sim}(q, m) + \\beta \\cdot e^{-\\lambda t}$，其中 $t$ 为记忆存入后的时间差，确保近期相关记忆优先召回。该设计使智能体在长达数百轮的对话中维持用户偏好记忆，同时将每次检索的 token 开销控制在固定预算内。\n\n与 MemGPT 等方案相比，MemoryOS 的分层淘汰策略减少了约 40% 的无效记忆写入，在个性化对话基准上 F1 提升显著。",
+      "id" : "memoryos-2506.06326",
+      "keywords" : [
+        "agent memory",
+        "LLM",
+        "hierarchical memory",
+        "long-term memory",
+        "personalization"
+      ],
+      "source" : "arxiv",
+      "summary" : "借鉴操作系统内存管理思想，为 LLM 智能体设计分层记忆体系，支持长期个性化与跨会话任务连续性。",
+      "timestamp" : "2025-06-07T00:00:00Z",
+      "title" : "MemoryOS: A Memory Operating System for LLM Agents",
+      "url" : "https:\/\/arxiv.org\/abs\/2506.06326"
+    },
+    {
+      "detail" : "SciAgents 从海量科学文献中构建本体知识图谱，节点为科学概念，边为领域关系。系统包含四类专业化智能体：Ontologist（定义概念与关系）、Scientist（沿图路径生成研究假设）、Critic（反驳与挑战假设）、Writer（综合输出科学报告），通过多轮辩证迭代收敛到高质量假设。\n\n图推理的核心在于对知识图谱进行随机游走采样，发现跨领域的「概念桥接」——即两个领域中未被显式关联但在图结构上距离较近的概念对，作为新颖假设的起点。这比纯 RAG 方案更能捕获隐性跨学科连接。\n\n案例研究在仿生材料与层级结构领域进行验证，生成假设经人类专家评估后认为具有实质新颖性。该框架为后续 AI Scientist 类工作奠定了多智能体 + 知识图谱的技术路线。",
+      "id" : "sciagents-2409.05556",
+      "keywords" : [
+        "multi-agent",
+        "scientific discovery",
+        "knowledge graph",
+        "hypothesis generation",
+        "autonomous research"
+      ],
+      "source" : "arxiv",
+      "summary" : "MIT 提出基于本体知识图谱的多智能体科学发现系统，角色化 LLM 智能体协作完成假设生成、批判与综合。",
+      "timestamp" : "2024-09-09T00:00:00Z",
+      "title" : "SciAgents: Automating Scientific Discovery through Multi-Agent Intelligent Graph Reasoning",
+      "url" : "https:\/\/arxiv.org\/abs\/2409.05556"
+    },
+    {
+      "detail" : "Agent Laboratory 将完整科研流程拆解为有向任务图，分别由文献员（Literature Review Agent）、程序员（Coding Agent）、实验员（Experiment Agent）和写作员（Writing Agent）四个专业化 LLM 智能体承接，通过共享工作区（代码库 + 数据文件）传递中间产物。\n\n与 AI Scientist（Sakana AI）等工作相比，Agent Laboratory 更强调「人在回路」的检查点设计：每个阶段完成后系统暂停，等待人类研究员审批再继续，降低错误级联风险。实验表明，该框架在机器学习相关任务上可将单次研究迭代从数天压缩至数小时。\n\n该框架的开放性在于：任何阶段可替换为人类操作员，支持人机混合科研模式，适合现阶段 LLM 能力边界下的实际部署场景。",
+      "id" : "agent-laboratory-2501.04227",
+      "keywords" : [
+        "autonomous research",
+        "multi-agent",
+        "scientific discovery",
+        "human-in-the-loop",
+        "LLM"
+      ],
+      "source" : "arxiv",
+      "summary" : "提出端到端自主科研框架，LLM 智能体协作完成文献综述、实验编码、结果分析到论文撰写的全流程。",
+      "timestamp" : "2025-01-08T00:00:00Z",
+      "title" : "Agent Laboratory: LLM Agents as Research Assistants for Autonomous Scientific Discovery",
+      "url" : "https:\/\/arxiv.org\/abs\/2501.04227"
+    },
+    {
+      "detail" : "Codex CLI 是 OpenAI 于 2025 年 4 月发布的开源命令行编码智能体，通过 `npm install -g @openai\/codex` 安装，底层使用 `codex-1`、`gpt-4o`、`o4-mini` 等模型。核心架构为：用户指令 → 模型规划 → 沙箱化 Shell 执行 → 结果反馈闭环。\n\n安全模型提供三档权限：`suggest`（仅建议）、`auto-edit`（自动编辑文件）、`full-auto`（完全自主执行命令），用户可按需选择风险边界。通过 `~\/.codex\/config.yaml` 配置 MCP 服务器，可扩展数据库查询、API 调用、浏览器控制等外部工具能力。\n\n与 Claude Code 相比，Codex CLI 的差异在于完全开源（MIT 许可）、模型可替换、更轻量的运行时。两者共同推动终端原生 AI 编程智能体成为开发者工作流的标配。",
+      "id" : "openai-codex-cli-github",
+      "keywords" : [
+        "Codex",
+        "coding agent",
+        "MCP",
+        "terminal",
+        "tool use",
+        "open-source"
+      ],
+      "source" : "github",
+      "summary" : "OpenAI 开源轻量级终端编码智能体，支持 MCP 工具协议，与 Claude Code 形成直接竞争。",
+      "timestamp" : "2025-04-16T00:00:00Z",
+      "title" : "OpenAI Codex CLI: Open-Source Terminal Coding Agent with MCP Support",
+      "url" : "https:\/\/github.com\/openai\/codex"
+    },
+    {
+      "detail" : "Model Context Protocol 由 Anthropic 提出，定义了 LLM 智能体与外部工具\/数据源之间的标准化通信接口，采用 JSON-RPC 2.0 作为传输协议，支持 Tools（可调用函数）、Resources（上下文数据）、Prompts（模板指令）三类能力暴露。\n\n2025 年内 OpenAI Agents SDK、LangChain、CrewAI、Meta LlamaStack 均宣布原生 MCP 支持，MCP 正演变为 AI 工具层的「USB-C 标准」。FastMCP（Python）和官方 TypeScript SDK 的发布大幅降低了服务端开发门槛，开发者可在数十行代码内将任意 API 封装为 MCP Server。\n\nMCP Registry 的上线使工具发现从手动配置转向中心化目录，为智能体动态加载工具能力提供了基础设施支撑，是多智能体系统工具层标准化的关键一步。",
+      "id" : "mcp-ecosystem-2025",
+      "keywords" : [
+        "MCP",
+        "tool use",
+        "agent framework",
+        "standardization",
+        "Claude Code",
+        "Codex"
+      ],
+      "source" : "blog",
+      "summary" : "MCP 成为 AI 工具集成的通用标准，OpenAI、Google DeepMind 等主要厂商相继宣布支持，MCP Registry 公开上线。",
+      "timestamp" : "2025-05-01T00:00:00Z",
+      "title" : "Model Context Protocol (MCP) Ecosystem Expansion: Registry, Multi-Provider Adoption",
+      "url" : "https:\/\/modelcontextprotocol.io"
+    },
+    {
+      "detail" : "该综述将 LLM 智能体记忆划分为四类：情节记忆（Episodic，存储具体交互历史）、语义记忆（Semantic，存储通用知识）、程序性记忆（Procedural，存储可执行技能）、工作记忆（Working，当前上下文窗口）。对应检索机制涵盖向量最近邻搜索、时间戳过滤、BM25 关键词匹配及其混合策略。\n\n论文重点分析了记忆写入（何时存、存什么）、记忆整合（压缩与遗忘策略）、记忆检索（精度 vs 召回 tradeoff）三个核心问题。特别指出当前方案的主要瓶颈：检索噪声导致智能体「记忆幻觉」——召回不相关记忆后产生错误推理。\n\n调研覆盖 MemGPT、Voyager、Generative Agents、GITM 等代表性系统，并给出未来方向：记忆-工具协同设计（将记忆本身视为可调用工具）、跨智能体共享记忆架构、以及记忆的可信性验证机制。",
+      "id" : "survey-memory-augmented-agents-2501.13587",
+      "keywords" : [
+        "agent memory",
+        "survey",
+        "episodic memory",
+        "RAG",
+        "LLM agent",
+        "long-term memory"
+      ],
+      "source" : "arxiv",
+      "summary" : "系统综述 LLM 智能体的记忆机制，覆盖情节、语义、程序性记忆的分类、检索方案与工具集成。",
+      "timestamp" : "2025-01-23T00:00:00Z",
+      "title" : "A Survey on Memory-Augmented Large Language Model Agents",
+      "url" : "https:\/\/arxiv.org\/abs\/2501.13587"
+    },
+    {
+      "detail" : "AutoGen 0.4 对框架核心进行了重大重构：从同步消息传递改为基于 Python asyncio 的异步事件驱动模型，智能体间通过发布-订阅模式通信，支持并发多智能体执行而无需显式等待。新引入 `AgentRuntime`（本地 \/ 分布式）抽象，使同一智能体逻辑可无缝部署于单机或跨进程集群。\n\nAutoGen Studio 是配套的低代码 UI，允许用户通过拖拽定义智能体角色、工具列表、终止条件，并实时查看消息流与中间产物。其底层序列化为 JSON 配置，可导出为 Python 代码继续深度定制。\n\n与 CrewAI、LangGraph 相比，AutoGen 的核心差异在于其「对话优先」（conversation-centric）设计哲学：智能体交互的基本单元是消息而非函数调用，更接近人类团队协作模型，适合需要动态协商的复杂任务场景。",
+      "id" : "autogen-studio-microsoft-2025",
+      "keywords" : [
+        "multi-agent",
+        "AutoGen",
+        "async",
+        "Microsoft",
+        "agent framework",
+        "no-code"
+      ],
+      "source" : "github",
+      "summary" : "微软 AutoGen 0.4 重构为异步事件驱动架构，AutoGen Studio 提供无代码多智能体系统可视化构建界面。",
+      "timestamp" : "2025-03-01T00:00:00Z",
+      "title" : "AutoGen Studio & AutoGen 0.4: Microsoft's Declarative Multi-Agent Framework",
+      "url" : "https:\/\/github.com\/microsoft\/autogen"
+    }
+  ],
+  "summary" : "本小时AI智能体领域呈现出两条清晰的技术主线：其一是记忆与状态管理的系统化，MemoryOS借鉴操作系统分层内存思想为LLM构建持久化记忆体系，配合记忆增强综述形成理论与工程双轨推进，标志着智能体从无状态推理向跨会话连续认知演进。其二是自主能力的垂直深化，SkillWeaver让Web智能体通过探索自动合成可复用技能函数实现自我改进，而Agent Laboratory与SciAgents则将多智能体协作延伸至科研全流程，覆盖假设生成、实验执行到论文撰写，展示了智能体替代高认知劳动的潜力。在框架层面，微软AutoGen 0.4重构为异步事件驱动架构，体现出多智能体系统向高并发、松耦合设计的范式迁移。工具互操作性方面，MCP协议获得OpenAI、Google DeepMind集中跟进并配套注册中心上线，正从Anthropic私有协议快速演变为行业级标准，预示AI工具生态将围绕该协议重新整合。整体趋势表明，智能体技术正从单点能力突破转向系统性基础设施建设，记忆、技能、协作与互操作四个维度同步成熟。"
+}
