@@ -46,6 +46,53 @@ class NewsStore {
     var isLoading = false
     var lastUpdated: Date?
     var keywords: [String] = NewsStore.defaultKeywords
+    var newlyAddedKeywords: Set<String> = []
+    var pendingDeletionKeywords: Set<String> = []
+
+    var capturedKeywords: Set<String> {
+        Set(items.flatMap { $0.keywords }.map { $0.lowercased() })
+    }
+
+    func isCaptured(_ kw: String) -> Bool {
+        let lower = kw.lowercased()
+        if capturedKeywords.contains(lower) { return true }
+        return items.contains { item in
+            let hay = (item.title + " " + item.summary + " " + item.detail).lowercased()
+            return hay.contains(lower)
+        }
+    }
+
+    func addKeyword(_ raw: String) {
+        let kw = raw.trimmingCharacters(in: .whitespacesAndNewlines)
+        guard !kw.isEmpty,
+              !keywords.contains(where: { $0.caseInsensitiveCompare(kw) == .orderedSame }) else { return }
+        keywords.append(kw)
+        newlyAddedKeywords.insert(kw)
+        pendingDeletionKeywords.remove(kw)
+        saveKeywords()
+    }
+
+    func removeKeyword(_ kw: String) {
+        if newlyAddedKeywords.contains(kw) {
+            keywords.removeAll { $0 == kw }
+            newlyAddedKeywords.remove(kw)
+        } else {
+            pendingDeletionKeywords.insert(kw)
+        }
+        saveKeywords()
+    }
+
+    func undoRemoveKeyword(_ kw: String) {
+        pendingDeletionKeywords.remove(kw)
+        saveKeywords()
+    }
+
+    func commitKeywordChanges() {
+        keywords.removeAll { pendingDeletionKeywords.contains($0) }
+        pendingDeletionKeywords.removeAll()
+        newlyAddedKeywords.removeAll()
+        saveKeywords()
+    }
 
     private static let maxItems = 10
 

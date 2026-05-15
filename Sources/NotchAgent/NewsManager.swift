@@ -37,6 +37,7 @@ class NewsManager: Sendable {
             store.items = items
             store.summary = summaryText
             store.lastUpdated = Date()
+            store.commitKeywordChanges()
             store.saveToDisk(fetch: fetch)
 
             // Step 3: Save hourly report and push to GitHub
@@ -96,10 +97,10 @@ class NewsManager: Sendable {
         - Papers: include method name, key formula/algorithm idea, benchmark results (numbers)
         - GitHub repos: include architecture approach, key features, performance claims
         - Blog posts: include the core technical insight and concrete examples
-        - IMPORTANT: wrap ALL math formulas in LaTeX $...$ delimiters (inline) or $$...$$ (display).
-          Example: "损失函数为 $L(\\theta) = \\mathbb{E}[R(y^+) - R(y^-)] \\cdot \\nabla \\log \\pi_\\theta(a)$"
-          Do NOT use plain text for formulas. Use proper LaTeX notation.
-        Keep detail concise but substantive — a reader should learn something without opening the link.
+        - STRUCTURE: split into 2-3 short paragraphs separated by \n\n. Each paragraph should focus on one aspect (e.g. background, method, results).
+        - FORMULAS: wrap math in LaTeX delimiters. Use $...$ for inline math, $$...$$ for IMPORTANT standalone formulas that deserve their own centered line.
+          Example: "核心损失函数定义为：\n\n$$L(\\theta) = \\mathbb{E}[R(y^+) - R(y^-)] \\cdot \\nabla \\log \\pi_\\theta(a)$$\n\n其中 $R$ 是奖励函数..."
+        Keep detail substantive but readable — aim for 3-5 sentences per paragraph max.
 
         Rules: summary and detail in Chinese, urls must be real, focus on TECHNICAL content.
         """

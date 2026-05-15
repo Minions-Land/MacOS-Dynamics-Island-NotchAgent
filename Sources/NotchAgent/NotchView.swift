@@ -5,6 +5,8 @@ struct NotchView: View {
     @State private var selectedItem: NewsItem?
     @State private var collapseTask: Task<Void, Never>?
     @State private var detailHeight: CGFloat = 100
+    @State private var keywordsEditMode = false
+    @State private var newKeywordInput = ""
     private let store = NewsStore.shared
     @Bindable private var settings = AppSettings.shared
 
@@ -37,6 +39,7 @@ struct NotchView: View {
                             isExpanded = false
                             selectedItem = nil
                             detailHeight = 100
+                            keywordsEditMode = false
                         }
                         updateWindowSize(expanded: false)
                     }
@@ -45,20 +48,16 @@ struct NotchView: View {
         }
     }
 
-    // COLLAPSED: completely hidden behind the notch
     private var collapsedView: some View {
         Color.clear
             .frame(width: 300, height: notchHeight)
     }
 
-    // EXPANDED: starts from top of screen, notch area has title + time
     private var expandedView: some View {
         VStack(spacing: 0) {
-            // Notch-flanking header (left: title, right: time)
             notchHeader
                 .frame(height: notchHeight)
 
-            // Main content area below the notch
             VStack(alignment: .leading, spacing: 0) {
                 if let item = selectedItem {
                     detailView(item: item)
@@ -77,10 +76,8 @@ struct NotchView: View {
         .foregroundColor(.white)
     }
 
-    // Header that flanks the notch: [NotchAgent ...notch... time]
     private var notchHeader: some View {
         HStack(spacing: 0) {
-            // Left side of notch
             HStack(spacing: 5) {
                 MinionIconView(size: 12)
                 Text("NotchAgent")
@@ -89,11 +86,9 @@ struct NotchView: View {
             .frame(maxWidth: .infinity, alignment: .trailing)
             .padding(.trailing, 8)
 
-            // Notch gap (approximately 180pt wide on MacBook Air)
             Color.clear
                 .frame(width: 180)
 
-            // Right side of notch
             HStack(spacing: 5) {
                 Text(Date(), format: .dateTime.hour().minute())
                     .font(.system(size: settings.scaled(12), weight: .medium))
@@ -112,7 +107,6 @@ struct NotchView: View {
     private var summaryAndListView: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: 12) {
-                // Summary section
                 if let summary = store.summary, !summary.isEmpty {
                     VStack(alignment: .leading, spacing: 6) {
                         HStack {
@@ -141,7 +135,8 @@ struct NotchView: View {
                     )
                 }
 
-                // News list (hourly — main content)
+                keywordsModule
+
                 if !store.items.isEmpty {
                     Text("本小时技术动态")
                         .font(.system(size: settings.scaled(12), weight: .medium))
@@ -151,13 +146,13 @@ struct NotchView: View {
                     ForEach(store.items.prefix(6)) { item in
                         NewsRowView(item: item)
                             .onTapGesture {
+                                detailHeight = 100
                                 withAnimation(.easeInOut(duration: 0.2)) {
                                     selectedItem = item
                                 }
                             }
                     }
 
-                    // Report entry points
                     Divider().background(Color.white.opacity(0.1))
                         .padding(.vertical, 6)
 
@@ -179,6 +174,118 @@ struct NotchView: View {
         }
     }
 
+    private var keywordsModule: some View {
+        VStack(alignment: .leading, spacing: 6) {
+            HStack {
+                Image(systemName: "tag")
+                    .font(.system(size: settings.scaled(11)))
+                    .foregroundColor(.white.opacity(0.5))
+                Text("Keywords")
+                    .font(.system(size: settings.scaled(12), weight: .medium))
+                    .foregroundColor(.white.opacity(0.5))
+                Spacer()
+                Button(action: {
+                    withAnimation(.easeInOut(duration: 0.15)) {
+                        keywordsEditMode.toggle()
+                        newKeywordInput = ""
+                    }
+                }) {
+                    Image(systemName: keywordsEditMode ? "checkmark.circle.fill" : "pencil.circle")
+                        .font(.system(size: settings.scaled(13)))
+                        .foregroundColor(.yellow.opacity(0.8))
+                }
+                .buttonStyle(.plain)
+            }
+
+            FlowLayout(spacing: 5) {
+                ForEach(store.keywords, id: \.self) { kw in
+                    keywordChip(kw)
+                }
+            }
+
+            if keywordsEditMode {
+                HStack(spacing: 6) {
+                    TextField("Add keyword...", text: $newKeywordInput)
+                        .textFieldStyle(.plain)
+                        .font(.system(size: settings.scaled(11)))
+                        .padding(.horizontal, 8)
+                        .padding(.vertical, 4)
+                        .background(Capsule().fill(.white.opacity(0.08)))
+                        .foregroundColor(.white)
+                        .onSubmit { commitNewKeyword() }
+                    Button(action: commitNewKeyword) {
+                        Image(systemName: "plus.circle.fill")
+                            .font(.system(size: settings.scaled(14)))
+                            .foregroundColor(.yellow.opacity(0.8))
+                    }
+                    .buttonStyle(.plain)
+                    .disabled(newKeywordInput.trimmingCharacters(in: .whitespaces).isEmpty)
+                }
+            }
+        }
+        .padding(10)
+        .background(
+            RoundedRectangle(cornerRadius: 8)
+                .fill(.white.opacity(0.03))
+                .overlay(
+                    RoundedRectangle(cornerRadius: 8)
+                        .stroke(.white.opacity(0.08), lineWidth: 0.5)
+                )
+        )
+    }
+
+    private func keywordChip(_ kw: String) -> some View {
+        let pendingDeletion = store.pendingDeletionKeywords.contains(kw)
+        let newlyAdded = store.newlyAddedKeywords.contains(kw)
+        let captured = store.isCaptured(kw)
+
+        let (bg, fg, ringColor, ringWidth): (Color, Color, Color, CGFloat) = {
+            if pendingDeletion {
+                return (.white.opacity(0.05), .white.opacity(0.3), .clear, 0)
+            } else if newlyAdded {
+                return (.black.opacity(0.6), .white.opacity(0.85), .white.opacity(0.2), 0.5)
+            } else if captured {
+                return (.yellow.opacity(0.12), .yellow.opacity(0.95), .yellow.opacity(0.85), 1.2)
+            } else {
+                return (.white.opacity(0.06), .white.opacity(0.7), .white.opacity(0.15), 0.5)
+            }
+        }()
+
+        return HStack(spacing: 4) {
+            Text(kw)
+                .font(.system(size: settings.scaled(11)))
+                .strikethrough(pendingDeletion, color: .white.opacity(0.4))
+            if keywordsEditMode {
+                Button(action: {
+                    if pendingDeletion {
+                        store.undoRemoveKeyword(kw)
+                    } else {
+                        store.removeKeyword(kw)
+                    }
+                }) {
+                    Image(systemName: pendingDeletion ? "arrow.uturn.backward.circle.fill" : "xmark.circle.fill")
+                        .font(.system(size: settings.scaled(11)))
+                        .foregroundColor(.white.opacity(0.6))
+                }
+                .buttonStyle(.plain)
+            }
+        }
+        .padding(.horizontal, 8)
+        .padding(.vertical, 3)
+        .background(
+            Capsule().fill(bg)
+                .overlay(Capsule().stroke(ringColor, lineWidth: ringWidth))
+        )
+        .foregroundColor(fg)
+    }
+
+    private func commitNewKeyword() {
+        let kw = newKeywordInput.trimmingCharacters(in: .whitespaces)
+        guard !kw.isEmpty else { return }
+        store.addKeyword(kw)
+        newKeywordInput = ""
+    }
+
     private var reportEntries: some View {
         VStack(alignment: .leading, spacing: 6) {
             Text("Reports")
@@ -194,18 +301,29 @@ struct NotchView: View {
     }
 
     private func detailView(item: NewsItem) -> some View {
-        ScrollView {
+        let currentIndex = store.items.firstIndex(where: { $0.id == item.id }) ?? 0
+        let total = store.items.count
+        let hasPrev = currentIndex > 0
+        let hasNext = currentIndex < total - 1
+
+        return ScrollView {
             VStack(alignment: .leading, spacing: 10) {
-                Button(action: { withAnimation { selectedItem = nil } }) {
-                    HStack(spacing: 4) {
-                        Image(systemName: "chevron.left")
-                            .font(.system(size: settings.scaled(12)))
-                        Text("Back")
-                            .font(.system(size: settings.scaled(13)))
+                HStack {
+                    Button(action: { withAnimation { selectedItem = nil } }) {
+                        HStack(spacing: 4) {
+                            Image(systemName: "chevron.left")
+                                .font(.system(size: settings.scaled(12)))
+                            Text("Back")
+                                .font(.system(size: settings.scaled(13)))
+                        }
+                        .foregroundColor(.yellow.opacity(0.8))
                     }
-                    .foregroundColor(.yellow.opacity(0.8))
+                    .buttonStyle(.plain)
+                    Spacer()
+                    Text("\(currentIndex + 1) / \(total)")
+                        .font(.system(size: settings.scaled(11)))
+                        .foregroundColor(.white.opacity(0.4))
                 }
-                .buttonStyle(.plain)
 
                 Text(item.title)
                     .font(.system(size: settings.scaled(15), weight: .semibold))
@@ -219,17 +337,22 @@ struct NotchView: View {
                     if item.detail.contains("$") || item.detail.contains("\\(") || item.detail.contains("\\[") {
                         MathTextView(
                             text: item.detail,
-                            fontSize: 11,
-                            textColor: "rgba(255,255,255,0.75)",
+                            fontSize: settings.scaled(13),
+                            textColor: "rgba(255,255,255,0.78)",
                             measuredHeight: $detailHeight
                         )
                         .frame(height: detailHeight)
+                        .id(item.id)
                     } else {
-                        Text(item.detail)
-                            .font(.system(size: settings.scaled(12.5)))
-                            .foregroundColor(.white.opacity(0.75))
-                            .lineSpacing(3.5)
-                            .fixedSize(horizontal: false, vertical: true)
+                        VStack(alignment: .leading, spacing: 8) {
+                            ForEach(splitIntoParagraphs(item.detail), id: \.self) { para in
+                                Text(para)
+                                    .font(.system(size: settings.scaled(12.5)))
+                                    .foregroundColor(.white.opacity(0.78))
+                                    .lineSpacing(4.5)
+                                    .fixedSize(horizontal: false, vertical: true)
+                            }
+                        }
                     }
                 }
 
@@ -263,9 +386,76 @@ struct NotchView: View {
                             .foregroundColor(.yellow.opacity(0.9))
                     }
                 }
+
+                Divider().background(Color.white.opacity(0.1))
+                    .padding(.vertical, 4)
+
+                HStack {
+                    Button(action: { navigateDetail(offset: -1) }) {
+                        HStack(spacing: 4) {
+                            Image(systemName: "chevron.left.circle.fill")
+                                .font(.system(size: settings.scaled(15)))
+                            Text("上一篇")
+                                .font(.system(size: settings.scaled(12)))
+                        }
+                        .foregroundColor(hasPrev ? .yellow.opacity(0.85) : .white.opacity(0.2))
+                    }
+                    .buttonStyle(.plain)
+                    .disabled(!hasPrev)
+
+                    Spacer()
+
+                    Button(action: { navigateDetail(offset: 1) }) {
+                        HStack(spacing: 4) {
+                            Text("下一篇")
+                                .font(.system(size: settings.scaled(12)))
+                            Image(systemName: "chevron.right.circle.fill")
+                                .font(.system(size: settings.scaled(15)))
+                        }
+                        .foregroundColor(hasNext ? .yellow.opacity(0.85) : .white.opacity(0.2))
+                    }
+                    .buttonStyle(.plain)
+                    .disabled(!hasNext)
+                }
             }
             .padding(14)
         }
+    }
+
+    private func navigateDetail(offset: Int) {
+        guard let cur = selectedItem,
+              let idx = store.items.firstIndex(where: { $0.id == cur.id }) else { return }
+        let next = idx + offset
+        guard next >= 0, next < store.items.count else { return }
+        detailHeight = 100
+        withAnimation(.easeInOut(duration: 0.18)) {
+            selectedItem = store.items[next]
+        }
+    }
+
+    private func splitIntoParagraphs(_ raw: String) -> [String] {
+        let normalized = raw
+            .replacingOccurrences(of: "\r\n", with: "\n")
+        let explicit = normalized.components(separatedBy: "\n\n")
+            .map { $0.trimmingCharacters(in: .whitespacesAndNewlines) }
+            .filter { !$0.isEmpty }
+        if explicit.count > 1 { return explicit }
+
+        let sentences = normalized.components(separatedBy: "。")
+        guard sentences.count > 3 else { return [raw] }
+        var out: [String] = []
+        var cur = ""
+        for (i, s) in sentences.enumerated() {
+            let t = s.trimmingCharacters(in: .whitespaces)
+            if t.isEmpty { continue }
+            cur += t + (i < sentences.count - 1 ? "。" : "")
+            if cur.count > 80 || i == sentences.count - 1 {
+                out.append(cur)
+                cur = ""
+            }
+        }
+        if !cur.isEmpty { out.append(cur) }
+        return out
     }
 
     private func updateWindowSize(expanded: Bool) {
@@ -289,8 +479,6 @@ struct NotchView: View {
     }
 }
 
-// Custom shape: rectangle with top corners squared (flush with screen top)
-// and bottom corners rounded
 struct ExpandedShape: Shape {
     func path(in rect: CGRect) -> Path {
         var path = Path()
