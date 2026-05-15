@@ -185,57 +185,148 @@ class NewsManager: Sendable {
     private static func checkAndGenerateRollups() async {
         let cal = Calendar.current
         let now = Date()
-        let year = cal.component(.year, from: now)
-        let month = cal.component(.month, from: now)
-        let day = cal.component(.day, from: now)
-        let hour = cal.component(.hour, from: now)
+        let yearNow = cal.component(.year, from: now)
+        let monthNow = cal.component(.month, from: now)
+        let dayNow = cal.component(.day, from: now)
+        let hourNow = cal.component(.hour, from: now)
+        let weekOfYearNow = cal.component(.weekOfYear, from: now)
+        let yearForWeekNow = cal.component(.yearForWeekOfYear, from: now)
+        let curQuarter = (monthNow - 1) / 3 + 1
 
-        let yearStr = String(format: "%04d", year)
-        let monthStr = String(format: "%02d", month)
-        let dayStr = String(format: "%02d", day)
-        let dateStr = "\(yearStr)-\(monthStr)-\(dayStr)"
+        let dataRoot = "\(repoPath)/data"
+        var budget = 5
 
-        // Daily report at hour >= 23
-        let dailyPath = "\(repoPath)/data/\(yearStr)/\(monthStr)/\(dayStr)/\(dateStr)_daily.json"
-        if hour >= 23 && !FileManager.default.fileExists(atPath: dailyPath) {
-            await generateDailyReport(year: yearStr, month: monthStr, day: dayStr, date: dateStr)
+        let years = (try? FileManager.default.contentsOfDirectory(atPath: dataRoot))?
+            .filter { Int($0) != nil }.sorted() ?? []
+
+        // 1. DAILY backfill — every past day with hourly files but no daily report
+        for yearStr in years {
+            if budget <= 0 { return }
+            let yearDir = "\(dataRoot)/\(yearStr)"
+            let months = (try? FileManager.default.contentsOfDirectory(atPath: yearDir))?
+                .filter { $0.count == 2 && Int($0) != nil }.sorted() ?? []
+            for monthStr in months {
+                if budget <= 0 { return }
+                let monthDir = "\(yearDir)/\(monthStr)"
+                let days = (try? FileManager.default.contentsOfDirectory(atPath: monthDir))?
+                    .filter { $0.count == 2 && Int($0) != nil }.sorted() ?? []
+                for dayStr in days {
+                    if budget <= 0 { return }
+                    let y = Int(yearStr)!, m = Int(monthStr)!, d = Int(dayStr)!
+                    let isToday = (y == yearNow && m == monthNow && d == dayNow)
+                    let isPast = (y < yearNow)
+                        || (y == yearNow && m < monthNow)
+                        || (y == yearNow && m == monthNow && d < dayNow)
+                    guard isPast || (isToday && hourNow >= 23) else { continue }
+
+                    let dayDir = "\(monthDir)/\(dayStr)"
+                    let dateStr = "\(yearStr)-\(monthStr)-\(dayStr)"
+                    let dailyPath = "\(dayDir)/\(dateStr)_daily.json"
+                    if FileManager.default.fileExists(atPath: dailyPath) { continue }
+
+                    let entries = (try? FileManager.default.contentsOfDirectory(atPath: dayDir)) ?? []
+                    let hasHourly = entries.contains(where: { $0.contains("_hourly.json") })
+                    guard hasHourly else { continue }
+
+                    await generateDailyReport(year: yearStr, month: monthStr, day: dayStr, date: dateStr)
+                    budget -= 1
+                }
+            }
         }
 
-        // Weekly report on Sunday (weekday == 1)
-        let weekday = cal.component(.weekday, from: now)
-        let weekOfYear = cal.component(.weekOfYear, from: now)
-        let weekStr = String(format: "W%02d", weekOfYear)
-        let weeklyDir = "\(repoPath)/data/\(yearStr)/\(monthStr)/\(weekStr)"
-        let weeklyPath = "\(weeklyDir)/\(yearStr)-\(weekStr)_weekly.json"
-        if weekday == 1 && hour >= 22 && !FileManager.default.fileExists(atPath: weeklyPath) {
-            await generateWeeklyReport(year: yearStr, month: monthStr, week: weekStr)
+        // 2. WEEKLY backfill — any past completed (yearForWeekOfYear, weekOfYear)
+        var weekKeys: Set<String> = []
+        for yearStr in years {
+            let yearDir = "\(dataRoot)/\(yearStr)"
+            let months = (try? FileManager.default.contentsOfDirectory(atPath: yearDir))?
+                .filter { $0.count == 2 && Int($0) != nil } ?? []
+            for monthStr in months {
+                let monthDir = "\(yearDir)/\(monthStr)"
+                let days = (try? FileManager.default.contentsOfDirectory(atPath: monthDir))?
+                    .filter { $0.count == 2 && Int($0) != nil } ?? []
+                for dayStr in days {
+                    guard let y = Int(yearStr), let m = Int(monthStr), let d = Int(dayStr),
+                          let date = cal.date(from: DateComponents(year: y, month: m, day: d)) else { continue }
+                    let wy = cal.component(.yearForWeekOfYear, from: date)
+                    let woy = cal.component(.weekOfYear, from: date)
+                    weekKeys.insert("\(wy)|\(String(format: "%02d", woy))|\(monthStr)")
+                }
+            }
+        }
+        for key in weekKeys.sorted() {
+            if budget <= 0 { return }
+            let parts = key.split(separator: "|").map(String.init)
+            guard parts.count == 3, let wy = Int(parts[0]), let woy = Int(parts[1]) else { continue }
+            let wkStr = "W\(parts[1])"
+            let monthStr = parts[2]
+            let isPast = (wy < yearForWeekNow) || (wy == yearForWeekNow && woy < weekOfYearNow)
+            guard isPast else { continue }
+            let weeklyPath = "\(dataRoot)/\(parts[0])/\(monthStr)/\(wkStr)/\(parts[0])-\(wkStr)_weekly.json"
+            if FileManager.default.fileExists(atPath: weeklyPath) { continue }
+            await generateWeeklyReport(year: parts[0], month: monthStr, week: wkStr)
+            budget -= 1
         }
 
-        // Monthly report on last day
-        let range = cal.range(of: .day, in: .month, for: now)!
-        if day == range.count && hour >= 22 {
-            let monthlyPath = "\(repoPath)/data/\(yearStr)/\(monthStr)/\(yearStr)-\(monthStr)_monthly.json"
-            if !FileManager.default.fileExists(atPath: monthlyPath) {
+        // 3. MONTHLY backfill — every past completed month with any data
+        for yearStr in years {
+            if budget <= 0 { return }
+            let yearDir = "\(dataRoot)/\(yearStr)"
+            let months = (try? FileManager.default.contentsOfDirectory(atPath: yearDir))?
+                .filter { $0.count == 2 && Int($0) != nil }.sorted() ?? []
+            for monthStr in months {
+                if budget <= 0 { return }
+                guard let y = Int(yearStr), let m = Int(monthStr) else { continue }
+                let isPast = (y < yearNow) || (y == yearNow && m < monthNow)
+                guard isPast else { continue }
+                let monthlyPath = "\(yearDir)/\(monthStr)/\(yearStr)-\(monthStr)_monthly.json"
+                if FileManager.default.fileExists(atPath: monthlyPath) { continue }
+                let monthDir = "\(yearDir)/\(monthStr)"
+                let hasContent = ((try? FileManager.default.contentsOfDirectory(atPath: monthDir))?.isEmpty == false)
+                guard hasContent else { continue }
                 await generateMonthlyReport(year: yearStr, month: monthStr)
+                budget -= 1
             }
         }
 
-        // Quarterly
-        if [3, 6, 9, 12].contains(month) && day == range.count && hour >= 22 {
-            let quarter = (month - 1) / 3 + 1
-            let quarterStr = "Q\(quarter)"
-            let quarterlyPath = "\(repoPath)/data/\(yearStr)/\(quarterStr)/\(yearStr)-\(quarterStr)_quarterly.json"
-            if !FileManager.default.fileExists(atPath: quarterlyPath) {
-                await generateQuarterlyReport(year: yearStr, quarter: quarterStr)
+        // 4. QUARTERLY backfill — every past completed quarter with any monthly
+        for yearStr in years {
+            if budget <= 0 { return }
+            guard let y = Int(yearStr) else { continue }
+            for q in 1...4 {
+                if budget <= 0 { return }
+                let isPast = (y < yearNow) || (y == yearNow && q < curQuarter)
+                guard isPast else { continue }
+                let qStr = "Q\(q)"
+                let qPath = "\(dataRoot)/\(yearStr)/\(qStr)/\(yearStr)-\(qStr)_quarterly.json"
+                if FileManager.default.fileExists(atPath: qPath) { continue }
+                var hasMonthly = false
+                for m in ((q - 1) * 3 + 1)...(q * 3) {
+                    let mStr = String(format: "%02d", m)
+                    if FileManager.default.fileExists(atPath: "\(dataRoot)/\(yearStr)/\(mStr)/\(yearStr)-\(mStr)_monthly.json") {
+                        hasMonthly = true; break
+                    }
+                }
+                guard hasMonthly else { continue }
+                await generateQuarterlyReport(year: yearStr, quarter: qStr)
+                budget -= 1
             }
         }
 
-        // Yearly
-        if month == 12 && day == 31 && hour >= 22 {
-            let yearlyPath = "\(repoPath)/data/\(yearStr)/\(yearStr)_yearly.json"
-            if !FileManager.default.fileExists(atPath: yearlyPath) {
-                await generateYearlyReport(year: yearStr)
+        // 5. YEARLY backfill — every past year with any quarterly
+        for yearStr in years {
+            if budget <= 0 { return }
+            guard let y = Int(yearStr), y < yearNow else { continue }
+            let yPath = "\(dataRoot)/\(yearStr)/\(yearStr)_yearly.json"
+            if FileManager.default.fileExists(atPath: yPath) { continue }
+            var hasQ = false
+            for q in 1...4 {
+                if FileManager.default.fileExists(atPath: "\(dataRoot)/\(yearStr)/Q\(q)/\(yearStr)-Q\(q)_quarterly.json") {
+                    hasQ = true; break
+                }
             }
+            guard hasQ else { continue }
+            await generateYearlyReport(year: yearStr)
+            budget -= 1
         }
     }
 
