@@ -1,0 +1,127 @@
+{
+  "fetchedAt" : "2026-05-16T01:25:28Z",
+  "items" : [
+    {
+      "detail" : "该论文通过对1,136篇引用文献的引用分析，发现记忆系统与技能发现研究长期割裂，缺乏统一视角。作者提出「经验压缩谱（Experience Compression Spectrum）」，将情节记忆（5–20×压缩）、技能抽象和规则提炼定位为同一轴上压缩程度递增的三个点，统一了此前分散的研究范式。\n\n核心洞察是：不同形式的经验积累本质上是对交互轨迹的不同粒度压缩，情节记忆保留细节、技能编码过程、规则提炼原则。该框架为长时程多会话部署中的经验管理瓶颈提供了系统性解决思路，并给出了各压缩层级的适用场景判断准则。",
+      "id" : "arxiv-2604-15877",
+      "keywords" : [
+        "agent memory",
+        "agent skill",
+        "LLM agent",
+        "experience compression"
+      ],
+      "source" : "arxiv",
+      "summary" : "提出「经验压缩谱」统一框架，将记忆、技能与规则视为单一压缩轴上的不同点，系统性地整合了LLM智能体的知识管理机制。",
+      "timestamp" : "2026-04-01T00:00:00Z",
+      "title" : "Unifying Memory, Skills, and Rules in LLM Agents",
+      "url" : "https:\/\/arxiv.org\/abs\/2604.15877"
+    },
+    {
+      "detail" : "论文于2026年5月7日发布，针对智能体长期运行中记忆失效问题构建了STALE（Stale Memory Awareness）评测基准。核心问题是：当世界状态发生变化后，智能体能否主动识别其存储的记忆已不再有效，而非盲目使用过时信息执行任务。\n\n实验表明，当前主流LLM在记忆时效性判断上存在系统性偏差——倾向于信任已存储的记忆而非质疑其有效性，即使上下文中存在矛盾信号。论文提出了基于时间戳感知与矛盾检测的记忆验证机制，为构建更可靠的长期记忆系统提供了方向。",
+      "id" : "arxiv-2605-06527",
+      "keywords" : [
+        "agent memory",
+        "memory validity",
+        "LLM agent",
+        "benchmark"
+      ],
+      "source" : "arxiv",
+      "summary" : "研究LLM智能体识别过期记忆的能力，提出STALE基准，揭示当前模型在记忆时效性判断上的系统性缺陷。",
+      "timestamp" : "2026-05-07T00:00:00Z",
+      "title" : "Can LLM Agents Know When Their Memories Are No Longer Valid? (STALE)",
+      "url" : "https:\/\/arxiv.org\/html\/2605.06527v1"
+    },
+    {
+      "detail" : "Synapse将智能体记忆表示为动态图结构，节点间的相关性通过扩散激活（Spreading Activation）动态涌现，而非依赖预计算的静态链接。系统引入侧抑制（Lateral Inhibition）机制抑制噪声激活，并通过时序衰减模拟记忆的遗忘曲线，使近期记忆具有更高的检索优先级。\n\n该方法将情节记忆（具体事件）与语义记忆（抽象知识）统一在同一图结构中，检索时激活从查询节点向外扩散，自然地融合两类记忆。与基于向量相似度的RAG方案相比，Synapse在多跳推理任务上表现出更强的关联发现能力，尤其在需要跨情节归纳规律的场景中优势显著。",
+      "id" : "arxiv-2601-02744",
+      "keywords" : [
+        "agent memory",
+        "episodic memory",
+        "semantic memory",
+        "spreading activation",
+        "LLM agent"
+      ],
+      "source" : "arxiv",
+      "summary" : "借鉴认知科学，提出Synapse系统，将记忆建模为动态图，通过扩散激活机制实现情节记忆与语义记忆的统一检索。",
+      "timestamp" : "2026-01-05T00:00:00Z",
+      "title" : "Empowering LLM Agents with Episodic-Semantic Memory via Spreading Activation (Synapse)",
+      "url" : "https:\/\/arxiv.org\/abs\/2601.02744"
+    },
+    {
+      "detail" : "AgentFloor是一个包含30个确定性任务的基准，按六层能力阶梯组织：指令遵循 → 单工具调用 → 多工具链式调用 → 多步协调 → 长时规划 → 不确定性下的规划。每层任务设计为确定性可验证，避免了评估中的随机性干扰。\n\n实验覆盖多个1B–13B参数的开源模型，结果显示小模型在前三层（指令遵循、单工具、多工具）表现接近大模型，但在第四层（多步协调）出现显著性能断崖，长时规划层几乎全部失败。论文分析了失败模式：主要瓶颈是状态追踪能力不足，而非工具调用格式问题，为小模型的针对性训练提供了方向。",
+      "id" : "arxiv-2605-00334",
+      "keywords" : [
+        "tool use",
+        "benchmark",
+        "small language model",
+        "LLM agent",
+        "agentic"
+      ],
+      "source" : "arxiv",
+      "summary" : "提出AgentFloor六层能力阶梯基准，系统评估小型开源模型在工具调用、多步协调和长时规划上的能力边界。",
+      "timestamp" : "2026-05-01T00:00:00Z",
+      "title" : "AgentFloor: How Far Up the Tool Use Ladder Can Small Open-Weight Models Go?",
+      "url" : "https:\/\/arxiv.org\/abs\/2605.00334"
+    },
+    {
+      "detail" : "该框架的核心创新是「持久世界状态（Persistent World State）」机制：所有专用智能体（规划、数据分析、文献检索、新颖性检测）共享一个跨迭代维护的上下文状态，避免了传统流水线中信息在智能体间传递时的损耗与不一致。\n\n系统支持人机交互循环，研究人员可在任意迭代节点介入修正假设或重定向分析方向，而不打断整体工作流。新颖性检测智能体负责实时对比当前假设与已有文献，防止重复发现。与纯自动化系统相比，该交互式设计在真实科研任务上显著提升了假设质量和实验效率。",
+      "id" : "arxiv-2601-12542",
+      "keywords" : [
+        "multi-agent system",
+        "autonomous scientific discovery",
+        "agent workflow"
+      ],
+      "source" : "arxiv",
+      "summary" : "提出以持久化世界状态为核心的交互式多智能体科研框架，整合规划、数据分析、文献检索与新颖性检测四类专用智能体。",
+      "timestamp" : "2026-01-01T00:00:00Z",
+      "title" : "Interactive Multi-Agent Workflows for Scientific Discovery",
+      "url" : "https:\/\/arxiv.org\/abs\/2601.12542"
+    },
+    {
+      "detail" : "GPT-5.3-Codex于2026年2月5日发布，系统卡显示其在自主编码任务上超越前代，核心改进是将前沿编码性能（来自GPT-5.2-Codex）与通用推理和专业知识能力（来自GPT-5.2）深度融合，使其能处理更长、更自主的开发会话，不仅执行代码还能主动发现问题和提出改进建议。\n\n2026年5月14日，OpenAI宣布Codex集成进ChatGPT移动端，用户可通过手机监控和管理开发工作流。NVIDIA已将Codex部署在GB200\/GB300基础设施上用于生产环境，Cisco也将其用于企业级软件工程场景。安全运行框架明确划分了低风险自动操作与高风险需显式确认操作的边界。",
+      "id" : "openai-codex-gpt53",
+      "keywords" : [
+        "Codex",
+        "agent system",
+        "LLM agent",
+        "agentic coding"
+      ],
+      "source" : "blog",
+      "summary" : "OpenAI发布GPT-5.3-Codex，融合GPT-5.2-Codex的编码能力与GPT-5.2的推理能力，定位为最强自主编码智能体，并同步推出移动端支持。",
+      "timestamp" : "2026-02-05T00:00:00Z",
+      "title" : "GPT-5.3-Codex: OpenAI最强代码智能体模型发布",
+      "url" : "https:\/\/openai.com\/index\/gpt-5-3-codex-system-card\/"
+    },
+    {
+      "detail" : "专访揭示Claude Code的核心架构理念：「精简执行层」将模型能力与工具执行环境解耦，执行层尽量薄，避免在harness层引入复杂逻辑，让模型本身承担更多推理和决策。这与重度框架化的竞品形成对比，目标是减少中间层对模型能力的遮蔽。\n\nClaude Code已从CLI扩展至IDE插件和桌面应用，并推出了多智能体管理工具，支持协调多个并行运行的子智能体。MCP（Model Context Protocol）作为智能体连接外部系统的标准接口，被定位为「智能体能力的USB-C」，支持数据库查询、Slack\/GitHub等API集成。产品路线图强调透明度和使用限制的可控性。",
+      "id" : "anthropic-claude-code-lean-harness",
+      "keywords" : [
+        "Claude Code",
+        "MCP server",
+        "multi-agent system",
+        "agent framework"
+      ],
+      "source" : "blog",
+      "summary" : "Anthropic Claude Code产品负责人接受Ars Technica专访，阐述「精简执行层（Lean Harness）」设计哲学及多智能体协调工具的演进路径。",
+      "timestamp" : "2026-05-01T00:00:00Z",
+      "title" : "Claude Code产品负责人谈「精简执行层」架构与多智能体管理",
+      "url" : "https:\/\/arstechnica.com\/ai\/2026\/05\/claude-codes-product-lead-talks-usage-limits-transparency-and-the-lean-harness\/"
+    },
+    {
+      "detail" : "文章提出，当前多智能体科研系统的瓶颈在于智能体间通信协议不统一，导致工具、数据源和智能体难以互操作。作者主张以MCP（Model Context Protocol）作为原生协议构建「协议原生智能体（Protocol-native Agents）」，每个智能体既是MCP客户端（调用工具）又是MCP服务端（暴露能力），形成可组合的分层生态。\n\n分层架构受实验室组织结构启发：顶层协调智能体负责假设生成和实验设计，中层专用智能体负责文献检索、数据分析、代码执行，底层工具智能体封装具体仪器或数据库接口。这种设计使科研工作流可以像软件包一样被复用和组合，作者认为这是将AI科学家从单任务工具升级为可扩展科研基础设施的关键路径。",
+      "id" : "frontiersin-mcp-native-scientist",
+      "keywords" : [
+        "MCP server",
+        "multi-agent system",
+        "autonomous scientific discovery",
+        "agent framework"
+      ],
+      "source" : "blog",
+      "summary" : "Frontiers AI发表观点文章，论证下一阶段自主科学发现需要以MCP协议为原生接口构建分层智能体生态系统。",
+      "timestamp" : "2026-05-01T00:00:00Z",
+      "title" : "Building MCP-native Hierarchical AI Scientist Ecosystems",
+      "url" : "https:\/\/www.frontiersin.org\/journals\/artificial-intelligence\/articles\/10.3389\/frai.2026.1820375\/full"
+    }
+  ],
+  "summary" : "本小时AI智能体领域呈现出以记忆机制为核心的密集研究突破：三篇arxiv论文分别从统一框架（经验压缩谱）、时效性检测（STALE基准）和认知科学仿生（Synapse扩散激活图）三个维度系统性重构了LLM记忆架构，标志着智能体记忆从简单检索向动态、有效期感知的方向演进。工具调用与多步规划能力的评估体系也在同步完善，AgentFloor六层阶梯基准首次量化了小型开源模型的能力天花板，为模型选型提供了系统性参照。在多智能体协作层面，以持久化世界状态为核心的科研框架和以MCP协议为原生接口的分层生态系统设计，共同指向「有状态、可组合」的下一代智能体架构范式。模型侧，GPT-5.3-Codex将编码能力与通用推理融合为自主编码智能体，而Anthropic的「精简执行层」哲学则代表了另一种以最小化协调开销换取可靠性的工程路线。整体趋势表明，智能体技术正从单点能力突破转向系统性基础设施建设，记忆管理、协议标准化与能力评估框架将成为近期研究的三大主轴。"
+}
