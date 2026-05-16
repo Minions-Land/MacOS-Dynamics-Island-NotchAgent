@@ -8,6 +8,7 @@ struct NotchView: View {
     @State private var isExpanded = false
     @State private var selectedItem: NewsItem?
     @State private var collapseTask: Task<Void, Never>?
+    @State private var expandTask: Task<Void, Never>?
     @State private var detailHeight: CGFloat = 100
     @State private var keywordsEditMode = false
     @State private var newKeywordInput = ""
@@ -29,11 +30,19 @@ struct NotchView: View {
         .onHover { hovering in
             collapseTask?.cancel()
             collapseTask = nil
+            expandTask?.cancel()
+            expandTask = nil
             if hovering {
-                withAnimation(.spring(response: 0.3, dampingFraction: 0.85)) {
-                    isExpanded = true
+                expandTask = Task {
+                    try? await Task.sleep(for: .milliseconds(500))
+                    guard !Task.isCancelled else { return }
+                    await MainActor.run {
+                        withAnimation(.spring(response: 0.3, dampingFraction: 0.85)) {
+                            isExpanded = true
+                        }
+                        updateWindowSize(expanded: true)
+                    }
                 }
-                updateWindowSize(expanded: true)
             } else {
                 collapseTask = Task {
                     try? await Task.sleep(for: .milliseconds(500))
