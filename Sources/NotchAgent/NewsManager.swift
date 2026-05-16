@@ -22,7 +22,7 @@ class NewsManager: Sendable {
 
         let keywords = store.keywords
 
-        // Step 1: Fetch news with haiku (cheap, fast)
+        // Step 1: Fetch news
         let items = await Task.detached {
             await Self.fetchNews(keywords: keywords)
         }.value
@@ -125,25 +125,7 @@ class NewsManager: Sendable {
 
         直接输出中文总结，不要任何前缀或格式标记。
         """
-
-        guard let claudePath = findClaudeCodePath() else { return "" }
-        let process = Process()
-        process.executableURL = URL(fileURLWithPath: claudePath)
-        process.arguments = ["--print", "--permission-mode", "bypassPermissions", "--model", "sonnet", prompt]
-        let home = FileManager.default.homeDirectoryForCurrentUser.path
-        process.environment = ProcessInfo.processInfo.environment.merging([
-            "PATH": "/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin:\(home)/.claude/bin",
-            "HOME": home
-        ]) { _, new in new }
-        let pipe = Pipe()
-        process.standardOutput = pipe
-        process.standardError = Pipe()
-        do {
-            try process.run()
-            runWithTimeout(process)
-            let data = pipe.fileHandleForReading.readDataToEndOfFile()
-            return String(data: data, encoding: .utf8)?.trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
-        } catch { return "" }
+        return await invokeSonnet(prompt: prompt)
     }
 
     // MARK: - Data Management & GitHub Push
