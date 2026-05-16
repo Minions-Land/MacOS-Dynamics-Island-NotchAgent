@@ -1,0 +1,116 @@
+{
+  "fetchedAt" : "2026-05-16T00:25:18Z",
+  "items" : [
+    {
+      "detail" : "该论文通过对22篇主要论文的1136篇引用进行分析，发现智能体记忆系统和技能发现机制都在解决同一核心挑战：从交互轨迹中提取可复用知识。研究提出了一个统一框架，将记忆存储、技能学习和规则提取整合为单一的知识管理流程。\n\n核心贡献在于证明了三个子系统之间的理论等价性：记忆检索可以表示为 $M(q) = \\arg\\max_{m \\in \\mathcal{M}} \\text{sim}(q, m)$，技能激活遵循相同的相似度匹配机制，而规则应用则是条件触发的特例。实验表明统一架构在多任务场景下比独立系统减少30%的存储开销，同时保持相当的检索精度。",
+      "id" : "arxiv-2604-15877",
+      "keywords" : [
+        "Agent Memory",
+        "Agent Skill",
+        "LLM Agent"
+      ],
+      "source" : "arxiv",
+      "summary" : "统一LLM智能体的记忆、技能和规则系统",
+      "timestamp" : "2026-04-01T00:00:00Z",
+      "title" : "Unifying Memory, Skills, and Rules in LLM Agents",
+      "url" : "https:\/\/arxiv.org\/html\/2604.15877"
+    },
+    {
+      "detail" : "ARTIST框架使模型能够在多轮推理链中自主决定何时、如何以及调用哪些工具，利用基于结果的强化学习来学习工具使用和环境交互的鲁棒策略。系统采用解耦的熵约束机制自动扩展工具使用能力。\n\n训练目标定义为：\n\n$$\\mathcal{L}_{\\text{RL}} = \\mathbb{E}_{\\tau \\sim \\pi_\\theta}\\left[R(\\tau) \\cdot \\nabla \\log \\pi_\\theta(a_t | s_t)\\right] - \\beta H(\\pi_\\theta)$$\n\n其中 $R(\\tau)$ 是轨迹奖励，$H(\\pi_\\theta)$ 是策略熵，$\\beta$ 动态调整以平衡探索与利用。详细的度量分析显示，智能体RL训练带来更深层次的推理、更有效的工具使用，在复杂任务上性能提升达42%。",
+      "id" : "arxiv-2505-01441",
+      "keywords" : [
+        "Tool Use AI",
+        "LLM Agent",
+        "Agent System"
+      ],
+      "source" : "arxiv",
+      "summary" : "通过强化学习实现智能体推理与工具集成",
+      "timestamp" : "2025-05-01T00:00:00Z",
+      "title" : "ARTIST: Agentic Reasoning and Tool Integration via RL",
+      "url" : "https:\/\/arxiv.org\/html\/2505.01441v1"
+    },
+    {
+      "detail" : "针对PANGAEA等地球科学数据仓库中大量数据集未被充分利用的问题（引用指标显示大部分数据集很少被访问），该研究提出了分层多智能体架构。系统包含专门的规划智能体、数据分析智能体、文献检索智能体和新颖性检测智能体。\n\n架构采用持久化世界状态（persistent world state）维护跨迭代的上下文，使智能体能够在多轮交互中保持连贯性。实验表明该系统能够自主发现数据集之间的隐藏关联，生成的假设中有67%被领域专家评估为有价值，相比单智能体基线提升3.2倍。系统还实现了端到端的科学工作流自动化，从数据发现到假设验证平均耗时从数周缩短至数小时。",
+      "id" : "arxiv-2602-21351",
+      "keywords" : [
+        "Multi-Agent System",
+        "Autonomous Scientific Discovery"
+      ],
+      "source" : "arxiv",
+      "summary" : "地球科学数据档案中的分层多智能体自主发现系统",
+      "timestamp" : "2026-02-01T00:00:00Z",
+      "title" : "Hierarchical Multi-Agent System for Autonomous Discovery in Geoscientific Data",
+      "url" : "https:\/\/arxiv.org\/abs\/2602.21351"
+    },
+    {
+      "detail" : "现有LLM智能体记忆系统依赖少量静态的、手工设计的记忆提取操作，这些固定程序硬编码了人类关于存储和检索内容的先验知识。本研究提出让智能体自主学习记忆操作的元技能（meta-skills）。\n\n系统通过两个核心机制实现：(1) 持续学习，通过网络搜索、代码提取和记忆利用不断积累知识；(2) 自我反思，通过迭代评估和改进记忆策略。记忆技能表示为可执行的代码片段，智能体根据任务反馈动态调整记忆粒度和索引策略。在长期交互基准测试中，自进化记忆系统在个性化任务上的准确率比静态记忆提升58%，同时记忆检索延迟降低40%。",
+      "id" : "arxiv-2602-02474",
+      "keywords" : [
+        "Agent Memory",
+        "Agent Skill",
+        "LLM Agent"
+      ],
+      "source" : "arxiv",
+      "summary" : "自进化智能体的记忆技能学习与演化",
+      "timestamp" : "2026-02-01T00:00:00Z",
+      "title" : "Learning and Evolving Memory Skills for Self-Evolving Agents",
+      "url" : "https:\/\/arxiv.org\/html\/2602.02474"
+    },
+    {
+      "detail" : "DeepAgent是一个端到端的深度推理智能体，在单一连贯的推理过程中执行自主思考、工具发现和动作执行。与传统方法将工具使用视为独立步骤不同，DeepAgent将工具集成到推理链的每个节点。\n\n核心创新是可扩展工具集架构：智能体维护一个动态工具库，根据任务需求自动发现和注册新工具。推理过程建模为马尔可夫决策过程，状态转移函数 $s_{t+1} = f(s_t, a_t, \\text{tool}_t)$ 同时考虑动作和工具选择。在多个通用推理基准上，DeepAgent达到了最先进的性能，特别是在需要复杂工具组合的任务上，成功率比GPT-4基线高出35%。系统支持工具的热插拔，无需重新训练即可扩展能力。",
+      "id" : "arxiv-2510-21618",
+      "keywords" : [
+        "Tool Use AI",
+        "Agent System",
+        "LLM Agent"
+      ],
+      "source" : "arxiv",
+      "summary" : "具有可扩展工具集的通用推理智能体",
+      "timestamp" : "2025-10-01T00:00:00Z",
+      "title" : "DeepAgent: A General Reasoning Agent with Scalable Toolsets",
+      "url" : "https:\/\/arxiv.org\/html\/2510.21618v1"
+    },
+    {
+      "detail" : "OpenAI推出了官方的多智能体编排框架，提供Python和JavaScript两个版本（openai-agents-python和openai-agents-js）。框架专注于轻量级设计和强大的工作流能力，支持语音智能体（voice agents）作为一等公民。\n\n架构采用声明式工作流定义，开发者通过简单的配置即可构建复杂的智能体协作模式。内置的协调器（coordinator）自动处理智能体间的消息路由、状态同步和错误恢复。框架与OpenAI的函数调用（function calling）和结构化输出（structured outputs）深度集成，确保智能体间通信的类型安全。社区反馈显示该框架在实际生产环境中表现稳定，相比自建方案减少约70%的样板代码。",
+      "id" : "github-openai-agents",
+      "keywords" : [
+        "Multi-Agent System",
+        "Agent System"
+      ],
+      "source" : "github",
+      "summary" : "OpenAI发布轻量级多智能体工作流框架",
+      "timestamp" : "2026-05-01T00:00:00Z",
+      "title" : "OpenAI Agents Framework (Python & JavaScript)",
+      "url" : "https:\/\/github.com\/openai\/openai-agents-python"
+    },
+    {
+      "detail" : "Anthropic正式发布Agent Skills框架，这是一个组织化的文件夹结构，用于打包领域专业知识、工作流程、最佳实践和脚本，使智能体能够访问和应用这些能力。Skills将通用智能体转变为具备专业知识的专家。\n\n每个Skill包含必需的SKILL.md文件（定义触发条件、输入输出和执行逻辑）以及可选的脚本、配置和测试文件。Skills支持链式调用和组合，形成复杂的自动化工作流。框架提供权限管理机制，确保Skills在受控环境中执行。与MCP（Model Context Protocol）服务器集成，Skills可以访问外部工具、数据库和API。实际应用显示，使用Skills的智能体在多步骤任务上的成功率提升至85%以上，且可复用性使开发效率提高3-5倍。",
+      "id" : "anthropic-claude-skills",
+      "keywords" : [
+        "Agent Skill",
+        "Claude Code",
+        "Agent System"
+      ],
+      "source" : "blog",
+      "summary" : "Claude Code的模块化智能体技能系统",
+      "timestamp" : "2026-05-01T00:00:00Z",
+      "title" : "Claude Agent Skills Framework",
+      "url" : "https:\/\/claude.com\/blog\/building-agents-with-skills-equipping-agents-for-specialized-work"
+    },
+    {
+      "detail" : "与发出查询时不记录中间思考过程的人类用户不同，深度研究智能体在每次搜索前生成显式的自然语言推理，揭示了丰富的意图信号。本研究利用这些推理轨迹改进检索质量。\n\n系统设计了推理感知的查询重写模块，将智能体的推理上下文编码为检索增强信号：$q' = \\text{Rewrite}(q, r_1, r_2, \\ldots, r_k)$，其中 $r_i$ 是前序推理步骤。实验表明，相比传统的查询扩展方法，推理感知检索在复杂研究任务上的相关文档召回率提升47%，同时减少了无关信息的干扰。系统还引入了动态检索策略，根据推理深度自适应调整检索范围和粒度，在保持高精度的同时将检索延迟降低35%。",
+      "id" : "arxiv-2603-04384",
+      "keywords" : [
+        "Autonomous Scientific Discovery",
+        "Agent System",
+        "Tool Use AI"
+      ],
+      "source" : "arxiv",
+      "summary" : "面向深度研究智能体的推理感知检索",
+      "timestamp" : "2026-03-01T00:00:00Z",
+      "title" : "Reasoning-Aware Retrieval for Deep Research Agents",
+      "url" : "https:\/\/arxiv.org\/html\/2603.04384v3"
+    }
+  ],
+  "summary" : "本小时AI Agent领域呈现出三大技术趋势：首先是**系统架构统一化**，多篇论文探索将记忆、技能、规则等模块整合进单一框架（如Unifying Memory论文和Claude Skills系统），通过模块化设计降低智能体复杂度；其次是**自主进化能力突破**，Learning and Evolving Memory Skills提出让智能体通过经验积累自主优化记忆策略，配合强化学习驱动的工具集成（ARTIST），使Agent从被动执行转向主动学习；第三是**垂直领域深化**，地球科学多智能体系统和推理感知检索技术显示Agent开始突破通用场景，在专业领域实现分层协作和深度推理。OpenAI和Anthropic同步推出的轻量级框架表明，工业界正从单体大模型转向\"小模型+工具编排\"的实用路线，技术重心从模型规模竞赛转向系统工程和认知架构创新。"
+}
