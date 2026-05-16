@@ -1,0 +1,127 @@
+{
+  "fetchedAt" : "2026-05-16T12:57:49Z",
+  "items" : [
+    {
+      "detail" : "现有技能增强型Agent通常将技能选择、执行与更新分为独立模块，导致优化目标不一致。Skill1将三者统一为共享任务结果目标下的单一策略，核心思路是：\n\n$$\\pi^*(a_t | s_t) = \\arg\\max_{\\pi} \\mathbb{E}_{\\tau \\sim \\pi}\\left[\\sum_t r(s_t, a_t) + \\lambda \\cdot \\text{SkillReuse}(\\tau)\\right]$$\n\n其中 $\\text{SkillReuse}$ 项鼓励Agent从持久技能库中检索并复用成功策略，而非每次从头推理。\n\n实验表明，Skill1在WebArena、SciWorld等多任务基准上相比分离式基线提升约12-18%的任务完成率，且技能库随训练轮次自动扩充，无需人工标注。",
+      "id" : "skill1-rl-2605",
+      "keywords" : [
+        "agent skill",
+        "reinforcement learning",
+        "skill library",
+        "LLM agent"
+      ],
+      "source" : "arxiv",
+      "summary" : "提出统一框架Skill1，用单一策略同时训练技能选择、利用与蒸馏三项能力，在多任务基准上超越现有分离式方法。",
+      "timestamp" : "2026-05-09T00:00:00Z",
+      "title" : "Skill1: Unified Evolution of Skill-Augmented Agents via Reinforcement Learning",
+      "url" : "https:\/\/arxiv.org\/abs\/2605.06130"
+    },
+    {
+      "detail" : "该论文指出，Agent记忆系统（存储过去经验）与技能发现（提取可复用策略）在文献中被独立研究，但引用网络分析显示两者高度重叠——均从交互轨迹中提取可泛化知识。作者提出MSR三元分类：Memory（情景\/语义存储）、Skill（可执行程序）、Rule（约束与偏好），三者共享统一的提取-检索-应用管道。\n\n核心贡献是一个统一的知识提取算子 $f: \\mathcal{T} \\rightarrow \\{m, s, r\\}$，将轨迹 $\\mathcal{T}$ 映射到对应知识类型，并给出各类型的存储格式与检索策略对比表。\n\n该框架对22个主流Agent系统（包括Voyager、MemGPT、Reflexion等）进行了重新分类，揭示了现有系统在Rule层面的普遍缺失，为未来设计提供了明确方向。",
+      "id" : "unify-mem-skill-rules-2604",
+      "keywords" : [
+        "agent memory",
+        "agent skill",
+        "LLM agent",
+        "survey"
+      ],
+      "source" : "arxiv",
+      "summary" : "通过对22篇核心论文1136条引用的系统分析，发现记忆系统与技能发现本质上提取同类知识，提出统一分类框架MSR（Memory-Skill-Rule）。",
+      "timestamp" : "2026-04-22T00:00:00Z",
+      "title" : "Unifying Memory, Skills, and Rules in LLM Agents",
+      "url" : "https:\/\/arxiv.org\/abs\/2604.15877"
+    },
+    {
+      "detail" : "传统Agent架构将推理循环与工具执行绑定在同一有状态进程中，导致harness随模型迭代快速过时。Managed Agents将两者分离：大脑层（Claude模型+决策harness）通过稳定接口调用手部层（工具沙箱、外部API、MCP服务器），harness变为无状态、可独立升级的组件。\n\n架构关键点：每个Agent会话拥有独立容器，支持持久化Agent配置；2026年4月23日新增Memory模块，以工作区级文本文档目录形式挂载，实现跨会话持久状态。工具执行层通过MCP协议标准化，支持Slack、GitHub、数据库等生产系统直连。\n\n实测数据：p50首token延迟下降~60%；开发者从零到部署可运行Agent的时间从数月缩短至数天。该架构被微软Azure团队评价为与其Hosted Agents方案高度互补，可通过AWS IAM认证直接接入Claude Platform on AWS。",
+      "id" : "anthropic-managed-agents-2026",
+      "keywords" : [
+        "Claude",
+        "managed agents",
+        "MCP",
+        "agent architecture",
+        "tool use"
+      ],
+      "source" : "blog",
+      "summary" : "Anthropic于2026年4月8日发布Claude Managed Agents公测，将模型推理（大脑）与工具执行（双手）彻底解耦，p50首token延迟降低约60%。",
+      "timestamp" : "2026-04-08T00:00:00Z",
+      "title" : "Anthropic Claude Managed Agents：「大脑与双手」解耦架构",
+      "url" : "https:\/\/www.anthropic.com\/engineering\/managed-agents"
+    },
+    {
+      "detail" : "该综述将现有工具使用方法归纳为三个范式：①提示范式（Prompting-based）：即插即用，无需权重更新，依赖上下文示例；②监督学习范式（SFT）：在标注工具调用轨迹上微调，泛化性受限于标注分布；③强化学习范式（RL-based）：以任务结果为奖励信号端到端优化，工具调用策略可自适应演化。\n\n三类工具覆盖：信息检索（搜索引擎、RAG）、计算（代码执行、计算器）、外部动作（API调用、浏览器操作）。综述指出RL范式在复杂多步任务上表现最优，但样本效率低；提示范式部署成本最低但在工具组合推理上存在系统性失败模式。\n\n论文还总结了工具选择错误、参数幻觉、调用时序错误三类主要失败模式，并给出各范式的缓解策略对比，是目前覆盖最全的工具使用方法论综述之一。",
+      "id" : "agentic-tool-use-survey-2604",
+      "keywords" : [
+        "tool use",
+        "LLM agent",
+        "reinforcement learning",
+        "survey"
+      ],
+      "source" : "arxiv",
+      "summary" : "系统梳理LLM工具使用的三大范式：基于提示、监督微调、强化学习，分析各范式在信息检索、计算与外部动作三类工具上的适用边界。",
+      "timestamp" : "2026-04-01T00:00:00Z",
+      "title" : "Agentic Tool Use in Large Language Models（综述，arXiv:2604.00835）",
+      "url" : "https:\/\/arxiv.org\/abs\/2604.00835"
+    },
+    {
+      "detail" : "MARTI针对LLM多Agent系统训练中的核心瓶颈：单机同步rollout在多Agent场景下GPU利用率极低（通常<40%）。框架引入多轮异步rollout机制，各Agent独立采样轨迹并异步提交梯度，配合层次化负载均衡调度器，将GPU利用率提升至~75%。\n\n训练架构采用CTDE（集中训练-分散执行）范式，集中式Critic可访问全局状态，各Agent Actor仅依赖局部观测。支持跨Agent的奖励归因（credit assignment），通过因果影响图分解联合奖励 $R_{joint}$ 为个体贡献 $r_i$。\n\n在代码生成多Agent协作任务上，MARTI相比单Agent基线提升23%的pass@1，相比同步训练基线训练速度加快3.1倍。GitHub仓库已开源，支持Python\/PyTorch生态。",
+      "id" : "marti-multiagent-rl-2026",
+      "keywords" : [
+        "multi-agent system",
+        "reinforcement learning",
+        "LLM training",
+        "distributed"
+      ],
+      "source" : "github",
+      "summary" : "清华C3I实验室提出MARTI框架，支持集中式多Agent交互与分布式策略训练，通过多轮异步rollout显著提升训练效率。",
+      "timestamp" : "2026-02-01T00:00:00Z",
+      "title" : "MARTI: Multi-Agent LLM Systems Reinforced Training and Inference Framework",
+      "url" : "https:\/\/github.com\/TsinghuaC3I\/MARTI"
+    },
+    {
+      "detail" : "该框架的核心创新是「持久世界状态」（Persistent World State）：一个跨Agent共享的结构化知识图谱，记录已验证假设、实验结果与文献摘要，避免各Agent重复推理已知事实。规划Agent负责分解研究目标为子任务并动态调整优先级；新颖性检测Agent通过嵌入相似度检索判断假设是否已被文献覆盖。\n\n工作流采用迭代假设-实验-解释循环：\n$$H_{t+1} = f_{\\text{plan}}(H_t, E_t, L_t, W_t)$$\n其中 $H_t$ 为当前假设集，$E_t$ 为实验结果，$L_t$ 为文献检索结果，$W_t$ 为世界状态。\n\n在合成生物学与材料科学两个领域的评测中，该框架生成的假设被领域专家评为「高度新颖且可验证」的比例达61%，显著高于单Agent基线的34%。",
+      "id" : "interactive-multiagent-sci-discovery-2601",
+      "keywords" : [
+        "multi-agent system",
+        "autonomous scientific discovery",
+        "LLM agent",
+        "knowledge graph"
+      ],
+      "source" : "arxiv",
+      "summary" : "提出含规划、数据分析、文献检索、新颖性检测四类专用Agent的多Agent科学发现框架，通过持久世界状态跨迭代维护上下文。",
+      "timestamp" : "2026-01-21T00:00:00Z",
+      "title" : "Interactive Multi-Agent Workflows for Scientific Discovery（arXiv:2601.12542）",
+      "url" : "https:\/\/arxiv.org\/abs\/2601.12542"
+    },
+    {
+      "detail" : "现有记忆增强Agent通常将记忆管理（何时写入\/读取）与任务推理分开优化，导致记忆操作与下游任务目标脱节。UMA将两者合并为单一RL策略，动作空间扩展为 $\\mathcal{A} = \\mathcal{A}_{\\text{mem}} \\cup \\mathcal{A}_{\\text{ans}}$，其中记忆动作包括 $\\{\\text{write}, \\text{read}, \\text{update}, \\text{delete}\\}$，奖励信号直接来自最终答案正确性。\n\n训练采用PPO算法，记忆操作的延迟奖励问题通过蒙特卡洛回报估计缓解。关键发现：端到端训练后，Agent自发学会「选择性遗忘」策略——主动删除低相关记忆以减少检索噪声，这一行为在监督训练基线中未出现。\n\n在LoCoMo、LongMemEval等长期记忆基准上，UMA相比MemGPT提升F1约9.3个百分点，相比RAG基线提升14.7个百分点，且记忆操作次数减少约40%。",
+      "id" : "unified-memory-agent-rl-2602",
+      "keywords" : [
+        "agent memory",
+        "reinforcement learning",
+        "long-context",
+        "LLM agent"
+      ],
+      "source" : "arxiv",
+      "summary" : "提出UMA框架，用端到端强化学习统一记忆操作（提取、更新、检索）与问答推理为单一策略，在长上下文任务上超越分离式记忆系统。",
+      "timestamp" : "2026-02-25T00:00:00Z",
+      "title" : "Unified Memory Agent (UMA): End-to-End RL Training for Long-Context Reasoning",
+      "url" : "https:\/\/arxiv.org\/html\/2602.18493v1"
+    },
+    {
+      "detail" : "传统技能增强Agent在推理时需检索外部技能库，引入延迟并依赖检索质量。本文提出「技能内化」（Skill Internalization）：通过In-Context RL将技能的行为模式直接编码进模型权重，使Agent在零样本条件下复现技能行为。\n\n方法核心：先用技能库中的示例构造上下文轨迹，再以任务成功率为奖励信号对模型进行RL微调。内化损失定义为：\n$$\\mathcal{L}_{\\text{intern}} = -\\mathbb{E}_{\\tau \\sim \\pi_{\\text{skill}}}[\\log \\pi_\\theta(a|s)] \\cdot R(\\tau)$$\n其中 $\\pi_{\\text{skill}}$ 为技能引导策略，$R(\\tau)$ 为轨迹奖励。\n\n实验在ALFWorld和WebShop上验证：内化后模型在无技能库条件下的任务成功率达到有技能库基线的94%，推理延迟降低约35%。作者指出内化效果与技能的「原子性」正相关——复合技能内化效果显著下降。",
+      "id" : "in-context-agentic-rl-skill-internalization-2604",
+      "keywords" : [
+        "agent skill",
+        "reinforcement learning",
+        "skill internalization",
+        "LLM agent"
+      ],
+      "source" : "arxiv",
+      "summary" : "探索将Agent技能从运行时检索内化为模型参数的方法，通过上下文强化学习实现零样本自主行为，无需推理时技能库查询。",
+      "timestamp" : "2026-04-03T00:00:00Z",
+      "title" : "In-Context Agentic RL for Skill Internalization（arXiv:2604.02268）",
+      "url" : "https:\/\/arxiv.org\/abs\/2604.02268"
+    }
+  ],
+  "summary" : "本小时AI Agent领域呈现\"统一化\"与\"端到端训练\"两大技术趋势：Skill1框架首次用单一强化学习策略同时优化技能选择、利用与蒸馏，UMA框架则将记忆操作与推理统一为端到端RL训练，均突破了传统分离式架构的效率瓶颈。Anthropic的Managed Agents通过\"大脑-双手\"解耦将首token延迟降低60%，验证了架构层面解耦与训练层面统一可并行推进。学术界对Agent能力的本质认知正在深化：MSR框架通过1136条引用的元分析揭示记忆与技能本质上提取同类知识，In-Context Agentic RL探索将运行时技能内化为模型参数的路径，预示Agent系统正从\"检索-执行\"范式向\"参数化自主行为\"演进。多Agent协作方面，MARTI的分布式策略训练与科学发现框架的持久世界状态机制，为复杂任务的异步协同提供了工程化方案，但如何在保持模块化的同时实现端到端优化仍是开放问题。"
+}
